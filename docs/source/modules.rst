@@ -1,8 +1,8 @@
-Module Reference
+Module reference
 ----------------
 
 .. toctree::
    :glob:
-   :maxdepth: 1
+   :maxdepth: 4
 
    modules/*
