@@ -1,0 +1,26 @@
+- name: LSS Controller
+  hosts: localhost
+
+  tasks:
+    - name: Gather LSS Client Types
+      willguibr.zpacloud_ansible.zpa_lss_client_types_info:
+      register: client_types
+    - name: client_types
+      debug:
+        msg: "{{ client_types }}"
+
+
+    # - name: Create a LSS Controller
+    #   willguibr.zpacloud_ansible.zpa_lss_config_controller:
+    #     state: absent
+    #     config:
+    #       name: Status
+    #       description: status
+    #       enabled: true
+    #       lss_host: 10.1.1.1
+    #       lss_port: 20000
+    #       source_log_type: "zpn_ast_auth_log"
+    #   register: lss_controller
+    # - name: lss_controller
+    #   debug:
+    #     msg: "{{ lss_controller }}"
