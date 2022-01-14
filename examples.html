@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Module Reference" href="modules.html" />
+    <link rel="prev" title="Zscaler Private Access Ansible Collection" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Zscaler Private Access Ansible Collection
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-zscaler-private-access">What is Zscaler Private Access</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app-connector-group">App Connector Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#service-edge-group">Service Edge Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provisioning-key">Provisioning Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#application-segment">Application Segment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#browser-access-application-segment">Browser Access Application Segment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#server-group">Server Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#segment-group">Segment Group</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Module Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">Release History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Zscaler Private Access Ansible Collection</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Examples</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/willguibr/zpacloud_ansible/blob/master/docs/source/examples.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h1>
+<section id="what-is-zscaler-private-access">
+<h2>What is Zscaler Private Access<a class="headerlink" href="#what-is-zscaler-private-access" title="Permalink to this headline"></a></h2>
+<p>The Zscaler Private Access (ZPA) service enables organizations to provide access to internal applications and services while ensuring the security of their networks.
+ZPA is an easier to deploy, more cost-effective, and more secure alternative to VPNs. Unlike VPNs, which require users to connect to your network to access your enterprise applications,
+ZPA allows you to give users policy-based secure access only to the internal apps they need to get their work done. With ZPA, application access does not require network access.</p>
+<section id="app-connector-group">
+<h3>App Connector Group<a class="headerlink" href="#app-connector-group" title="Permalink to this headline"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create First App Connector Group</span>
+  <span class="nt">willguibr.zpacloud.zpa_app_connector_groups</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Example1&quot;</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;Example1&quot;</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">city_country</span><span class="p">:</span> <span class="s">&quot;California,</span><span class="nv"> </span><span class="s">US&quot;</span>
+    <span class="nt">country_code</span><span class="p">:</span> <span class="s">&quot;US&quot;</span>
+    <span class="nt">latitude</span><span class="p">:</span> <span class="s">&quot;37.3382082&quot;</span>
+    <span class="nt">longitude</span><span class="p">:</span> <span class="s">&quot;-121.8863286&quot;</span>
+    <span class="nt">location</span><span class="p">:</span> <span class="s">&quot;San</span><span class="nv"> </span><span class="s">Jose,</span><span class="nv"> </span><span class="s">CA,</span><span class="nv"> </span><span class="s">USA&quot;</span>
+    <span class="nt">upgrade_day</span><span class="p">:</span> <span class="s">&quot;SUNDAY&quot;</span>
+    <span class="nt">upgrade_time_in_secs</span><span class="p">:</span> <span class="s">&quot;66600&quot;</span>
+    <span class="nt">override_version_profile</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">version_profile_id</span><span class="p">:</span> <span class="s">&quot;0&quot;</span>
+    <span class="nt">dns_query_type</span><span class="p">:</span> <span class="s">&quot;IPV4&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="service-edge-group">
+<h3>Service Edge Group<a class="headerlink" href="#service-edge-group" title="Permalink to this headline"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create/Update/Delete Service Edge Group</span>
+   <span class="l l-Scalar l-Scalar-Plain">willguibr.zpacloud.zpa_service_edge_groups</span><span class="p p-Indicator">:</span>
+     <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Example&quot;</span>
+     <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;Example1&quot;</span>
+     <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+     <span class="nt">city_country</span><span class="p">:</span> <span class="s">&quot;California,</span><span class="nv"> </span><span class="s">US&quot;</span>
+     <span class="nt">country_code</span><span class="p">:</span> <span class="s">&quot;US&quot;</span>
+     <span class="nt">latitude</span><span class="p">:</span> <span class="s">&quot;37.3382082&quot;</span>
+     <span class="nt">longitude</span><span class="p">:</span> <span class="s">&quot;-121.8863286&quot;</span>
+     <span class="nt">location</span><span class="p">:</span> <span class="s">&quot;San</span><span class="nv"> </span><span class="s">Jose,</span><span class="nv"> </span><span class="s">CA,</span><span class="nv"> </span><span class="s">USA&quot;</span>
+     <span class="nt">upgrade_day</span><span class="p">:</span> <span class="s">&quot;SUNDAY&quot;</span>
+     <span class="nt">upgrade_time_in_secs</span><span class="p">:</span> <span class="s">&quot;66600&quot;</span>
+     <span class="nt">override_version_profile</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+     <span class="nt">version_profile_id</span><span class="p">:</span> <span class="s">&quot;0&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="provisioning-key">
+<h3>Provisioning Key<a class="headerlink" href="#provisioning-key" title="Permalink to this headline"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create/Update/Delete App Connector Group Provisioning Key</span>
+  <span class="nt">willguibr.zpacloud.zpa_provisioning_key</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;App</span><span class="nv"> </span><span class="s">Connector</span><span class="nv"> </span><span class="s">Group</span><span class="nv"> </span><span class="s">Provisioning</span><span class="nv"> </span><span class="s">Key&quot;</span>
+    <span class="nt">association_type</span><span class="p">:</span> <span class="s">&quot;CONNECTOR_GRP&quot;</span>
+    <span class="nt">max_usage</span><span class="p">:</span> <span class="s">&quot;10&quot;</span>
+    <span class="nt">enrollment_cert_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">6573</span>
+    <span class="nt">zcomponent_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">216196257331291903</span>
+
+<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create/Update/Delete Service Edge Connector Group Provisioning Key</span>
+  <span class="nt">willguibr.zpacloud.zpa_provisioning_key</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Service</span><span class="nv"> </span><span class="s">Edge</span><span class="nv"> </span><span class="s">Connector</span><span class="nv"> </span><span class="s">Group</span><span class="nv"> </span><span class="s">Provisioning</span><span class="nv"> </span><span class="s">Key&quot;</span>
+    <span class="nt">association_type</span><span class="p">:</span> <span class="s">&quot;CONNECTOR_GRP&quot;</span>
+    <span class="nt">max_usage</span><span class="p">:</span> <span class="s">&quot;10&quot;</span>
+    <span class="nt">enrollment_cert_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">6573</span>
+    <span class="nt">zcomponent_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">216196257331291903</span>
+</pre></div>
+</div>
+</section>
+<section id="application-segment">
+<h3>Application Segment<a class="headerlink" href="#application-segment" title="Permalink to this headline"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create First Application Segment</span>
+  <span class="nt">willguibr.zpacloud.zpa_application_segment</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Example Application</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Example Application Test</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">health_reporting</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ON_ACCESS</span>
+    <span class="nt">bypass_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NEVER</span>
+    <span class="nt">is_cname_enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">tcp_port_range</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">from</span><span class="p">:</span> <span class="s">&quot;8080&quot;</span>
+        <span class="nt">to</span><span class="p">:</span> <span class="s">&quot;8085&quot;</span>
+    <span class="nt">domain_names</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">server1.example.com</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">server2.example.com</span>
+    <span class="nt">segment_group_id</span><span class="p">:</span> <span class="s">&quot;216196257331291896&quot;</span>
+    <span class="nt">server_groups</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="s">&quot;216196257331291969&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="browser-access-application-segment">
+<h3>Browser Access Application Segment<a class="headerlink" href="#browser-access-application-segment" title="Permalink to this headline"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create/Update/Delete a Browser Access Application Segment</span>
+  <span class="nt">willguibr.zpacloud.zpa_browser_access</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Example</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Example</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">health_reporting</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ON_ACCESS</span>
+    <span class="nt">bypass_type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NEVER</span>
+    <span class="nt">is_cname_enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">tcp_port_range</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">from</span><span class="p">:</span> <span class="s">&quot;80&quot;</span>
+        <span class="nt">to</span><span class="p">:</span> <span class="s">&quot;80&quot;</span>
+    <span class="nt">domain_names</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">crm1.example.com</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">crm2.example.com</span>
+    <span class="nt">segment_group_id</span><span class="p">:</span> <span class="s">&quot;216196257331291896&quot;</span>
+    <span class="nt">server_groups</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&quot;216196257331291969&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="server-group">
+<h3>Server Group<a class="headerlink" href="#server-group" title="Permalink to this headline"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create/Update/Delete a Server Group</span>
+  <span class="nt">willguibr.zpacloud_ansible.zpa_server_group</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Example&quot;</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="s">&quot;Example&quot;</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">dynamic_discovery</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="nt">app_connector_groups</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="s">&quot;216196257331291924&quot;</span>
+    <span class="nt">servers</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="s">&quot;216196257331291921&quot;</span>
+    <span class="nt">applications</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">id</span><span class="p">:</span> <span class="s">&quot;216196257331291981&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="segment-group">
+<h3>Segment Group<a class="headerlink" href="#segment-group" title="Permalink to this headline"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create/Update/Delete a Server Group</span>
+  <span class="nt">willguibr.zpacloud.zpa_segment_group</span><span class="p">:</span>
+    <span class="nt">config_space</span><span class="p">:</span> <span class="s">&quot;DEFAULT&quot;</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Example Segment Group</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Example Segment Group</span>
+    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">policy_migrated</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">tcp_keep_alive_enabled</span><span class="p">:</span> <span class="s">&quot;1&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Zscaler Private Access Ansible Collection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="Module Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, William Guilherme.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
