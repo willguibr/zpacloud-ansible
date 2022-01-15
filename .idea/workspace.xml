@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c769aba2-00ef-4c1a-861c-01d0322fa07c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_app_connector_groups.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_app_connector_groups.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_application_segment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_application_segment.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_application_server.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_application_server.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_ba_certificate.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_ba_certificate.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_browser_access.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_browser_access.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_cloud_connector_group.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_cloud_connector_group.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_customer_version_profile.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_customer_version_profile.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_enrollement_certificate.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_enrollement_certificate.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_idp_controller.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_idp_controller.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_machine_group.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_machine_group.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_policy_access_rule.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_policy_access_rule.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_posture_profile.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_posture_profile.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_provisioning_key.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_provisioning_key.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_saml_attribute.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_saml_attribute.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_scim_attribute_header.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_scim_attribute_header.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_scim_groups.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_scim_groups.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_segment_group.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_segment_group.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_server_group.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_server_group.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_service_edge_groups.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_service_edge_groups.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/zpa_trusted_network.yml" beforeDir="false" afterPath="$PROJECT_DIR$/examples/zpa_trusted_network.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galaxy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/galaxy.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_app_connector_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_app_connector_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_application_segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_application_segment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_application_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_application_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_browser_access.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_browser_access.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_browser_certificate.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_browser_certificate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_cloud_connector_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_cloud_connector_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_customer_version_profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_customer_version_profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_enrollement_certificate.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_enrollement_certificate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_idp_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_idp_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_machine_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_machine_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_policy_rule.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_policy_rule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_posture_profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_posture_profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_provisioning_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_provisioning_key.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_saml_attribute.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_saml_attribute.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_scim_attribute_header.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_scim_attribute_header.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_scim_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_scim_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_segment_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_segment_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_server_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_server_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_service_edge_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_service_edge_groups.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/module_utils/zpa_trusted_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/module_utils/zpa_trusted_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_app_connector_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_app_connector_groups.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_app_connector_groups_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_app_connector_groups_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_application_segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_application_segment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_application_segment_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_application_segment_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_application_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_application_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_application_server_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_application_server_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_ba_certificate_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_ba_certificate_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_browser_access.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_browser_access.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_browser_access_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_browser_access_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_cloud_connector_group_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_cloud_connector_group_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_customer_version_profile_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_customer_version_profile_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_enrollement_certificate_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_enrollement_certificate_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_idp_controller_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_idp_controller_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_machine_group_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_machine_group_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_policy_access_rule.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_policy_access_rule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_policy_access_rule_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_policy_access_rule_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_posture_profile_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_posture_profile_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_provisioning_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_provisioning_key.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_provisioning_key_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_provisioning_key_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_saml_attribute_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_saml_attribute_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_scim_attribute_header_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_scim_attribute_header_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_scim_group_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_scim_group_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_segment_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_segment_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_segment_group_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_segment_group_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_server_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_server_group.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_server_group_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_server_group_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_service_edge_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_service_edge_groups.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_service_edge_groups_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_service_edge_groups_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/modules/zpa_trusted_network_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/modules/zpa_trusted_network_info.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="23ioA4A1l02QYDxDlXa4DmhgSCe" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c769aba2-00ef-4c1a-861c-01d0322fa07c" name="Changes" comment="" />
+      <created>1642226122205</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1642226122205</updated>
+    </task>
+    <servers />
+  </component>
+</project>
