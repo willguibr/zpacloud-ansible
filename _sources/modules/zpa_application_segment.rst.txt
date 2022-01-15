@@ -1,7 +1,26 @@
-zpa\_application\_segment module
-================================
+.. zpa_application_segment_module
+----------------------------------
+
+zpa_application_segment -- Create/Update/Delete an Application Segment.
+========================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+Create/Update/Delete an Application Segment.
 
 .. automodule:: zpa_application_segment
    :members:
-   :undoc-members:
-   :show-inheritance:
+
+
+
+Parameters
+----------
+
+  name: (required: type: str)
+   Name of the application.
