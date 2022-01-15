@@ -1,8 +1,8 @@
-Module Reference
+Module reference
 ----------------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 4
 
    zpa_app_connector_groups
    zpa_app_connector_groups_info
@@ -17,12 +17,14 @@ Module Reference
    zpa_customer_version_profile_info
    zpa_enrollement_certificate_info
    zpa_idp_controller_info
-   zpa_lss_config_controller
    zpa_machine_group_info
    zpa_policy_access_forwarding_rule
    zpa_policy_access_rule
    zpa_policy_access_rule_info
-   zpa_policy_access_timeout_rule
+   zpa_policy_forward_rule
+   zpa_policy_forward_rule_info
+   zpa_policy_timeout_rule
+   zpa_policy_timeout_rule_info
    zpa_posture_profile_info
    zpa_provisioning_key
    zpa_provisioning_key_info

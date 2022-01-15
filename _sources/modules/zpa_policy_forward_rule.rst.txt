@@ -1,0 +1,7 @@
+zpa\_policy\_forward\_rule module
+=================================
+
+.. automodule:: zpa_policy_forward_rule
+   :members:
+   :undoc-members:
+   :show-inheritance:

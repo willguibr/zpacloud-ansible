@@ -1,0 +1,7 @@
+zpa\_policy\_timeout\_rule module
+=================================
+
+.. automodule:: zpa_policy_timeout_rule
+   :members:
+   :undoc-members:
+   :show-inheritance:

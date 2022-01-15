@@ -10,7 +10,10 @@ ZPA is an easier to deploy, more cost-effective, and more secure alternative to 
 ZPA allows you to give users policy-based secure access only to the internal apps they need to get their work done. With ZPA, application access does not require network access.
 
 App Connector Group
--------------------
+===================
+
+The following module allows for interaction with the ZPA App Connector Group API endpoints.
+This module creates an app connector group, which in turn must be associated with a provisioning key resource.
 
 .. code-block:: yaml
 
@@ -31,7 +34,10 @@ App Connector Group
         dns_query_type: "IPV4"
 
 Service Edge Group
-------------------
+==================
+
+The following module allows for interaction with the ZPA Service Edge Group API endpoints.
+This module creates an service edge group, which in turn must be associated with a provisioning key resource.
 
 .. code-block:: yaml
 
@@ -51,7 +57,11 @@ Service Edge Group
         version_profile_id: "0"
 
 Provisioning Key
-----------------
+================
+
+The following module allows for interaction with the ZPA Provisioning Key API endpoints.
+This module creates a provisioning key resource, which is a text string that is generated when a new App Connector
+or Private Service Edge is added.
 
 .. code-block:: yaml
 
@@ -73,7 +83,10 @@ Provisioning Key
 
 
 Application Segment
--------------------
+===================
+
+The following module allows for interaction with the ZPA Application Segments endpoints.
+The module creates an application segment resource, which is a grouping of defined applications.
 
 .. code-block:: yaml
 
@@ -91,16 +104,21 @@ Application Segment
         domain_names:
           - server1.example.com
           - server2.example.com
-        segment_group_id: "216196257331291896"
+        segment_group_id: "{{ segment_group_id }}"
         server_groups:
-          - id: "216196257331291969"
+          - id: "{{ server_group_id }}"
 
 Browser Access Application Segment
-----------------------------------
+==================================
+
+The following module allows for interaction with the ZPA Application Segments endpoints.
+The module creates a Browser Access Application Segment resource, which allows you to leverage 
+a web browser for user authentication and application access over ZPA, without requiring users 
+to install the Zscaler Client Connector (formerly Zscaler App or Z App) on their devices.
 
 .. code-block:: yaml
 
-    - name: Create/Update/Delete a Browser Access Application Segment
+    - name: Browser Access Application Segment
       willguibr.zpacloud.zpa_browser_access:
         name: Example
         description: Example
@@ -114,17 +132,39 @@ Browser Access Application Segment
         domain_names:
           - crm1.example.com
           - crm2.example.com
-        segment_group_id: "216196257331291896"
+        segment_group_id: "{{ segment_group_id }}"
         server_groups:
-          - "216196257331291969"
+          - id: "{{ server_group_id }}"
+        clientless_apps:
+            name: "sales.acme.com"
+            application_protocol: "HTTP"
+            application_port: "80"
+            certificate_id: "{{ certificate_id }}"
+            trust_untrusted_cert: true
+            enabled: true
+            domain: "sales.acme.com"
           
 Server Group
-------------
+============
+
+The following module allows for interaction with the ZPA Server Groups endpoints.
+The module creates a Server Group resource, which can be created to manually define servers,
+or it can be created with the option of `dynamic_discovery` enabled so that ZPA discovers the appropriate servers,
+for each application as users request them.
 
 .. code-block:: yaml
 
-    - name: Create/Update/Delete a Server Group
-      willguibr.zpacloud_ansible.zpa_server_group:
+    - name: Create/Update/Delete a Server Group (Dynamic Discovery ON)
+      willguibr.zpacloud.zpa_server_group:
+        name: "Example"
+        description: "Example"
+        enabled: false
+        dynamic_discovery: true
+        app_connector_groups:
+          - id: "216196257331291924"
+
+    - name: Create/Update/Delete a Server Group (Dynamic Discovery OFF)
+      willguibr.zpacloud.zpa_server_group:
         name: "Example"
         description: "Example"
         enabled: false
@@ -133,15 +173,15 @@ Server Group
           - id: "216196257331291924"
         servers:
           - id: "216196257331291921"
-        applications:
-          - id: "216196257331291981"
 
 Segment Group
--------------
+=============
+
+The following module allows for interaction with the ZPA Segment Groups endpoints.
 
 .. code-block:: yaml
 
-    - name: Create/Update/Delete a Server Group
+    - name: Create/Update/Delete a Segment Groups
       willguibr.zpacloud.zpa_segment_group:
         config_space: "DEFAULT"
         name: Example Segment Group
@@ -149,3 +189,66 @@ Segment Group
         enabled: true
         policy_migrated: true
         tcp_keep_alive_enabled: "1"
+
+Policy Access Rule
+==================
+
+.. code-block:: yaml
+
+    - name: Create/update/delete a Policy Rule
+      willguibr.zpacloud_ansible.zpa_policy_access_rule:
+        name: "Example Policy Access Rule"
+        description: "Example Policy Access Rule"
+        action: "ALLOW"
+        rule_order: 1
+        operator: "AND"
+        conditions:
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "Example Policy Access Rule"
+                object_type: "APP"
+                lhs: "id"
+                rhs: "216196257331291979"
+
+Policy Access Timeout Rule
+==========================
+
+.. code-block:: yaml
+
+    - name: Create/update/delete a Policy Timeout Rule
+      willguibr.zpacloud_ansible.zpa_policy_access_timeout_rule:
+        name: "Example Policy Timeout Rule"
+        description: "Example Policy Timeout Rule"
+        action: "RE_AUTH"
+        rule_order: 1
+        operator: "AND"
+        conditions:
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "Application_Segment"
+                object_type: "APP"
+                lhs: "id"
+                rhs: "216196257331291979"
+
+Policy Access Forwarding Rule
+=============================
+
+.. code-block:: yaml
+
+    - name: Create/update/delete a Policy Forwarding Rule
+      willguibr.zpacloud_ansible.zpa_policy_access_forwarding_rule:
+        name: "Example Policy Forwarding Rule"
+        description: "Example Policy Forwarding Rule"
+        action: "BYPASS"
+        rule_order: 1
+        operator: "AND"
+        conditions:
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "Application_Segment"
+                object_type: "APP"
+                lhs: "id"
+                rhs: "216196257331291979"
