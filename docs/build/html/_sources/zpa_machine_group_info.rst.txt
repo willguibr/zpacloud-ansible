@@ -1,7 +1,7 @@
-zpa\_application\_segment module
+zpa\_machine\_group\_info module
 ================================
 
-.. automodule:: zpa_application_segment
+.. automodule:: zpa_machine_group_info
    :members:
    :undoc-members:
    :show-inheritance:
