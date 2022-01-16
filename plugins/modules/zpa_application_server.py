@@ -118,7 +118,7 @@ def main():
         description=dict(type='str', required=False),
         address=dict(type='str', required=True),
         enabled=dict(type='bool', required=False),
-        # app_server_group_ids=dict(type='list', elements='str', required=False),
+        app_server_group_ids=dict(type='list', elements='str', required=False),
         config_space=dict(type='str', required=False,
                           default="DEFAULT", choices=["DEFAULT", "SIEM"]),
         state=dict(type="str", choices=[

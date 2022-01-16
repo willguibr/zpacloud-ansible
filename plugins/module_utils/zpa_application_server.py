@@ -40,22 +40,6 @@ class ApplicationServerService:
                 return application_server
         return None
 
-    def mapApplicationServerRespJSONToListID(self, applicationServers):
-        if applicationServers is None:
-            return []
-        l = []
-        for s in applicationServers:
-            l.append(s.get("id"))
-        return l
-
-    def mapApplicationServerToJSON(self, applicationServers):
-        if applicationServers is None:
-            return []
-        l = []
-        for id in applicationServers:
-            l.append(dict(id=id))
-        return l
-
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -66,7 +50,7 @@ class ApplicationServerService:
             "name": resp_json.get("name"),
             "description": resp_json.get("description"),
             "enabled": resp_json.get("enabled"),
-            # "app_server_group_ids": self.mapApplicationServerRespJSONToListID(resp_json.get("appServerGroupIds")),
+            "app_server_group_ids": resp_json.get("appServerGroupIds"),
         }
 
     def mapAppToJSON(self, application_server):
@@ -79,8 +63,19 @@ class ApplicationServerService:
             "name": application_server.get("name"),
             "description": application_server.get("description"),
             "enabled": application_server.get("enabled"),
-            # "appServerGroupIds": self.mapApplicationServerToJSON(application_server.get("app_server_group_ids")),
+            "appServerGroupIds": application_server.get("app_server_group_ids"),
         }
+
+    def unlinkAttachedServerGroups(self, appID):
+        server = self.getByID(appID)
+        if server is None:
+            return None
+        if len(server.get("app_server_group_ids")) > 0:
+            print(
+                "[INFO] Removing server group ID/s from application server: %s" % (appID))
+            server["app_server_group_ids"] = []
+            return self.update(server)
+        return server
 
     def create(self, application_server):
         """Create new Application Server"""
@@ -104,6 +99,7 @@ class ApplicationServerService:
 
     def delete(self, id):
         """delete the Application Server"""
+        self.unlinkAttachedServerGroups(id)
         response = self.rest.delete(
             "/mgmtconfig/v1/admin/customers/%s/server/%s" % (self.customer_id, id))
         return response.status_code

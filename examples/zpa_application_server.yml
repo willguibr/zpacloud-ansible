@@ -7,7 +7,6 @@
         # name: "jenkins.securitygeek.io"
       register: app_server
     - name: application server
-
       debug:
         msg: "{{ app_server }}"
 
@@ -19,7 +18,7 @@
         enabled: true
         description: "Example Application Server"
         config_space: "DEFAULT"
-        # app_server_group_ids: []
+        app_server_group_ids: [216196257331292104, 216196257331291965]
       register: application_server
     - name: created/updated application server
       debug:
