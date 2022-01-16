@@ -1,64 +1,15 @@
 - name: policy timeout rule
   hosts: localhost
   tasks:
-    # - name: Gather information about all timeout policy rules
-    #   willguibr.zpacloud.zpa_policy_timeout_rule_info:
-        #id: "216196257331292020"
-    #     name: "Test"
-    #   register: policy
-    # - name: policy rule
-    #   debug:
-    #     msg: "{{ policy }}"
     - name: Timeout Policy - Test
       willguibr.zpacloud.zpa_policy_timeout_rule:
         name: "Timeout Policy - Test"
         description: "Timeout Policy - Test"
         action: "RE_AUTH"
         rule_order: 1
-    #     operator: "AND"
-    #     conditions:
-    #       - negated: false
-    #         operator: "OR"
-    #         operands:
-    #           - name: "test policy access rule"
-    #             object_type: "APP"
-    #             lhs: "id"
-    #             rhs: "216196257331292105"
-        # conditions:
-        #   - negated: false
-        #     operator: "OR"
-        #     operands:
-        #       - name: "test policy access rule"
-        #         object_type: "SCIM_GROUP"
-        #         lhs: "216196257331285825"
-        #         rhs: "293478"
-        # conditions:
-        #   - negated: false
-        #     operator: "OR"
-        #     operands:
-        #       - name: "test policy access rule"
-        #         object_type: "CLIENT_TYPE"
-        #         lhs: "id"
-        #         rhs: "zpn_client_type_exporter"
-        #     operands:
-        #       - name: "test policy access rule"
-        #         object_type: "CLIENT_TYPE"
-        #         lhs: "id"
-        #         rhs: "zpn_client_type_browser_isolation"
-        #     operands:
-        #       - name: "test policy access rule"
-        #         object_type: "CLIENT_TYPE"
-        #         lhs: "id"
-        #         rhs: "zpn_client_type_zapp"
-        # conditions:
-        #   - negated: false
-        #     operator: "OR"
-        #     operands:
-        #       - name: "Posture"
-        #         object_type: "POSTURE"
-        #         lhs: "13ba3d97-aefb-4acc-9e54-6cc230dee4a5"
-        #         rhs: "true"
-    #     state: absent
-    #   register: created_rule
-    # - debug:
-    #       msg: "{{ created_rule }}"
+        reauth_idle_timeout: 600
+        reauth_timeout: 172800
+        state: absent
+      register: created_rule
+    - debug:
+        msg: "{{ created_rule }}"

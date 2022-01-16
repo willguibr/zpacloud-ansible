@@ -58,16 +58,16 @@ class PolicyTimeOutRuleService:
         return None
 
     def mapListJSONToList(self, entities):
-        if entities is None:
-            return []
+        if entities is None or len(entities) == 0:
+            return None
         l = []
         for s in entities:
             l.append(self.camelcaseToSnakeCase(s))
         return l
 
     def mapListToJSONObjList(self, entities):
-        if entities is None:
-            return []
+        if entities is None or len(entities) == 0:
+            return None
         l = []
         for e in entities:
             l.append(dict(id=e.get("id")))
