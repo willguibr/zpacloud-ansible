@@ -100,6 +100,8 @@ class PolicyRuleService:
 
     def mapConditionsToList(self, conditionsJSON):
         conds = []
+        if conditionsJSON is None:
+            return conds
         for cond in conditionsJSON:
             """"""
             conds.append({
@@ -115,6 +117,8 @@ class PolicyRuleService:
 
     def mapConditionsToJSONList(self, conditions):
         conds = []
+        if conditions is None:
+            return conds
         for cond in conditions:
             """"""
             conds.append({
