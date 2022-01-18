@@ -28,3 +28,48 @@ Refer to the following help article: https://help.zscaler.com/zpa/about-api-keys
 
 Parameters
 ----------
+
+Notes
+-----
+
+LHS and RHS values differ based on object types. Refer to the following table: 
+
+.. list-table:: **LHS and RHS Values**
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Object Type
+     - LHS
+     - RHS
+   * - APP
+     - "id"
+     - <app segment ID>
+   * - APP_GROUP
+     - "id"
+     - <app segment group ID>
+   * - CLIENT_TYPE
+     - "id"
+     - 
+      - zpn_client_type_zapp
+      - zpn_client_type_exporter
+      - zpn_client_type_browser_isolation
+   * - IDP
+     - "id"
+     - <IdP ID>
+   * - POSTURE
+     - <posture network ID>
+     - "true" / "false"
+   * - SAML
+     - <SAML attribute ID>
+     - <Attribute value to match>
+   * - SCIM
+     - <SCIM attribute ID>
+     - <Attribute value to match>
+   * - SCIM_GROUP
+     - <SCIM group attribute ID>
+     - <Attribute value to match>
+
+Examples
+--------
+
+.. code-block:: yaml+jinja

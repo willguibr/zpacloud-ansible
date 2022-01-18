@@ -1,8 +1,8 @@
-.. _zpa_policy_access_rule_module:
+.. _zpa_policy_forwarding_rule_module:
 
 
-zpa_policy_access_rule - Create/Update/Delete a Policy Access Rule.
-====================================================================
+zpa_policy_forwarding_rule - Create/Update/Delete a Policy Forwarding Rule.
+===========================================================================
 
 .. contents::
    :local:
@@ -12,7 +12,7 @@ zpa_policy_access_rule - Create/Update/Delete a Policy Access Rule.
 Synopsis
 --------
 
-This module creates a Policy Access rule in the ZPA Cloud.
+This module creates a Policy Forwarding rule in the ZPA Cloud.
 
 
 
@@ -85,12 +85,11 @@ LHS and RHS values differ based on object types. Refer to the following table:
      - <trusted network ID>
      - "true"
 
+Policy Forwarding rules take the following actions:
 
-
-
-
-
-
+- INTERCEPT
+- BYPASS
+- INTERCEPT_ACCESIBLE
 
 Examples
 --------
@@ -102,28 +101,36 @@ Examples
         name: IdP_Name
       register: idp_controller
 
-    - name: Create/update/delete a policy rule
-      willguibr.zpacloud.zpa_policy_access_rule:
-        name: "Policy Access Example"
-        description: "Policy Access Example"
-        action: "ALLOW"
+    - name: Forwarding Policy - Test
+      willguibr.zpacloud.zpa_policy_forwarding_rule:
+        name: "Policy Forwarding Rule"
+        description: "Policy Forwarding Rule"
+        action: "INTERCEPT"
         rule_order: 1
         operator: "AND"
         conditions:
           - negated: false
             operator: "OR"
             operands:
-              - name: "app_segment"
+              - name: "Test"
                 object_type: "APP"
                 lhs: "id"
-                rhs: "216196257331291979"
-
-              - name: "segment_group"
+                rhs: "216196257331292105"
+              - name: "All Other Services"
                 object_type: "APP_GROUP"
                 lhs: "id"
-                rhs: "216196257331291980"
-
+                rhs: "216196257331292103"
+          - negated: false
+            operator: "OR"
             operands:
-               - object_type: "SCIM_GROUP"
-                  lhs: "{{ idp_controller.data[0].id }}"
-                  rhs: "216196257331291979"
+              - name: "zpn_client_type_exporter"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_exporter"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "CrowdStrike_ZPA_ZTA_80"
+                object_type: "POSTURE"
+                lhs: "{{ postures.data[0].posture_udid }}"
+                rhs: "false"
