@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase
 )
 import re
 
@@ -34,14 +34,6 @@ class SegmentGroupService:
             segment_groups.append(self.mapRespJSONToApp(segment_group))
         return segment_groups
 
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
-
     def getByName(self, name):
         segment_groups = self.getAll()
         for segment_group in segment_groups:
@@ -54,7 +46,7 @@ class SegmentGroupService:
             return []
         l = []
         for s in entities:
-            l.append(self.camelcaseToSnakeCase(s))
+            l.append(camelcaseToSnakeCase(s))
         return l
 
     def mapListToJSONObjList(self, entities):
@@ -64,7 +56,7 @@ class SegmentGroupService:
         for e in entities:
             l.append(dict(id=e.get("id")))
         return l
-
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -78,7 +70,7 @@ class SegmentGroupService:
             "policy_migrated": resp_json.get("policyMigrated"),
             "tcp_keep_alive_enabled": resp_json.get("tcpKeepAliveEnabled"),
         }
-
+    @delete_none
     def mapAppToJSON(self, segment_group):
         if segment_group is None:
             return {}

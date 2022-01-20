@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase
 )
 import re
 
@@ -46,17 +46,10 @@ class ApplicationSegmentService:
             return []
         l = []
         for s in serverGroups:
-            d = self.camelcaseToSnakeCase(s)
+            d = camelcaseToSnakeCase(s)
             l.append(d)
         return l
 
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
 
     def mapServerGroupsListToJSON(self, serverGroups):
         if serverGroups is None:
@@ -72,10 +65,11 @@ class ApplicationSegmentService:
             return []
         l = []
         for app in apps:
-            d = self.camelcaseToSnakeCase(app)
+            d = camelcaseToSnakeCase(app)
             l.append(d)
         return l
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -104,6 +98,7 @@ class ApplicationSegmentService:
             "clientless_apps": self.mapClientlessAppsJSONToList(resp_json.get("clientlessApps"))
         }
 
+    @delete_none
     def mapAppToJSON(self, app):
         if app is None:
             return {}

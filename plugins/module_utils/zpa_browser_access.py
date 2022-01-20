@@ -1,6 +1,6 @@
 import re
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase, snakecaseToCamelcase
 )
 
 
@@ -46,42 +46,10 @@ class BrowserAccessService:
             return []
         l = []
         for s in serverGroups:
-            d = self.camelcaseToSnakeCase(s)
+            d = camelcaseToSnakeCase(s)
             l.append(d)
         return l
 
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
-
-    @staticmethod
-    def snakecaseToCamelcase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                newKey = ''.join(
-                    x.capitalize() or '_' for x in key.split('_'))
-                newKey = newKey[:1].lower() + newKey[1:]
-                new_obj[newKey] = value
-        return new_obj
-
-    @staticmethod
-    def delete_none(_dict):
-        """Delete None values recursively from all of the dictionaries, tuples, lists, sets"""
-        if isinstance(_dict, dict):
-            for key, value in list(_dict.items()):
-                if isinstance(value, (list, dict, tuple, set)):
-                    _dict[key] = BrowserAccessService.delete_none(value)
-                elif value is None or key is None:
-                    del _dict[key]
-        elif isinstance(_dict, (list, set, tuple)):
-            _dict = type(_dict)(BrowserAccessService.delete_none(item)
-                                for item in _dict if item is not None)
-        return _dict
 
     def mapServerGroupsListToJSON(self, serverGroups):
         if serverGroups is None:
@@ -97,7 +65,7 @@ class BrowserAccessService:
             return []
         l = []
         for app in apps:
-            d = self.camelcaseToSnakeCase(app)
+            d = camelcaseToSnakeCase(app)
             l.append(d)
         return l
 
@@ -106,10 +74,11 @@ class BrowserAccessService:
             return []
         l = []
         for app in apps:
-            d = self.snakecaseToCamelcase(app)
+            d = snakecaseToCamelcase(app)
             l.append(d)
         return l
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -139,13 +108,13 @@ class BrowserAccessService:
             "tcp_port_range": resp_json.get("tcpPortRange"),
             "udp_port_range": resp_json.get("udpPortRange"),
             "server_groups": self.mapServerGroupsJSONToList(resp_json.get("serverGroups")),
-
         }
 
+    @delete_none
     def mapAppToJSON(self, app):
         if app is None:
             return {}
-        return self.delete_none({
+        return {
             "segmentGroupId": app.get("segment_group_id"),
             "segmentGroupName": app.get("segment_group_name"),
             "bypassType": app.get("bypass_type"),
@@ -171,7 +140,7 @@ class BrowserAccessService:
             "udpPortRange": app.get("udp_port_range"),
             "serverGroups": self.mapServerGroupsListToJSON(app.get("server_groups")),
             "clientlessApps": self.mapClientlessAppsToJSONList(app.get("clientless_apps")),
-        })
+        }
 
     def create(self, app):
         """Create new application"""

@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none
 )
 
 
@@ -40,6 +40,7 @@ class CloudConnectorGroupService:
                 return cloud_connector
         return None
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -57,6 +58,7 @@ class CloudConnectorGroupService:
             "zia_org_id": resp_json.get("ziaOrgId"),
         }
 
+    @delete_none
     def mapAppToJSON(self, cloudConnector):
         if cloudConnector is None:
             return {}

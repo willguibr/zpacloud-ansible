@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase
 )
 import re
 
@@ -24,7 +24,7 @@ class PolicyRuleService:
         status_code = response.status_code
         if status_code != 200:
             return None
-        return self.camelcaseToSnakeCase(response.json)
+        return camelcaseToSnakeCase(response.json)
 
     def getByID(self, id, policy_set_id):
         response = self.rest.get(
@@ -42,14 +42,6 @@ class PolicyRuleService:
             policy_rules.append(self.mapRespJSONToPolicy(policy_rule))
         return policy_rules
 
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
-
     def getByNameAndType(self, name, type):
         policy_rules = self.getAllByPolicyType(type)
         for policy_rule in policy_rules:
@@ -62,7 +54,7 @@ class PolicyRuleService:
             return []
         l = []
         for s in entities:
-            l.append(self.camelcaseToSnakeCase(s))
+            l.append(camelcaseToSnakeCase(s))
         return l
 
     def mapListToJSONObjList(self, entities):
@@ -128,6 +120,7 @@ class PolicyRuleService:
             })
         return conds
 
+    @delete_none
     def mapRespJSONToPolicy(self, resp_json):
         if resp_json is None:
             return {}
@@ -154,10 +147,11 @@ class PolicyRuleService:
             "app_server_groups": self.mapListJSONToList(resp_json.get("appServerGroups")),
         }
 
+    @delete_none
     def mapAppToJSON(self, policy_rule):
         if policy_rule is None:
             return {}
-        return self.delete_none({
+        return {
             "defaultRule": policy_rule.get("default_rule"),
             "description": policy_rule.get("description"),
             "policyType": policy_rule.get("policy_type"),
@@ -178,21 +172,7 @@ class PolicyRuleService:
             "conditions": self.mapConditionsToJSONList(policy_rule.get("conditions")),
             "appServerGroups": self.mapListToJSONObjList(policy_rule.get("app_server_groups")),
             "appConnectorGroups":  self.mapListToJSONObjList(policy_rule.get("app_connector_groups")),
-        })
-
-    @staticmethod
-    def delete_none(_dict):
-        """Delete None values recursively from all of the dictionaries, tuples, lists, sets"""
-        if isinstance(_dict, dict):
-            for key, value in list(_dict.items()):
-                if isinstance(value, (list, dict, tuple, set)):
-                    _dict[key] = PolicyRuleService.delete_none(value)
-                elif value is None or key is None:
-                    del _dict[key]
-        elif isinstance(_dict, (list, set, tuple)):
-            _dict = type(_dict)(PolicyRuleService.delete_none(item)
-                                for item in _dict if item is not None)
-        return _dict
+        }
 
     def customValidate(self, operand, expectedLHS, expectedRHS, getByID):
         if operand.get("lhs", "") == "" or not operand.get("lhs") in expectedLHS:

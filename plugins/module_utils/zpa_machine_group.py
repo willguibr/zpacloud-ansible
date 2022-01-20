@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none
 )
 
 
@@ -39,7 +39,7 @@ class MachineGroupService:
             if machineGroup.get("name") == name:
                 return machineGroup
         return None
-
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -53,7 +53,7 @@ class MachineGroupService:
             "name": resp_json.get("name"),
             # "machines": resp_json.get("machines"), # Machines inner menu is missing
         }
-
+    @delete_none
     def mapAppToJSON(self, network):
         if network is None:
             return {}

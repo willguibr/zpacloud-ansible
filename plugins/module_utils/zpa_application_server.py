@@ -1,6 +1,7 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none
 )
+
 
 class ApplicationServerService:
     def __init__(self, module, customer_id):
@@ -29,7 +30,8 @@ class ApplicationServerService:
             base_url="/mgmtconfig/v1/admin/customers/%s/server" % (self.customer_id), data_key_name="list")
         application_servers = []
         for application_server in list:
-            application_servers.append(self.mapRespJSONToApp(application_server))
+            application_servers.append(
+                self.mapRespJSONToApp(application_server))
         return application_servers
 
     def getByName(self, name):
@@ -39,6 +41,7 @@ class ApplicationServerService:
                 return application_server
         return None
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -52,6 +55,7 @@ class ApplicationServerService:
             "app_server_group_ids": resp_json.get("appServerGroupIds"),
         }
 
+    @delete_none
     def mapAppToJSON(self, application_server):
         if application_server is None:
             return {}

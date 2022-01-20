@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase
 )
 import re
 
@@ -34,14 +34,6 @@ class ProfileVersionService:
             networks.append(self.mapRespJSONToApp(network))
         return networks
 
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
-
     def getByName(self, name):
         networks = self.getAll()
         for network in networks:
@@ -54,22 +46,23 @@ class ProfileVersionService:
             return None
         scopes = []
         for v in d:
-            scopes.append(self.camelcaseToSnakeCase(v))
+            scopes.append(camelcaseToSnakeCase(v))
         return scopes
 
     def mapJSONCustomScopeRequestCustomerIds(self, d):
         if d is None:
             return None
-        return self.camelcaseToSnakeCase(d)
+        return camelcaseToSnakeCase(d)
 
     def mapJSONVersions(self, d):
         if d is None:
             return None
         versions = []
         for v in d:
-            versions.append(self.camelcaseToSnakeCase(v))
+            versions.append(camelcaseToSnakeCase(v))
         return versions
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}

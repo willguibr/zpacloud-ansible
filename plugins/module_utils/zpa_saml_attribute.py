@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper,delete_none
 )
 
 
@@ -39,7 +39,7 @@ class SamlAttributeService:
             if samlAttribute.get("name") == name:
                 return samlAttribute
         return None
-
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -54,7 +54,7 @@ class SamlAttributeService:
             "saml_name": resp_json.get("samlName"),
             "user_attribute": resp_json.get("userAttribute"),
         }
-
+    @delete_none
     def mapAppToJSON(self, samlAttribute):
         if samlAttribute is None:
             return {}

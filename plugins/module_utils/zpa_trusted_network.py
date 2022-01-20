@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none
 )
 
 
@@ -40,6 +40,7 @@ class TrustedNetworkService:
                 return network
         return None
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -55,6 +56,7 @@ class TrustedNetworkService:
             "zscaler_cloud": resp_json.get("zscalerCloud"),
         }
 
+    @delete_none
     def mapAppToJSON(self, network):
         if network is None:
             return {}

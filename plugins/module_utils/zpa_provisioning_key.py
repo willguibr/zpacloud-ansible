@@ -1,5 +1,5 @@
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+    ZPAClientHelper, delete_none
 )
 import re
 
@@ -56,6 +56,7 @@ class ProvisioningKeyService:
                 return provisioning_key
         return None
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -80,10 +81,11 @@ class ProvisioningKeyService:
             "zcomponent_name": resp_json.get("zcomponentName"),
         }
 
+    @delete_none
     def mapAppToJSON(self, provisioning_key):
         if provisioning_key is None:
             return {}
-        return self.delete_none({
+        return {
             "appConnectorGroupId": provisioning_key.get("app_connector_group_id"),
             "appConnectorGroupName": provisioning_key.get("app_connector_group_name"),
             "creationTime": provisioning_key.get("creation_time"),
@@ -102,21 +104,7 @@ class ProvisioningKeyService:
             "usageCount": provisioning_key.get("usage_count"),
             "zcomponentId": provisioning_key.get("zcomponent_id"),
             "zcomponentName": provisioning_key.get("zcomponent_name"),
-        })
-
-    @staticmethod
-    def delete_none(_dict):
-        """Delete None values recursively from all of the dictionaries, tuples, lists, sets"""
-        if isinstance(_dict, dict):
-            for key, value in list(_dict.items()):
-                if isinstance(value, (list, dict, tuple, set)):
-                    _dict[key] = ProvisioningKeyService.delete_none(value)
-                elif value is None or key is None:
-                    del _dict[key]
-        elif isinstance(_dict, (list, set, tuple)):
-            _dict = type(_dict)(ProvisioningKeyService.delete_none(item)
-                                for item in _dict if item is not None)
-        return _dict
+        }
 
     def create(self, provisioning_key, association_type):
         """Create new Provisioning Key"""
