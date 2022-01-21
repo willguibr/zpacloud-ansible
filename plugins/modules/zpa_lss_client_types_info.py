@@ -1,21 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
@@ -27,46 +14,35 @@ from traceback import format_exc
 
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
-author: William Guilherme (@willguibr)
+module: zpa_lss_client_types_info
+short_description: Retrieves LSS Client Types Information.
 description:
-  - Provides details about a specific trusted network created in the Zscaler Private Access Mobile Portal
-module: zpa_trusted_network_info
-short_description: Provides details about a specific trusted network created in the Zscaler Private Access Mobile Portal
+  - This module will allow the retrieval of LSS (Log Streaming Services) Client Types information from the ZPA Cloud. This can then be associated with the source_log_type parameter when creating an LSS Resource.
+author: William Guilherme (@willguibr)
 version_added: "1.0.0"
 requirements:
-  - supported starting from zpa_api >= 1.0
+  - supported starting from zpa_api >= 2.0
 options:
   name:
     description:
-      - Name of the trusted network.
+      - Name of the LSS client type.
     required: false
     type: str
-  id:
-    description:
-      - ID of the trusted network.
-    required: false
-    type: str
-
 """
 
 EXAMPLES = """
-- name: trusted network
-  hosts: localhost
-  tasks:
-    - name: Gather information about all trusted network
-      willguibr.zpacloud.zpa_trusted_network_info:
-        #name: Corp-Trusted-Networks
-        id: 216196257331282234
-      register: networks
-    - name: networks
-      debug:
-        msg: "{{ networks }}"
+- name: Get Details About All LSS Client Types
+  willguibr.zpacloud.zpa_lss_client_types_info:
+  register: lss_client_typeps
+
+- debug:
+    msg: "{{ lss_client_typeps }}"
 
 """
 
-RETURN = r"""
+RETURN = """
 data:
     description: Trusted Network information
     returned: success
@@ -74,39 +50,32 @@ data:
     type: list
     sample: [
       {
-          "id": "216196257331282234",
-          "modified_time": "1631935891",
-          "creation_time": "1625992655",
-          "modified_by": "72057594037928115",
-          "name": "Corp-Trusted-Networks",
-          "network_id": "869fbea4-799d-422a-984f-d40fbe53bc02",
-          "zscaler_cloud": "zscalerthree"
       }
     ]
 """
 
 
 def core(module):
-    machine_group_name = module.params.get("name", None)
-    machine_group_id = module.params.get("id", None)
+    lss_client_type_name = module.params.get("name", None)
+    lss_client_type_id = module.params.get("id", None)
     customer_id = module.params.get("customer_id", None)
     service = LSSClientTypesService(module, customer_id)
-    machine_groups = []
-    if machine_group_id is not None:
-        machine_group = service.getByID(machine_group_id)
-        if machine_group is None:
+    lss_client_types = []
+    if lss_client_type_id is not None:
+        lss_client_type = service.getByID(lss_client_type_id)
+        if lss_client_type is None:
             module.fail_json(
-                msg="Failed to retrieve Machine Group ID: '%s'" % (id))
-        machine_groups = [machine_group]
-    elif machine_group_name is not None:
-        machine_group = service.getByName(machine_group_name)
-        if machine_group is None:
+                msg="Failed to retrieve LSS Client Types ID: '%s'" % (id))
+        lss_client_types = [lss_client_type]
+    elif lss_client_type_name is not None:
+        lss_client_type = service.getByName(lss_client_type_name)
+        if lss_client_type is None:
             module.fail_json(
-                msg="Failed to retrieve Machine Group Name: '%s'" % (machine_group_name))
-        machine_groups = [machine_groups]
+                msg="Failed to retrieve LSS Client Type Name: '%s'" % (lss_client_type_name))
+        lss_client_types = [lss_client_types]
     else:
-        machine_groups = service.getAll()
-    module.exit_json(changed=False, data=machine_groups)
+        lss_client_types = service.getAll()
+    module.exit_json(changed=False, data=lss_client_types)
 
 
 def main():

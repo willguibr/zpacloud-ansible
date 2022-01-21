@@ -52,14 +52,14 @@ class LSSClientTypesService:
             "zpn_client_type_slogger": resp_json.get("ZPNClientTypeSlogger"),
         }
 
-    def mapAppToJSON(self, network):
-        if network is None:
+    def mapAppToJSON(self, clientType):
+        if clientType is None:
             return {}
         return {
-            "ZPNClientTypeExporter": network.get("zpn_client_type_exporter"),
-            "ZPNClientTypeMachineTunnel": network.get("zpn_client_type_machine_tunnel"),
-            "ZPNClientTypeIPAnchoring": network.get("zpn_client_type_ip_anchoring"),
-            "ZPNClientTypeEdgeConnector": network.get("zpn_client_type_edge_connector"),
-            "ZPNClientTypeZAPP": network.get("zpn_client_type_zapp"),
-            "ZPNClientTypeSlogger": network.get("zpn_client_type_slogger"),
+            "ZPNClientTypeExporter": clientType.get("zpn_client_type_exporter"),
+            "ZPNClientTypeMachineTunnel": clientType.get("zpn_client_type_machine_tunnel"),
+            "ZPNClientTypeIPAnchoring": clientType.get("zpn_client_type_ip_anchoring"),
+            "ZPNClientTypeEdgeConnector": clientType.get("zpn_client_type_edge_connector"),
+            "ZPNClientTypeZAPP": clientType.get("zpn_client_type_zapp"),
+            "ZPNClientTypeSlogger": clientType.get("zpn_client_type_slogger"),
         }
