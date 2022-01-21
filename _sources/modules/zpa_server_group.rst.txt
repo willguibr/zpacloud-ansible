@@ -1,0 +1,111 @@
+.. _zpa_server_group_module:
+
+
+zpa_server_group -- Create a Server Group .
+===========================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module create/update/delete a Server Group resource in the ZPA Cloud.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  applications (type: list)
+    This field is a json array of server_group-connector-id objects only.
+
+
+  enabled (type: bool)
+    This field defines if the server group is enabled or disabled.
+
+
+  dynamic_discovery (type: bool)
+    This field controls dynamic discovery of the servers.
+
+
+  name (required, type: str)
+    This field defines the name of the server group.
+
+
+  servers (type: list)
+    This field is a list of servers objects that are applicable only when dynamic discovery is disabled. Server name is required only in cases where the new servers need to be created in this API. For existing servers, pass only the serverId.
+
+
+  app_connector_groups (type: list)
+    List of server_group-connector ID objects.
+
+
+  config_space (type: str, default: DEFAULT)
+    
+
+
+  description (type: str)
+    This field is the description of the server group.
+
+
+  id (type: str)
+    
+
+
+  ip_anchored (type: bool)
+    
+
+
+  state (type: str, default: present)
+    Whether the server group should be present or absent.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Create/Update/Delete a Server Group - Dynamic Discovery Off
+      willguibr.zpacloud.zpa_server_group:
+        name: "Example"
+        description: "Example"
+        enabled: false
+        dynamic_discovery: false
+        app_connector_groups:
+          - id: "216196257331291921"
+        servers:
+          - id: "216196257331291921"
+        applications:
+          - id: "216196257331291921"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

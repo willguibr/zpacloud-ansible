@@ -1,0 +1,78 @@
+.. _zpa_policy_forwarding_rule_info_module:
+
+
+zpa_policy_forwarding_rule_info -- Retrieves policy forwarding rule information.
+================================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a policy forwarding rule.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (required, type: str)
+    Name of the policy forwarding rule.
+
+
+  id (type: str)
+    ID of the policy forwarding rule.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Information About All Policy Forwarding Rules
+        willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+      
+    - name: Get information About Forwarding Rules by Name
+        willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+          name: "All Other Services"
+        
+    - name: Get information About Forwarding Rules by ID
+        willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+          id: "216196257331292020"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

@@ -1,0 +1,78 @@
+.. _zpa_machine_group_info_module:
+
+
+zpa_machine_group_info -- Retrieves machine group information.
+==============================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a machine group detail from the ZPA Cloud.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the machine group.
+
+
+  id (type: str)
+    ID of the machine group.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Details of All Machine Groups
+      willguibr.zpacloud.zpa_machine_group_info:
+
+    - name: Get Details of a Specific Machine Group by Name
+      willguibr.zpacloud.zpa_machine_group_info:
+        name: "Corp_Machine_Group"
+
+    - name: Get Details of a Specific Machine Group by ID
+      willguibr.zpacloud.zpa_machine_group_info:
+        id: "216196257331282583"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

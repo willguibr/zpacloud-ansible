@@ -1,0 +1,85 @@
+.. _zpa_provisioning_key_info_module:
+
+
+zpa_provisioning_key_info -- Retrieves details about a Provisioning Key.
+========================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information abouta Provisioning Key by association type (CONNECTOR_GRP or SERVICE_EDGE_GRP).
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the provisioning key.
+
+
+  id (type: str)
+    ID of the provisioning key.
+
+
+  association_type (required, type: str)
+    Specifies the provisioning key type for App Connectors or ZPA Private Service Edges. The supported values are CONNECTOR_GRP and SERVICE_EDGE_GRP.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Gather Details of All SERVICE_EDGE_GRP Provisioning Keys
+      willguibr.zpacloud.zpa_provisioning_key_info:
+        association_type: "SERVICE_EDGE_GRP"
+
+    - name: Gather Details of All SERVICE_EDGE_GRP Provisioning Keys by Name
+      willguibr.zpacloud.zpa_provisioning_key_info:
+        name: "Example Service Edge Group"
+        association_type: "SERVICE_EDGE_GRP"
+
+    - name: Gather Details of All SERVICE_EDGE_GRP Provisioning Keys by ID
+      willguibr.zpacloud.zpa_provisioning_key_info:
+        id: "8691"
+        association_type: "SERVICE_EDGE_GRP"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

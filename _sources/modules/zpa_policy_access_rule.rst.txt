@@ -1,0 +1,163 @@
+.. _zpa_policy_access_rule_module:
+
+
+zpa_policy_access_rule -- Create a Policy Access Rule
+=====================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module create/update/delete a Policy Access Rule in the ZPA Cloud.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  bypass_default_rule (type: bool)
+    
+
+
+  policy_set_id (required, type: str)
+    
+
+
+  action (type: str)
+      This is for providing the rule action.
+
+
+  action_id (type: str)
+    This field defines the description of the server.
+
+
+  priority (type: str)
+    
+
+
+  id (type: str)
+    
+
+
+  policy_type (type: str)
+    
+
+
+  rule_order (type: str)
+    
+
+
+  default_rule (type: bool)
+    This is for providing a customer message for the user.
+
+
+  operator (type: str)
+    
+
+
+  app_connector_groups (type: list)
+    List of app-connector IDs.
+
+
+  reauth_default_rule (type: bool)
+    
+
+
+  description (type: str)
+    This is the description of the access policy.
+
+
+  conditions (type: list)
+    This is for proviidng the set of conditions for the policy.
+
+
+  reauth_idle_timeout (type: str)
+    
+
+
+  app_server_groups (type: list)
+    List of the server group IDs.
+
+
+  reauth_timeout (type: str)
+    
+
+
+  custom_msg (type: str)
+    This is for providing a customer message for the user.
+
+
+  lss_default_rule (type: bool)
+    
+
+
+  name (required, type: str)
+    This is the name of the policy.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+        - name: Create/Update/Delete a Policy Access Rule
+          willguibr.zpacloud.zpa_policy_access_rule:
+            name: "Policy Access Rule - Example"
+            description: "Policy Access Rule - Example"
+            action: "ALLOW"
+            rule_order: 2
+            operator: "AND"
+            conditions:
+              - negated: false
+                operator: "OR"
+                operands:
+                  - name: "app_segment"
+                    object_type: "APP"
+                    lhs: "id"
+                    rhs: "216196257331291979"
+            state: present
+          register: created_rule
+        - name: created policy access rule
+          debug:
+            msg: "{{ created_rule }}"
+
+
+
+Return Values
+-------------
+
+data (success, dict, {})
+  Policy Rule
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

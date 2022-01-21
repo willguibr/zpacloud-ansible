@@ -1,0 +1,85 @@
+.. _zpa_scim_group_info_module:
+
+
+zpa_scim_group_info -- Retrieves scim group information from a given IDP
+========================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about scim group(s) from a given IDP
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the scim group.
+
+
+  idp_name (required, type: str)
+    Name of the IDP.
+
+
+  id (type: str)
+    ID of the scim group.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Information About All SCIM Groups from an IdP
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        idp_name: "IdP_Name"
+        
+    - name: Get Information About a SCIM Group by ID
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        id: 216196257331285827
+        idp_name: "IdP_Name"
+        
+    - name: Get Information About a SCIM Group by Name 
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        name: "Finance"
+        idp_name: "IdP_Name"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

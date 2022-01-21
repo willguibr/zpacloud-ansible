@@ -1,0 +1,78 @@
+.. _zpa_browser_access_info_module:
+
+
+zpa_browser_access_info -- Retrieves browser access application segment information.
+====================================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a browser access application segment.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the App Connector Group.
+
+
+  id (type: str)
+    ID of the App Connector Group.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Gather information about all browser access application segments
+      willguibr.zpacloud.zpa_browser_access_info:
+      register: all_browser_access
+
+    - debug:
+      msg: "{{ all_browser_access }}"
+
+    - name: Browser Access Application Segment by Name
+      willguibr.zpacloud.zpa_browser_access_info:
+        name: "Example"
+        
+    - name: Browser Access Application Segment by ID
+      willguibr.zpacloud.zpa_browser_access_info:
+        id: "198288282"
+
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

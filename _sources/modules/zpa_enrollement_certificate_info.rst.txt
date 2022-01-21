@@ -1,0 +1,91 @@
+.. _zpa_enrollement_certificate_info_module:
+
+
+zpa_enrollement_certificate_info -- Retrieves enrollment certificate information.
+=================================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a Enrollment Certificate detail from the ZPA Cloud.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the browser certificate.
+
+
+  id (type: str)
+    ID of the browser certificate.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Gather Information Details of All Enrollment Certificates
+      willguibr.zpacloud.zpa_enrollment_cert_info:
+
+    - name: Gather Information Details of the Root Enrollment Certificates by Name
+      willguibr.zpacloud.zpa_enrollment_cert_info:
+        name: "Root"
+
+    - name: Gather Information Details of the Client Enrollment Certificates by Name
+      willguibr.zpacloud.zpa_enrollment_cert_info:
+        name: "Client"
+
+    - name: Gather Information Details of the Connector Enrollment Certificates by Name
+      willguibr.zpacloud.zpa_enrollment_cert_info:
+        name: "Connector"
+
+    - name: Gather Information Details of the Service Edge Enrollment Certificates by Name
+      willguibr.zpacloud.zpa_enrollment_cert_info:
+        name: "Service Edge"
+
+    - name: Gather Information Details of the Isolation Client Enrollment Certificates by Name
+      willguibr.zpacloud.zpa_enrollment_cert_info:
+        name: "Isolation Client"
+        
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

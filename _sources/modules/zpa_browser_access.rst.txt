@@ -1,0 +1,190 @@
+.. _zpa_browser_access_module:
+
+
+zpa_browser_access -- Create a Browser Access Application Segment.
+==================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module create/update/delete a Browser Access Application Segment in the ZPA Cloud.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  default_max_age (type: str)
+    default_max_age
+
+
+  ip_anchored (type: bool)
+    ip_anchored
+
+
+  udp_port_range (type: list)
+    udp port range
+
+
+  id (type: str)
+    Unique ID.
+
+
+  double_encrypt (type: bool)
+    Whether Double Encryption is enabled or disabled for the app.
+
+
+  icmp_access_type (type: str, default: NONE)
+    icmp access type.
+
+
+  default_idle_timeout (type: str)
+    default idle timeout.
+
+
+  modifiedby (type: str)
+    modified by.
+
+
+  passive_health_enabled (type: bool)
+    passive health enabled.
+
+
+  bypass_type (type: str)
+    Indicates whether users can bypass ZPA to access applications.
+
+
+  is_cname_enabled (type: bool)
+    Indicates if the Zscaler Client Connector (formerly Zscaler App or Z App) receives CNAME DNS records from the connectors.
+
+
+  name (required, type: str)
+    Name of the application.
+
+
+  config_space (type: str, default: DEFAULT)
+    config space.
+
+
+  health_reporting (type: str, default: NONE)
+    Whether health reporting for the app is Continuous or On Access. Supported values: NONE, ON_ACCESS, CONTINUOUS.
+
+
+  log_features (type: str)
+    log features.
+
+
+  server_groups (required, type: list)
+    List of the server group IDs.
+
+
+  segment_group_id (required, type: str)
+    segment group id.
+
+
+  description (type: str)
+    Description of the application.
+
+
+  health_check_type (type: str)
+    health check type.
+
+
+  segment_group_name (type: str)
+    segment group name.
+
+
+  tcp_port_range (type: list)
+    tcp port range
+
+
+  udp_port_ranges (type: list)
+    UDP port ranges used to access the app.
+
+
+  tcp_port_ranges (type: list)
+    TCP port ranges used to access the app.
+
+
+  enabled (type: bool)
+    Whether this application is enabled or not.
+
+
+  domain_names (required, type: list)
+    List of domains and IPs.
+
+
+  clientless_apps (type: list)
+    
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Create an app segment
+      willguibr.zpacloud.zpa_browser_access:
+        name: Example Application
+        description: Example Application Test
+        enabled: true
+        health_reporting: ON_ACCESS
+        bypass_type: NEVER
+        clientless_apps:
+          - name: "crm.example.com"
+            application_protocol: "HTTP"
+            application_port: "8080"
+            certificate_id: "216196257331282583"
+            trust_untrusted_cert: true
+            enabled: true
+            domain: "crm.example.com"
+          - name: "crm2.example.com"
+            application_protocol: "HTTP"
+            application_port: "8082"
+            certificate_id: "216196257331282583"
+            trust_untrusted_cert: true
+            enabled: true
+            domain: "crm.example.com"
+        is_cname_enabled: true
+        tcp_port_range:
+          - from: "80"
+            to: "80"
+        domain_names:
+          - crm.example.com
+        segment_group_id: "216196257331291896"
+        server_groups:
+          - "216196257331291969"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

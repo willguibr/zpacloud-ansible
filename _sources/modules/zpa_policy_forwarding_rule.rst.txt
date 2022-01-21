@@ -1,0 +1,195 @@
+.. _zpa_policy_forwarding_rule_module:
+
+
+zpa_policy_forwarding_rule -- Create a Policy Forwarding Rule.
+==============================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will create, update or delete a specific Policy Forwarding Rule
+
+
+
+
+
+
+
+Parameters
+----------
+
+  bypass_default_rule (type: bool)
+    
+
+
+  policy_set_id (required, type: str)
+    
+
+
+  action (type: str)
+    This is for providing the rule action.
+
+
+  action_id (type: str)
+    This field defines the description of the server.
+
+
+  priority (type: str)
+    
+
+
+  id (type: str)
+    
+
+
+  policy_type (type: str)
+    
+
+
+  rule_order (type: str)
+    
+
+
+  default_rule (type: bool)
+    This is for providing a customer message for the user.
+
+
+  operator (type: str)
+    This denotes the operation type.
+
+
+  custom_msg (type: str)
+    This is for providing a customer message for the user.
+
+
+  name (required, type: str)
+    This is the name of the policy.
+
+
+  description (type: str)
+    This is the description of the access policy.
+
+
+  conditions (type: list)
+    This is for proviidng the set of conditions for the policy.
+
+
+    negated (type: bool)
+      
+
+
+    operator (type: str)
+      This denotes the operation type.
+
+
+      operands (type: list)
+        This signifies the various policy criterias.
+
+
+        idp_id (type: str)
+          
+
+
+        lhs (type: str)
+          This signifies the key for the object type.
+
+
+        name (type: str)
+          This signifies the key for the object type.
+
+
+        rhs (type: str)
+          This denotes the value for the given object type. Its value depends upon the key.
+
+
+        object_type (type: str)
+          This is for specifying the policy criteria.
+
+
+
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Policy Forwarding Rule - Example
+      willguibr.zpacloud.zpa_policy_forwarding_rule:
+        name: "Policy Forwarding Rule - Example"
+        description: "Policy Forwarding Rule - Example"
+        action: "BYPASS"
+        rule_order: 1
+        operator: "AND"
+        conditions:
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "app_segment"
+                object_type: "APP"
+                lhs: "id"
+                rhs: "216196257331292105"
+              - name: "segment_group"
+                object_type: "APP_GROUP"
+                lhs: "id"
+                rhs: "216196257331292103"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "zpn_client_type_exporter"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_exporter"
+              - name: "zpn_client_type_browser_isolation"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_browser_isolation"
+              - name: "zpn_client_type_zapp"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_zapp"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "CrowdStrike_ZPA_ZTA_80"
+                object_type: "POSTURE"
+                lhs: "{{ postures.data[0].posture_udid }}"
+                rhs: "false"
+
+
+
+Return Values
+-------------
+
+data (success, dict, {})
+  Policy Forwarding Rule
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

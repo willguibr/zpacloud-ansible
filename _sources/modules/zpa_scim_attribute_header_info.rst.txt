@@ -1,0 +1,85 @@
+.. _zpa_scim_attribute_header_info_module:
+
+
+zpa_scim_attribute_header_info -- Retrieves scim attribute header from a given IDP
+==================================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about scim attribute header from a given IDP
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the scim attribute.
+
+
+  idp_name (type: str)
+    Name of the IDP, required when ID is not sepcified.
+
+
+  id (type: str)
+    ID of the scim attribute.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Information About All SCIM Attribute of an IDP
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        idp_name: IdP_Name
+        
+    - name: Get Information About the SCIM Attribute by Name
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        name: costCenter
+        idp_name: IdP_Name
+        
+    - name: Get Information About the SCIM Attribute by ID
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+        id: 216196257331285842
+        idp_name: IdP_Name
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

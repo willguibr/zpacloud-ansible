@@ -1,0 +1,78 @@
+.. _zpa_trusted_networks_info_module:
+
+
+zpa_trusted_networks_info -- Retrieves information about a Trusted Network.
+===========================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about Trusted Network resource.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the trusted network.
+
+
+  id (type: str)
+    ID of the trusted network.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Information About All Trusted Networks
+      willguibr.zpacloud.zpa_trusted_network_info:
+        
+    - name: Get information about Trusted Networks by Name
+      willguibr.zpacloud.zpa_trusted_network_info:
+        name: Corp-Trusted-Networks
+
+    - name: Get information about Trusted Networks by ID
+      willguibr.zpacloud.zpa_trusted_network_info:
+        id: 216196257331282234
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

@@ -1,0 +1,73 @@
+.. _zpa_application_segment_info_module:
+
+
+zpa_application_segment_info -- Retrieve an application segment information.
+============================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about an application segment.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  name (required, type: str)
+    Name of the application segment.
+
+
+  id (type: str)
+    ID of the application segment.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    "
+    - name: Retrieve Details of All Application Segments
+      willguibr.zpacloud.zpa_application_segment_info:
+
+    - name: Retrieve Details of a Specific Application Segments by Name
+      willguibr.zpacloud.zpa_application_segment_info:
+        name: "Example Application Segment"
+
+    - name: Retrieve Details of a Specific Application Segments by ID
+      willguibr.zpacloud.zpa_application_segment_info:
+        id: "216196257331291981"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

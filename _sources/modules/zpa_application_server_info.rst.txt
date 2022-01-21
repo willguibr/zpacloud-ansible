@@ -1,0 +1,73 @@
+.. _zpa_application_server_info_module:
+
+
+zpa_application_server_info -- Retrieve an application server information.
+==========================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about an application server.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the server group.
+
+
+  id (type: str)
+    ID of the server group.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Gather Information Details of All Application Servers
+        willguibr.zpacloud.zpa_application_server_info:
+
+    - name: Gather Information Details of an Application Server by Name
+        willguibr.zpacloud.zpa_application_server_info:
+        name: server1.acme.com
+
+    - name: Gather Information Details of an Application Server by ID
+        willguibr.zpacloud.zpa_application_server_info:
+        id: "216196257331291921"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

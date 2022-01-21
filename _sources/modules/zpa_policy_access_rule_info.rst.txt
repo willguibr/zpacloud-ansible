@@ -1,0 +1,78 @@
+.. _zpa_policy_access_rule_info_module:
+
+
+zpa_policy_access_rule_info -- Retrieves policy access rule information.
+========================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a policy access rule.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the policy rule.
+
+
+  id (type: str)
+    ID of the policy rule.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Details of All Policy Access Rules
+        willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+        
+    - name: Get Details of a Policy Access Rule by Name
+        willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+        name: "Policy Access Rule - Example"
+        
+    - name: Get Details of a Policy Access Rule by ID
+        willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+        id: "216196257331291979"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

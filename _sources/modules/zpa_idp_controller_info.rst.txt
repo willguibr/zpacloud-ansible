@@ -1,0 +1,73 @@
+.. _zpa_idp_controller_info_module:
+
+
+zpa_idp_controller_info -- Retrieves Identity Provider information.
+===================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about an Identity Provider (IdP) detail from the ZPA Cloud.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  name (required, type: str)
+    Name of the Identity Provider.
+
+
+  id (type: str)
+    ID of the Identity Provider.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Details of All IdP Controllers
+      willguibr.zpacloud.zpa_idp_controller_info:
+
+    - name: Get Details of a Specific IdP Controller by Name
+      willguibr.zpacloud.zpa_idp_controller_info:
+        name: User_IdP_Name
+
+    - name: Get Details of a Specific IdP Controller by ID
+      willguibr.zpacloud.zpa_idp_controller_info:
+        id: "216196257331282583"  
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

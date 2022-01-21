@@ -1,0 +1,73 @@
+.. _zpa_server_group_info_module:
+
+
+zpa_server_group_info -- Retrieves information about an server group
+====================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a server group resource.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the server group.
+
+
+  id (type: str)
+    ID of the server group.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Details of All Server Groups
+        willguibr.zpacloud.zpa_server_group_info:
+
+    - name: Get Details of a Specific Server Group by Name
+        willguibr.zpacloud.zpa_server_group_info:
+        name: Example
+
+    - name: Get Details of a Specific Server Group by ID
+        willguibr.zpacloud.zpa_server_group_info:
+        id: "216196257331291969"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

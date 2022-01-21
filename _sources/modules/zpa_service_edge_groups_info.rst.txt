@@ -1,0 +1,73 @@
+.. _zpa_service_edge_groups_info_module:
+
+
+zpa_service_edge_groups_info -- Retrieves information about a Service Edge Group.
+=================================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a Service Edge Group resource.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the Service Edge Group..
+
+
+  id (type: str)
+    ID of the Service Edge Group..
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get information about all Service Edge Groups
+      willguibr.zpacloud.zpa_service_edge_groups_info:
+        
+    - name: Get information about Service Edge Connector Group by ID
+      willguibr.zpacloud.zpa_service_edge_groups_info:
+        id: "198288282"
+
+    - name: Get information about Service Edge Connector Group by Name
+      willguibr.zpacloud.zpa_service_edge_groups_info:
+        name: "Example"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

@@ -1,0 +1,78 @@
+.. _zpa_customer_version_profile_info_module:
+
+
+zpa_customer_version_profile_info -- Retrieves customer version profile information.
+====================================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a customer version profile.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 2.0
+
+
+
+Parameters
+----------
+
+  name (required, type: str)
+    Name of the customer version profile.
+
+
+  id (type: str)
+    ID of the customer version profile.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Information Details of All Customer Version Profiles
+      willguibr.zpacloud.zpa_customer_version_profile_info:
+
+    - name: Get Information Details of a Customer Version Profiles by Name
+      willguibr.zpacloud.zpa_customer_version_profile_info:
+        name: "New Release"
+
+    - name: Get Information Details of a Customer Version Profiles by ID
+      willguibr.zpacloud.zpa_customer_version_profile_info:
+        id: "2"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

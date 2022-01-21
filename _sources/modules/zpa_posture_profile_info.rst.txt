@@ -1,0 +1,78 @@
+.. _zpa_posture_profile_info_module:
+
+
+zpa_posture_profile_info -- Retrieves details of a posture profile resource.
+============================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a posture profile resource.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the posture profile.
+
+
+  id (type: str)
+    ID of the posture profile.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Information About All Posture Profiles
+      willguibr.zpacloud.zpa_posture_profile_info:
+
+    - name: Get Details of a Specific Posture Profile by ID
+      willguibr.zpacloud.zpa_posture_profile_info:
+        id: "216196257331282583"
+         
+    - name: Get Details of a Specific Posture Profile by Name
+      willguibr.zpacloud.zpa_posture_profile_info:
+        name: CrowdStrike_ZPA_Pre-ZTA
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

@@ -1,0 +1,78 @@
+.. _zpa_saml_attribute_info_module:
+
+
+zpa_saml_attribute_info -- Retrieves saml attributes from a given IDP
+=====================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a saml attributes from a given IDP
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 1.0
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the saml attribute.
+
+
+  id (type: str)
+    ID of the saml attribute.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Information About All SAML Attributes
+      willguibr.zpacloud.zpa_saml_attribute_info:
+      
+    - name: Get Information About Saml Attribute by Attribute Name
+      willguibr.zpacloud.zpa_saml_attribute_info:
+        name: DepartmentName_User
+        
+    - name: Get Information About Saml Attribute by Attribute ID
+      willguibr.zpacloud.zpa_saml_attribute_info:
+        id: 216196257331285827
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

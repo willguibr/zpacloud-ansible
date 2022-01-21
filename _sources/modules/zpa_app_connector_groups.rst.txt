@@ -1,0 +1,134 @@
+.. _zpa_app_connector_groups_module:
+
+
+zpa_app_connector_groups -- Create an App Connector Group in the ZPA Cloud.
+===========================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module creates/update/delete an App Connector Group in the ZPA Cloud.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  name (required, type: str)
+    Name of the App Connector Group.
+
+
+  id (type: str)
+    ID of the App Connector Group.
+
+
+  city_country (type: str)
+    City Country of the App Connector Group.
+
+
+  country_code (type: str)
+    Country code of the App Connector Group.
+
+
+  dns_query_type (type: str, default: IPV4_IPV6)
+    Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the App Connector Group.
+
+
+  enabled (type: bool)
+    Whether this App Connector Group is enabled or not.
+
+
+  latitude (required, type: str)
+    Latitude of the App Connector Group. Integer or decimal. With values in the range of -90 to 90.
+
+
+  location (required, type: str)
+    Location of the App Connector Group.
+
+
+  longitude (required, type: str)
+    Longitude of the App Connector Group. Integer or decimal. With values in the range of -180 to 180.
+
+
+  lss_app_connector_group (type: bool)
+    LSS app connector group
+
+
+  upgrade_day (type: str, default: SUNDAY)
+    App Connectors in this group will attempt to update to a newer version of the software during this specified day. List of valid days (i.e., Sunday, Monday).
+
+
+  upgrade_time_in_secs (type: str, default: 66600)
+    App Connectors in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
+
+
+  override_version_profile (type: bool)
+    App Connectors in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
+
+
+  version_profile_id (type: str)
+    ID of the version profile. To learn more, see Version Profile Use Cases. This value is required, if the value for overrideVersionProfile is set to true.
+
+
+  version_profile_name (type: str)
+    Name of the version profile.
+
+
+  state (type: str, default: present)
+    Whether the app connector group should be present or absent.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Create/Update/Delete an App Connector Group
+      willguibr.zpacloud.zpa_app_connector_groups:
+        name: "Example"
+        description: "Example2"
+        enabled: true
+        city_country: "California, US"
+        country_code: "US"
+        latitude: "37.3382082"
+        longitude: "-121.8863286"
+        location: "San Jose, CA, USA"
+        upgrade_day: "SUNDAY"
+        upgrade_time_in_secs: "66600"
+        override_version_profile: true
+        version_profile_id: "0"
+        dns_query_type: "IPV4"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

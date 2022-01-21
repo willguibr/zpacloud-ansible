@@ -1,0 +1,73 @@
+.. _zpa_cloud_connector_group_info_module:
+
+
+zpa_cloud_connector_group_info -- Retrieves cloud connector group information.
+==============================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about a cloud connector group.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  name (type: str)
+    Name of the Cloud Connector Group.
+
+
+  id (type: str)
+    ID of the Cloud Connector Group.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Information Details of All Cloud Connector Groups
+      willguibr.zpacloud.zpa_cloud_connector_group_info:
+
+    - name: Get Information Details of a Cloud Connector Group by Name
+      willguibr.zpacloud.zpa_cloud_connector_group_info:
+        name: zs-cc-vpc-096108eb5d9e68d71-ca-central-1a
+
+    - name: Get Information Details of a Cloud Connector Group by ID
+      willguibr.zpacloud.zpa_cloud_connector_group_info:
+        id: "216196257331292017"  
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+
