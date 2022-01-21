@@ -1,36 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_application_server import ApplicationServerService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_application_server import ApplicationServerService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
+
 __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-module: zpa_application_servers
-short_description: Create/Update/Delete an application server.
+module: zpa_application_server
+short_description: Create an application server in the ZPA Cloud.
 description:
-    - Create server group objects in the ZPA portal
+    - This module creates/update/delete an application server in the ZPA Cloud.
 author:
     - William Guilherme (@willguibr)
 version_added: '1.0.0'
@@ -71,7 +59,9 @@ EXAMPLES = """
     description: Example
     address: example.acme.com
     enabled: true
+"""
 
+EXAMPLES = """
 - name: Create Second Application Server
     willguibr.zpacloud.zpa_application_server:
     name: Example1
@@ -125,13 +115,15 @@ def core(module):
 
 def main():
     argument_spec = ZPAClientHelper.zpa_argument_spec()
+    id_name_spec = dict(type='list', elements='dict', options=dict(id=dict(
+        type='str', required=False), name=dict(type='str', required=False)), required=False)
     argument_spec.update(
-        id=dict(type="str", required=False),
+        id=dict(type="str"),
         name=dict(type='str', required=True),
         description=dict(type='str', required=False),
         address=dict(type='str', required=True),
         enabled=dict(type='bool', required=False),
-        # app_server_group_ids=dict(type='list', elements='str', required=False),
+        app_server_group_ids=dict(type='list', elements='str', required=False),
         config_space=dict(type='str', required=False,
                           default="DEFAULT", choices=["DEFAULT", "SIEM"]),
         state=dict(type="str", choices=[

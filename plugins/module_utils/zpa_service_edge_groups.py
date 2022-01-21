@@ -1,6 +1,6 @@
 import re
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase
 )
 
 
@@ -40,23 +40,15 @@ class ServiceEdgeGroupService:
             if app.get("name") == name:
                 return app
         return None
-    
+
     def mapServiceEdgesJSONToList(self, serviceEdges):
         if serviceEdges is None:
             return []
         l = []
         for s in serviceEdges:
-            d = self.camelcaseToSnakeCase(s)
+            d = camelcaseToSnakeCase(s)
             l.append(d)
         return l
-
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
 
     def mapServiceEdgesListToJSON(self, serviceEdges):
         if serviceEdges is None:
@@ -66,13 +58,13 @@ class ServiceEdgeGroupService:
             d = dict(id=s.get("id"))
             l.append(d)
         return l
-    
+
     def mapTrustedNetworksJSONToList(self, trustedNetworks):
         if trustedNetworks is None:
             return []
         l = []
         for app in trustedNetworks:
-            d = self.camelcaseToSnakeCase(app)
+            d = camelcaseToSnakeCase(app)
             l.append(d)
         return l
 
@@ -84,7 +76,8 @@ class ServiceEdgeGroupService:
             d = dict(id=s.get("id"))
             l.append(d)
         return l
-    
+
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -110,6 +103,7 @@ class ServiceEdgeGroupService:
             "trusted_networks": self.mapTrustedNetworksJSONToList(resp_json.get("trustedNetworks")),
         }
 
+    @delete_none
     def mapAppToJSON(self, serviceEdge):
         if serviceEdge is None:
             return {}

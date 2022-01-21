@@ -1,38 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_server_group import ServerGroupService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_server_group import ServerGroupService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 __metaclass__ = type
 
-DOCUMENTATION = '''
+DOCUMENTATION = """
 ---
 module: zpa_server_group
-short_description: Create/ an server group
+short_description: Create a Server Group .
 description:
-  - This module will create, retrieve, update or delete a specific server group
+  - This module create/update/delete a Server Group resource in the ZPA Cloud.
 author:
-  - William Guilherme (@willguibr)
+    - William Guilherme (@willguibr)
 version_added: "1.0.0"
 options:
   applications:
@@ -85,58 +72,35 @@ options:
     choices: ["present", "absent"]
     type: str
 
-'''
+"""
+EXAMPLES = """
+- name: Create/Update/Delete a Server Group - Dynamic Discovery ON
+  willguibr.zpacloud.zpa_server_group:
+    name: "Example"
+    description: "Example"
+    enabled: true
+    dynamic_discovery: true
+    app_connector_groups:
+      - id: "216196257331291924"
+"""
 
-EXAMPLES = r'''
-- name: server group
-  hosts: localhost
-  tasks:
-    - name: Create an server group
-      willguibr.zpacloud_ansible.zpa_server_group:
-        state: absent
-        name: "Example Test amazzal"
-        description: "Example  Test amazzal"
-        enabled: false
-        dynamic_discovery: false
-        app_connector_groups:
-          - id: "216196257331291921"
-            name: "sks"
-        servers:
-          - id: "216196257331291921"
-            name: "sks"
-        applications:
-          - id: "216196257331291921"
-            name: "sks"
-      register: server_g
-    - name: server group
-      debug:
-        msg: "{{ server_g }}"
+EXAMPLES = """
+- name: Create/Update/Delete a Server Group - Dynamic Discovery Off
+  willguibr.zpacloud.zpa_server_group:
+    name: "Example"
+    description: "Example"
+    enabled: false
+    dynamic_discovery: false
+    app_connector_groups:
+      - id: "216196257331291921"
+    servers:
+      - id: "216196257331291921"
+    applications:
+      - id: "216196257331291921"
+"""
 
-'''
-
-RETURN = r"""
-data:
-    description: App Connector Group
-    returned: success
-    type: dict
-    sample: {
-                "app_connector_groups": [
-                    {"id": "216196257331291924", "name":"XXX"}
-                ],
-                "applications": [
-                    {"id": "216196257331291924", "name":"XXX"}
-                ],
-                "config_space": "DEFAULT",
-                "description": "Browser Access Apps",
-                "dynamic_discovery": false,
-                "enabled": true,
-                "id": "216196257331291969",
-                "ip_anchored": false,
-                "name": "Browser Access Apps",
-                "servers": [
-                    {"id": "216196257331291924", "name":"XXX"}
-                ]
-            }
+RETURN = """
+# The newly created server group resource record.
 """
 
 

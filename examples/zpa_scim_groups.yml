@@ -2,10 +2,10 @@
   hosts: localhost
   tasks:
     - name: Gather information about all SCIM Groups
-      willguibr.zpacloud_ansible.zpa_scim_group_info:
+      willguibr.zpacloud.zpa_scim_group_info:
         #name: "Engineering"
         #id: 293480
-        idp_name: "SGIO-User-Okta"
+        # idp_name: "SGIO-User-Okta"
       register: scim_group
     - name: scim_group
       debug:

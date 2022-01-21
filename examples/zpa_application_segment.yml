@@ -2,14 +2,14 @@
   hosts: localhost
   tasks:
     - name: Gather information about all App segment
-      willguibr.zpacloud_ansible.zpa_application_segment_info:
+      willguibr.zpacloud.zpa_application_segment_info:
         #id: "216196257331291981"
       register: app
     - name: app segment
       debug:
         msg: "{{ app }}"
     - name: Create an app segment
-      willguibr.zpacloud_ansible.zpa_application_segment:
+      willguibr.zpacloud.zpa_application_segment:
         state: absent
         name: Example Application
         description: Example Application Test

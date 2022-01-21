@@ -1,6 +1,7 @@
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase
 )
+import re
 
 
 class ProfileVersionService:
@@ -40,32 +41,42 @@ class ProfileVersionService:
                 return network
         return None
 
+    def mapJSONCustomScopeCustomerIds(self, d):
+        if d is None:
+            return None
+        scopes = []
+        for v in d:
+            scopes.append(camelcaseToSnakeCase(v))
+        return scopes
+
+    def mapJSONCustomScopeRequestCustomerIds(self, d):
+        if d is None:
+            return None
+        return camelcaseToSnakeCase(d)
+
+    def mapJSONVersions(self, d):
+        if d is None:
+            return None
+        versions = []
+        for v in d:
+            versions.append(camelcaseToSnakeCase(v))
+        return versions
+
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
         return {
-            # "creation_time": resp_json.get("creationTime"),
-            # "custome_id": resp_json.get("customerId"),
-            # "description": resp_json.get("description"),
+            "creation_time": resp_json.get("creationTime"),
+            "customer_id": resp_json.get("customerId"),
+            "description": resp_json.get("description"),
             "id": resp_json.get("id"),
-            # "modified_by": resp_json.get("modifiedBy"),
-            # "modified_time": resp_json.get("modifiedTime"),
+            "modified_by": resp_json.get("modifiedBy"),
+            "modified_time": resp_json.get("modifiedTime"),
             "name": resp_json.get("name"),
-            # "upgrade_priority": resp_json.get("upgradePriority"),
-            # "visibility_scope": resp_json.get("visibilityScope"),
-        }
-
-    def mapAppToJSON(self, version):
-        if version is None:
-            return {}
-        return {
-            # "creationTime": version.get("creation_time"),
-            # "customerId": version.get("custome_id"),
-            # "description": version.get("description"),
-            "id": version.get("id"),
-            # "modifiedBy": version.get("modified_by"),
-            # "modifiedTime": version.get("modified_time"),
-            "name": version.get("name"),
-            # "upgradePriority": version.get("upgrade_priority"),
-            # "visibilityScope": version.get("visibility_scope"),
+            "upgrade_priority": resp_json.get("upgradePriority"),
+            "visibility_scope": resp_json.get("visibilityScope"),
+            "custom_scope_request_customer_ids": self.mapJSONCustomScopeRequestCustomerIds(resp_json.get("customScopeRequestCustomerIds")),
+            "custom_scope_customer_ids": self.mapJSONCustomScopeCustomerIds(resp_json.get("customScopeCustomerIds")),
+            "versions": self.mapJSONVersions(resp_json.get("versions")),
         }

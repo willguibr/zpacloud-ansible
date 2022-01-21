@@ -1,5 +1,5 @@
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
+    ZPAClientHelper, delete_none
 )
 
 
@@ -39,7 +39,7 @@ class PostureProfileService:
             if posture.get("name") == name:
                 return posture
         return None
-
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -55,7 +55,7 @@ class PostureProfileService:
             "zscaler_cloud": resp_json.get("zscalerCloud"),
             "zscaler_customer_id": resp_json.get("zscalerCustomerId"),
         }
-
+    @delete_none
     def mapAppToJSON(self, posture):
         if posture is None:
             return {}

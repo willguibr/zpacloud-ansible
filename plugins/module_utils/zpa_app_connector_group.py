@@ -1,6 +1,6 @@
 import re
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
+    ZPAClientHelper, delete_none,camelcaseToSnakeCase
 )
 
 
@@ -46,17 +46,9 @@ class AppConnectorGroupService:
             return []
         l = []
         for s in connectors:
-            d = self.camelcaseToSnakeCase(s)
+            d = camelcaseToSnakeCase(s)
             l.append(d)
         return l
-
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
 
     def mapConnectorsListToJSON(self, connectors):
         if connectors is None:
@@ -67,6 +59,7 @@ class AppConnectorGroupService:
             l.append(d)
         return l
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -88,6 +81,7 @@ class AppConnectorGroupService:
             "dns_query_type": resp_json.get("dnsQueryType"),
         }
 
+    @delete_none
     def mapAppToJSON(self, app):
         if app is None:
             return {}

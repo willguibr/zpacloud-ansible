@@ -1,6 +1,6 @@
 import re
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase, snakecaseToCamelcase
 )
 
 
@@ -46,17 +46,10 @@ class BrowserAccessService:
             return []
         l = []
         for s in serverGroups:
-            d = self.camelcaseToSnakeCase(s)
+            d = camelcaseToSnakeCase(s)
             l.append(d)
         return l
 
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
 
     def mapServerGroupsListToJSON(self, serverGroups):
         if serverGroups is None:
@@ -72,10 +65,20 @@ class BrowserAccessService:
             return []
         l = []
         for app in apps:
-            d = self.camelcaseToSnakeCase(app)
+            d = camelcaseToSnakeCase(app)
             l.append(d)
         return l
 
+    def mapClientlessAppsToJSONList(self, apps):
+        if apps is None:
+            return []
+        l = []
+        for app in apps:
+            d = snakecaseToCamelcase(app)
+            l.append(d)
+        return l
+
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -105,9 +108,9 @@ class BrowserAccessService:
             "tcp_port_range": resp_json.get("tcpPortRange"),
             "udp_port_range": resp_json.get("udpPortRange"),
             "server_groups": self.mapServerGroupsJSONToList(resp_json.get("serverGroups")),
-
         }
 
+    @delete_none
     def mapAppToJSON(self, app):
         if app is None:
             return {}
@@ -115,7 +118,6 @@ class BrowserAccessService:
             "segmentGroupId": app.get("segment_group_id"),
             "segmentGroupName": app.get("segment_group_name"),
             "bypassType": app.get("bypass_type"),
-            # "clientlessApps": app.get("clientless_apps"),
             "configSpace": app.get("config_space"),
             "creationTime": app.get("creation_time"),
             "defaultIdleTimeout": app.get("default_idle_timeout"),
@@ -137,7 +139,7 @@ class BrowserAccessService:
             "tcpPortRange": app.get("tcp_port_range"),
             "udpPortRange": app.get("udp_port_range"),
             "serverGroups": self.mapServerGroupsListToJSON(app.get("server_groups")),
-            "clientless_apps": self.mapClientlessAppsJSONToList(app.get("clientlessApps")),
+            "clientlessApps": self.mapClientlessAppsToJSONList(app.get("clientless_apps")),
         }
 
     def create(self, app):
@@ -148,7 +150,7 @@ class BrowserAccessService:
         status_code = response.status_code
         if status_code > 299:
             return None
-        return self.mapRespJSONToApp(response.json)
+        return self.getByID(response.json.get("id"))
 
     def update(self, app):
         """update the application"""
@@ -158,7 +160,7 @@ class BrowserAccessService:
         status_code = response.status_code
         if status_code > 299:
             return None
-        return app
+        return self.getByID(appJSON.get("id"))
 
     def detach_from_segment_group(self, app_id, seg_group_id):
         seg_group = self.rest.get(

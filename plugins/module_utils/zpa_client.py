@@ -8,7 +8,7 @@
 # Simplified BSD License (see licenses/simplified_bsd.txt or https://opensource.org/licenses/BSD-2-Clause)
 
 from __future__ import absolute_import, division, print_function
-
+import re
 from ansible.module_utils.common.text.converters import jsonify
 
 __metaclass__ = type
@@ -48,6 +48,47 @@ def retry_with_backoff(retries=5, backoff_in_seconds=1):
     return decorator
 
 
+def delete_none(f):
+    """
+        This decorator should be used on functions that return an object to delete empty fields
+    """
+    def wrapper(*args):
+        _dict = f(*args)
+        if _dict is not None:
+            return deleteNone(_dict)
+        return _dict
+    return wrapper
+
+def deleteNone(_dict):
+    """Delete None values recursively from all of the dictionaries, tuples, lists, sets"""
+    if isinstance(_dict, dict):
+        for key, value in list(_dict.items()):
+            if isinstance(value, (list, dict, tuple, set)):
+                _dict[key] = deleteNone(value)
+            elif value is None or key is None:
+                del _dict[key]
+    elif isinstance(_dict, (list, set, tuple)):
+        _dict = type(_dict)(deleteNone(item)
+                            for item in _dict if item is not None)
+    return _dict
+
+
+def camelcaseToSnakeCase(obj):
+    new_obj = dict()
+    for key, value in obj.items():
+        if value is not None:
+            new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
+    return new_obj
+
+def snakecaseToCamelcase(obj):
+    new_obj = dict()
+    for key, value in obj.items():
+        if value is not None:
+            newKey = ''.join(
+                x.capitalize() or '_' for x in key.split('_'))
+            newKey = newKey[:1].lower() + newKey[1:]
+            new_obj[newKey] = value
+    return new_obj
 class Response(object):
     def __init__(self, resp, info):
         self.body = None
@@ -111,8 +152,11 @@ class ZPAClientHelper:
             url = '%s/signin' % self.baseurl
             resp, info = fetch_url(
                 module=self.module, url=url, data=data, method="POST", headers=headers)
+            resp = Response(resp, info)
+            print("[INFO] calling: %s %s %s\n response: %s" %
+                  ("POST", url, str(data), str("" if resp == None else resp.json)))
             # print("[INFO] %s\n" % (to_text(resp.read())))
-            return Response(resp, info)
+            return resp
         except Exception:
             e = get_exception()
             self._fail('login', str(e))
@@ -136,7 +180,7 @@ class ZPAClientHelper:
         return "%s/%s" % (self.baseurl, path)
 
     @retry_with_backoff(retries=5)
-    def send(self, method, path, data=None):
+    def send(self, method, path, data=None, fail_safe=False):
         url = self._url_builder(path)
         data = self.module.jsonify(data)
         if method == "DELETE":
@@ -154,13 +198,13 @@ class ZPAClientHelper:
         resp = Response(resp, info)
         print("[INFO] calling: %s %s %s\n response: %s" %
               (method, url, str(data), str("" if resp == None else resp.json)))
-        if resp.status_code == 400:
+        if resp.status_code == 400 and fail_safe == True:
             self.module.fail_json(
                 msg="Operation failed. API response: %s\n" % (resp.json))
         return resp
 
-    def get(self, path, data=None):
-        return self.send("GET", path, data)
+    def get(self, path, data=None, fail_safe=False):
+        return self.send("GET", path, data, fail_safe)
 
     def put(self, path, data=None):
         return self.send("PUT", path, data)
@@ -232,9 +276,13 @@ class ZPAClientHelper:
             if status_code != expected_status_code:
                 break
             page += 1
+            if response is None or response.json is None or response.json.get(data_key_name) is None:
+                has_next = False
+                continue
             ret_data.extend(response.json[data_key_name])
             try:
                 has_next = response.json.get("totalPages") is not None and int(
+                    response.json["totalPages"]) != 0 and int(
                     response.json["totalPages"]) < page
             except KeyError:
                 has_next = False

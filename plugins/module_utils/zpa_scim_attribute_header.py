@@ -1,5 +1,5 @@
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
+    ZPAClientHelper,delete_none
 )
 
 
@@ -57,7 +57,7 @@ class ScimAttributeHeaderService:
             if samlAttribute.get("name") == name:
                 return samlAttribute
         return None
-
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -79,7 +79,7 @@ class ScimAttributeHeaderService:
             "schema_uri": resp_json.get("schemaURI"),
             "uniqueness": resp_json.get("uniqueness"),
         }
-
+    @delete_none
     def mapAppToJSON(self, scimAttribute):
         if scimAttribute is None:
             return {}

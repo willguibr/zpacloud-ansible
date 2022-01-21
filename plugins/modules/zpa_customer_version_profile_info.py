@@ -1,26 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_customer_version_profile import ProfileVersionService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_customer_version_profile import ProfileVersionService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
@@ -29,11 +16,11 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-author: William Guilherme (@willguibr)
-description:
-  - Get details (ID and/or Name) of a customer version profile.
 module: zpa_customer_version_profile_info
-short_description: Get details (ID and/or Name) of a customer version profile.
+short_description: Retrieves customer version profile information.
+description:
+  - This module will allow the retrieval of information about a customer version profile.
+author: William Guilherme (@willguibr)
 version_added: "1.0.0"
 requirements:
   - supported starting from zpa_api >= 2.0
@@ -51,28 +38,16 @@ options:
 """
 
 EXAMPLES = """
-- name: Gather Information Details of All Customer Version Profiles
+- name: Get Information Details of All Customer Version Profiles
   willguibr.zpacloud.zpa_customer_version_profile_info:
-  register: all_customer_version_profiles
 
-- debug:
-    msg: "{{ all_customer_version_profiles }}"
-
-- name: Gather Information Details of a Cloud Connector Group by Name
+- name: Get Information Details of a Customer Version Profiles by Name
   willguibr.zpacloud.zpa_customer_version_profile_info:
     name: "New Release"
-  register: version_profile_name
 
-- debug:
-    msg: "{{ version_profile_name }}"
-
-- name: Gather Information Details of a Cloud Connector Group by ID
+- name: Get Information Details of a Customer Version Profiles by ID
   willguibr.zpacloud.zpa_customer_version_profile_info:
     id: "2"
-  register: version_profile_id
-
-- debug:
-    msg: "{{ version_profile_id }}"
 """
 
 RETURN = """

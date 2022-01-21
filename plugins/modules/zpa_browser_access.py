@@ -1,36 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_browser_access import BrowserAccessService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_browser_access import BrowserAccessService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-module: zpa_application_segment
-short_description: Create an application segment
+module: zpa_browser_access
+short_description: Create a Browser Access Application Segment.
 description:
-  - This module will create, retrieve, update or delete a specific application segment
+  - This module create/update/delete a Browser Access Application Segment in the ZPA Cloud.
 author:
   - William Guilherme (@willguibr)
 version_added: "1.0.0"
@@ -149,38 +136,51 @@ options:
     elements: str
     required: True
     description: "List of domains and IPs."
+  clientless_apps:
+    type: list
+    elements: dict
+    required: False
+    description: ""
 """
 
 EXAMPLES = """
-- name: App segment
-  hosts: localhost
-  tasks:
-    - name: Create an app segment
-      willguibr.zpacloud_ansible.zpa_application_segment:
-        state: absent
-        name: Example Application
-        description: Example Application Test
+- name: Create an app segment
+  willguibr.zpacloud.zpa_browser_access:
+    name: Example Application
+    description: Example Application Test
+    enabled: true
+    health_reporting: ON_ACCESS
+    bypass_type: NEVER
+    clientless_apps:
+      - name: "crm.example.com"
+        application_protocol: "HTTP"
+        application_port: "8080"
+        certificate_id: "216196257331282583"
+        trust_untrusted_cert: true
         enabled: true
-        health_reporting: ON_ACCESS
-        bypass_type: NEVER
-        is_cname_enabled: true
-        tcp_port_range:
-          - from: "80"
-            to: "80"
-        domain_names:
-          - crm.example.com
-        segment_group_id: "216196257331291896"
-        server_groups:
-          #- "216196257331291969"
-      register: app_segment
-    - name: created/updated app segment
-      debug:
-        msg: "{{ app_segment }}"
+        domain: "crm.example.com"
+      - name: "crm2.example.com"
+        application_protocol: "HTTP"
+        application_port: "8082"
+        certificate_id: "216196257331282583"
+        trust_untrusted_cert: true
+        enabled: true
+        domain: "crm.example.com"
+    is_cname_enabled: true
+    tcp_port_range:
+      - from: "80"
+        to: "80"
+    domain_names:
+      - crm.example.com
+    segment_group_id: "216196257331291896"
+    server_groups:
+      - "216196257331291969"
 """
 
 RETURN = """
 # The newly created browser access application segment resource record.
 """
+
 
 def core(module):
     state = module.params.get("state", None)
@@ -226,7 +226,7 @@ def core(module):
     if state == "present":
         if existing_app is not None:
             """Update"""
-            service.update(existing_app)
+            existing_app = service.update(existing_app)
             module.exit_json(changed=True, data=existing_app)
         else:
             """Create"""
@@ -278,6 +278,29 @@ def main():
         server_groups=id_name_spec,
         segment_group_name=dict(type='str', required=False),
         domain_names=dict(type='list', elements='str', required=True),
+        clientless_apps=dict(
+            type='list',
+            elements='dict',
+            options=dict(
+                path=dict(type='str', required=False),
+                trust_untrusted_cert=dict(type='bool', required=False),
+                allow_options=dict(type='bool', required=False),
+                description=dict(type='str', required=False),
+                id=dict(type='str'),
+                cname=dict(type='str', required=False),
+                hidden=dict(type='bool', required=False),
+                app_id=dict(type='str'),
+                application_port=dict(type='str', required=False),
+                application_protocol=dict(type='str', required=True),
+                name=dict(type='str', required=True),
+                certificate_id=dict(type='str', required=True),
+                certificate_name=dict(type='str', required=False),
+                domain=dict(type='str', required=False),
+                enabled=dict(type='bool', required=False),
+                local_domain=dict(type='str', required=False),
+            ),
+            required=False
+        ),
         state=dict(type="str", choices=[
                    "present", "absent"], default="present")
     )

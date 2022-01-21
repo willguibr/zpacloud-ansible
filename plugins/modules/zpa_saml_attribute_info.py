@@ -1,39 +1,26 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_saml_attribute import SamlAttributeService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_saml_attribute import SamlAttributeService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
 
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
-author: William Guilherme (@willguibr)
-description:
-  - Provides details about a specific saml attributes from a given IDP
 module: zpa_saml_attribute_info
-short_description: Provides details about a specific saml attributes from a given IDP
+short_description: Retrieves saml attributes from a given IDP
+description:
+  - This module will allow the retrieval of information about a saml attributes from a given IDP
+author: William Guilherme (@willguibr)
 version_added: "1.0.0"
 requirements:
   - supported starting from zpa_api >= 1.0
@@ -52,53 +39,20 @@ options:
 """
 
 EXAMPLES = """
-- name: saml attribute
-  hosts: localhost
-  tasks:
-    - name: Gather information about saml attribute by attribute Name
-      willguibr.zpacloud_ansible.zpa_saml_attribute_info:
-        name: DepartmentName_User-Okta
-      register: department_name
-    - name: department_name
-      debug:
-        msg: "{{ department_name }}"
-        
-    - name: Gather information about saml attribute by attribute ID
-      willguibr.zpacloud_ansible.zpa_saml_attribute_info:
-        id: 216196257331285827
-      register: attribute_id
-    - name: attribute_id
-      debug:
-        msg: "{{ attribute_id }}"
-        
-    - name: Gather information about all saml attribute by attributes
-      willguibr.zpacloud_ansible.zpa_saml_attribute_info:
-      register: saml_attributes
-    - name: saml_attributes
-      debug:
-        msg: "{{ saml_attributes }}"
-
+- name: Get Information About All SAML Attributes
+  willguibr.zpacloud.zpa_saml_attribute_info:
+  
+- name: Get Information About Saml Attribute by Attribute Name
+  willguibr.zpacloud.zpa_saml_attribute_info:
+    name: DepartmentName_User
+    
+- name: Get Information About Saml Attribute by Attribute ID
+  willguibr.zpacloud.zpa_saml_attribute_info:
+    id: 216196257331285827
 """
 
-RETURN = r"""
-data:
-    description: saml attribute information
-    returned: success
-    elements: dict
-    type: list
-    data: [
-            {
-              "creation_time": "1631718008",
-              "id": "216196257331285827",
-              "idp_id": "216196257331285825",
-              "idp_name": "User-Okta",
-              "modified_by": "216196257331281958",
-              "modified_time": null,
-              "name": "DepartmentName-User-Okta",
-              "saml_name": "DepartmentName",
-              "user_attribute": false
-            },
-    ]
+RETURN = """
+# Returns information on a specified SAML attribute.
 """
 
 

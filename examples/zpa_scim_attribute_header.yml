@@ -2,8 +2,12 @@
   hosts: localhost
   tasks:
     - name: Gather information about all SCIM Attribute
-      willguibr.zpacloud_ansible.zpa_scim_attribute_header_info:
+      willguibr.zpacloud.zpa_scim_attribute_header_info:
+<<<<<<< HEAD
+        name: costCenter
+=======
         #name: costCenter
+>>>>>>> master
         #id: 216196257331285842
         idp_name: SGIO-User-Okta
       register: scim

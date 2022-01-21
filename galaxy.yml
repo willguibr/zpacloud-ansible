@@ -6,7 +6,7 @@
 namespace: 'willguibr'
 
 # The name of the collection. Has the same character restrictions as 'namespace'
-name: 'zpacloud_ansible'
+name: 'zpacloud'
 
 # The version of the collection. Must be compatible with semantic versioning
 version: 2.9.0
@@ -50,16 +50,16 @@ tags:
 dependencies: {}
 
 # The URL of the originating SCM repository
-repository: 'https://github.com/willguibr/zpacloud_ansible'
+repository: 'https://github.com/willguibr/zpacloud-ansible'
 
 # The URL to any online docs
-documentation: 'https://willguibr.github.io/zpacloud_ansible/'
+documentation: 'https://willguibr.github.io/zpacloud-ansible/'
 
 # The URL to the homepage of the collection/project
-homepage: 'https://github.com/willguibr/zpacloud_ansible'
+homepage: 'https://github.com/willguibr/zpacloud-ansible'
 
 # The URL to the collection issue tracker
-issues: 'https://github.com/willguibr/zpacloud_ansible/issues'
+issues: 'https://github.com/willguibr/zpacloud-ansible/issues'
 
 # Ignore these files
 build_ignore:

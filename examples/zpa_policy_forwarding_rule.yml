@@ -1,0 +1,65 @@
+- name: policy timeout rule
+  hosts: localhost
+  tasks:
+    - name: Gather information about all Posture Profiles
+      willguibr.zpacloud.zpa_posture_profile_info:
+        name: "CrowdStrike_ZPA_ZTA_80"
+        # id: 216196257331285223
+      register: postures
+    - name: postures
+      debug:
+        msg: "{{ postures.data[0].posture_udid }}"
+
+    - name: Gather information about all policy rules
+      willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+        #id: "216196257331292020"
+        name: "Forwarding Policy - Test"
+      register: policy
+    - name: policy rule
+      debug:
+        msg: "{{ policy }}"
+    - name: Forwarding Policy - Test
+      willguibr.zpacloud.zpa_policy_forwarding_rule:
+        name: "Forwarding Policy - Test"
+        description: "Forwarding Policy - Test"
+        action: "BYPASS"
+        rule_order: 1
+        operator: "AND"
+        conditions:
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "Test"
+                object_type: "APP"
+                lhs: "id"
+                rhs: "216196257331292105"
+              - name: "All Other Services"
+                object_type: "APP_GROUP"
+                lhs: "id"
+                rhs: "216196257331292103"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "zpn_client_type_exporter"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_exporter"
+              - name: "zpn_client_type_browser_isolation"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_browser_isolation"
+              - name: "zpn_client_type_zapp"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_zapp"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "CrowdStrike_ZPA_ZTA_80"
+                object_type: "POSTURE"
+                lhs: "{{ postures.data[0].posture_udid }}"
+                rhs: "false"
+        # state: absent
+    #   register: created_rule
+    # - debug:
+    #     msg: "{{ created_rule }}"

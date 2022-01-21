@@ -1,5 +1,5 @@
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
+    ZPAClientHelper, delete_none, camelcaseToSnakeCase
 )
 import re
 
@@ -41,20 +41,12 @@ class ServerGroupService:
                 return server_group
         return None
 
-    @staticmethod
-    def camelcaseToSnakeCase(obj):
-        new_obj = dict()
-        for key, value in obj.items():
-            if value is not None:
-                new_obj[re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()] = value
-        return new_obj
-
     def mapListJSONToList(self, entities):
         if entities is None:
             return []
         l = []
         for s in entities:
-            l.append(self.camelcaseToSnakeCase(s))
+            l.append(camelcaseToSnakeCase(s))
         return l
 
     def mapListToJSONList(self, entities):
@@ -65,6 +57,7 @@ class ServerGroupService:
             l.append(dict(id=e.get("id")))
         return l
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -81,6 +74,7 @@ class ServerGroupService:
             "app_connector_groups": self.mapListJSONToList(resp_json.get("appConnectorGroups")),
         }
 
+    @delete_none
     def mapAppToJSON(self, server_group):
         if server_group is None:
             return {}

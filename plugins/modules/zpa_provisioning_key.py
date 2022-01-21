@@ -1,36 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_provisioning_key import ProvisioningKeyService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_provisioning_key import ProvisioningKeyService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
+
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
 module: zpa_provisioning_key
-short_description: Create/ an Provisioning Key
+short_description: Create a Provisioning Key.
 description:
-  - This module will create, retrieve, update or delete a specific Provisioning Key
+  - This module will create/update/delete a specific Provisioning Key by association type (CONNECTOR_GRP or SERVICE_EDGE_GRP).
 author:
   - William Guilherme (@willguibr)
 version_added: "1.0.0"
@@ -96,51 +84,49 @@ options:
     required: False
 """
 
-EXAMPLES = '''
-- name: App Provisioning Key
-  hosts: localhost
-  tasks:
-    - name: Create/update/delete a Provisioning Key
-      willguibr.zpacloud_ansible.zpa_provisioning_key:
-        name             : "New York Provisioning Key"
-        association_type : "CONNECTOR_GRP"
-        max_usage        : "10"
-        enrollment_cert_id : 92828292
-        zcomponent_id : 2828227
-      register: key
-    - name: created key
-      debug:
-        msg: "{{ key }}"
+EXAMPLES = """
+- name: Get ID Information of a Connector Enrollment Certificate
+  willguibr.zpacloud_ansible.zpa_enrollement_certificate_info:
+    name: "Connector"
+  register: connector_cert_id
 
-'''
+- name: Get ID Information of an App Connector Group
+  willguibr.zpacloud.zpa_app_connector_groups_info:
+    name: "Example"
+  register: app_connector_group
+  
+- name: Create/Update/Delete App Connector Group Provisioning Key
+  willguibr.zpacloud_ansible.zpa_provisioning_key:
+    name: "App Connector Group Provisioning Key"
+    association_type: "CONNECTOR_GRP"
+    max_usage: "10"
+    enrollment_cert_id: "{{ connector_cert_id.data[0].id }}"
+    zcomponent_id: "{{ app_connector_group.data[0].id }}"
+  register: provisioning_key
+"""
 
-RETURN = r"""
-data:
-    description: Provisioning Key
-    returned: success
-    type: dict
-    sample:
-        {
-            "app_connector_group_id": null,
-            "app_connector_group_name": "USA App Connector Group",
-            "creation_time": "1639693617",
-            "enabled": true,
-            "enrollment_cert_id": "6573",
-            "enrollment_cert_name": "Connector",
-            "expiration_in_epoch_sec": null,
-            "id": "8691",
-            "ip_acl": null,
-            "max_usage": "2",
-            "modified_by": "216196257331282070",
-            "modified_time": null,
-            "name": "USA App Connector Group",
-            "provisioning_key": "3|api.private.zscaler.com|Wy3HzPKWJr88i6uA...",
-            "ui_config": null,
-            "usage_count": "0",
-            "zcomponent_id": "216196257331291906",
-            "zcomponent_name": "USA App Connector Group",
-        }
+EXAMPLES = """
+- name: Get ID Information of a Service Edge Group Enrollment Certificate
+  willguibr.zpacloud_ansible.zpa_enrollement_certificate_info:
+    name: "Service Edge"
+  register: enrollment_cert_service_edge
 
+- name: Get ID Information of an Service Edge Group
+  willguibr.zpacloud.zpa_service_edge_groups_info:
+    name: "Example"
+  register: service_edge_group
+  
+- name: Create/Update/Delete App Connector Group Provisioning Key
+  willguibr.zpacloud_ansible.zpa_provisioning_key:
+    name: "App Connector Group Provisioning Key"
+    association_type: "CONNECTOR_GRP"
+    max_usage: "10"
+    enrollment_cert_id: "{{ enrollment_cert_service_edge.data[0].id }}"
+    zcomponent_id: "{{ service_edge_group.data[0].id }}"
+"""
+
+RETURN = """
+# The newly created app connector group or service edge group provisioning key resource record.
 """
 
 

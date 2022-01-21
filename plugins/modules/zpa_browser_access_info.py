@@ -1,26 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_browser_access import BrowserAccessService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_browser_access import BrowserAccessService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
@@ -30,9 +17,9 @@ __metaclass__ = type
 DOCUMENTATION = """
 ---
 module: zpa_browser_access_info
-short_description: Gather information about an app connector group
+short_description: Retrieves browser access application segment information.
 description:
-  - This module can be used to gather information about an app connector group.
+  - This module will allow the retrieval of information about a browser access application segment.
 author:
   - William Guilherme (@willguibr)
 version_added: "1.0.0"
@@ -51,27 +38,20 @@ options:
 
 EXAMPLES = """
 - name: Gather information about all browser access application segments
-  willguibr.zpacloud_ansible.zpa_browser_access_info:
+  willguibr.zpacloud.zpa_browser_access_info:
   register: all_browser_access
 
 - debug:
   msg: "{{ all_browser_access }}"
 
 - name: Browser Access Application Segment by Name
-  willguibr.zpacloud_ansible.zpa_browser_access_info:
+  willguibr.zpacloud.zpa_browser_access_info:
     name: "Example"
-  register: ba_app_segment_name
-  
-- debug:
-    msg: "{{ ba_app_segment_name }}"
     
 - name: Browser Access Application Segment by ID
-  willguibr.zpacloud_ansible.zpa_browser_access_info:
+  willguibr.zpacloud.zpa_browser_access_info:
     id: "198288282"
-  register: ba_app_segment_id
 
-- debug:
-    msg: "{{ ba_app_segment_id }}"
 """
 
 RETURN = """

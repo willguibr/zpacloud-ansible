@@ -1,101 +1,57 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-from __future__ import (absolute_import, division, print_function)
+from __future__ import absolute_import, division, print_function
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_idp_controller import IDPControllerService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_idp_controller import IDPControllerService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
 
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
-author: William Guilherme (@willguibr)
+module: zpa_idp_controller_info
+short_description: Retrieves Identity Provider information.
 description:
-  - Provides details about a specific trusted network created in the Zscaler Private Access Mobile Portal
-module: zpa_trusted_network_info
-short_description: Provides details about a specific trusted network created in the Zscaler Private Access Mobile Portal
+  - This module will allow the retrieval of information about an Identity Provider (IdP) detail from the ZPA Cloud.
+author:
+  - William Guilherme (@willguibr)
 version_added: "1.0.0"
-requirements:
-  - supported starting from zpa_api >= 1.0
 options:
   name:
     description:
-      - Name of the browser certificate.
-    required: false
+      - Name of the Identity Provider.
+    required: true
     type: str
   id:
     description:
-      - ID of the browser certificate.
+      - ID of the Identity Provider.
     required: false
     type: str
-
 """
 
 EXAMPLES = """
-- name: browser certificate
-  hosts: localhost
-  tasks:
-    - name: Gather information about all browser certificate
-      willguibr.zpacloud_ansible.zpa_ba_certificate_info:
-        #name: Corp-Trusted-Networks
-        id: 216196257331282234
-      register: certificates
-    - name: certificates
-      debug:
-        msg: "{{ certificates }}"
+- name: Get Details of All IdP Controllers
+  willguibr.zpacloud.zpa_idp_controller_info:
 
+- name: Get Details of a Specific IdP Controller by Name
+  willguibr.zpacloud.zpa_idp_controller_info:
+    name: User_IdP_Name
+
+- name: Get Details of a Specific IdP Controller by ID
+  willguibr.zpacloud.zpa_idp_controller_info:
+    id: "216196257331282583"  
 """
 
-RETURN = r"""
-data:
-    description: Browser Certificate information
-    returned: success
-    elements: dict
-    type: list
-    data: [
-            {
-              "id": "12345",
-              "name": "Root",
-            },
-            {
-              "id": "12345",
-              "name": "Client",
-            },
-            {
-              "id": "1234567890",
-              "name": "Connector",
-            },
-            {
-              "id": "6574",
-              "name": "Service Edge",
-            },
-            {
-                "id": "10242",
-                "name": "Isolation Client",
-            }
-    ]
+RETURN = """
+# Returns information on a specified Identity Provider.
 """
-
 
 def core(module):
     idp_name = module.params.get("name", None)

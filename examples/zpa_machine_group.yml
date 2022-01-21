@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
     - name: Gather information about all machine groups
-      willguibr.zpacloud_ansible.zpa_machine_group_info:
+      willguibr.zpacloud.zpa_machine_group_info:
         #name: Corp-Trusted-Networks
         # id: 216196257331282234
       register: machine_groups

@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
     - name: Gather information about all Service Edge Groups
-      willguibr.zpacloud_ansible.zpa_service_edge_groups_info:
+      willguibr.zpacloud.zpa_service_edge_groups_info:
         name: "Canada Service Edge Group"
       register: service_edge
 
@@ -11,7 +11,7 @@
         msg: "{{ service_edge }}"
 
     - name: Create/update/delete an service edge groups
-      willguibr.zpacloud_ansible.zpa_service_edge_groups:
+      willguibr.zpacloud.zpa_service_edge_groups:
         state: "absent"
         #id: "216196257331292046"
         name: "Example"

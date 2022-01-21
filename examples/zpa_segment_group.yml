@@ -2,14 +2,14 @@
   hosts: localhost
   tasks:
     - name: Gather information about all Segment Groups
-      willguibr.zpacloud_ansible.zpa_segment_group_info:
+      willguibr.zpacloud.zpa_segment_group_info:
         #name: "Browser Access Apps"
       register: segment_group
     - name: segment group
       debug:
         msg: "{{ segment_group }}"
     - name: Create a segment group
-      willguibr.zpacloud_ansible.zpa_segment_group:
+      willguibr.zpacloud.zpa_segment_group:
         state: absent
         config_space: "DEFAULT"
         name: Example Segment Group

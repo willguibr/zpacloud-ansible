@@ -1,142 +1,192 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_application_segment import ApplicationSegmentService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_application_segment import ApplicationSegmentService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
+
 __metaclass__ = type
 
 DOCUMENTATION = """
 ---
 module: zpa_application_segment
-short_description: Create/Update/Delete an App Connector Group.
+short_description: Create an application segment in the ZPA Cloud.
 description:
-  - This module will Create/Update/Delete an application segment
+    - This module will create/update/delete an application segment
 author:
-  - William Guilherme (@willguibr)
+    - William Guilherme (@willguibr)
 version_added: "1.0.0"
 options:
   name:
+    description: 
+      - Name of the application.
+    required: true
     type: str
-    required: True
-    description: "Name of the application."
+  description:
+    description:
+      - Description of the application.
+    required: false
+    type: str
   default_max_age:
+    description:
+      - default_max_age
+    required: false
     type: str
-    required: False
-    default: ""
-    description: "default_max_age"
   ip_anchored:
+    description:
+      - Whether Source IP Anchoring for use with ZIA, is enabled or disabled for the app.
     type: bool
-    required: False
-    description: "ip_anchored"
+    required: false
   tcp_port_range:
     type: list
     elements: dict
-    required: True
-    description: List of tcp port range pairs, e.g. [‘22’, ‘22’] for port 22-22, [‘80’, ‘100’] for 80-100.
+    description:
+      - List of tcp port range pairs, e.g. [22, 22] for port 22-22, [80, 100] for 80-100.
+    required: true
+    suboptions:
+      from:
+        type: str
+        required: false
+        description:
+          - List of valid TCP ports. The application segment API supports multiple TCP and UDP port ranges.
+      to:
+        type: str
+        required: false
+        description:
+          - List of valid TCP ports. The application segment API supports multiple TCP and UDP port ranges.
   udp_port_range:
     type: list
     elements: dict
-    required: True
-    description: "List of udp port range pairs, e.g. [‘35000’, ‘35000’] for port 35000."
+    description:
+      - List of udp port range pairs, e.g. [‘35000’, ‘35000’] for port 35000.
+    required: true
+    suboptions:
+      from:
+        type: str
+        required: false
+        description:
+          - List of valid UDP ports. The application segment API supports multiple TCP and UDP port ranges.
+      to:
+        type: str
+        required: false
+        description:
+          - List of valid UDP ports. The application segment API supports multiple TCP and UDP port ranges.
   double_encrypt:
+    description:
+      - Whether Double Encryption is enabled or disabled for the app.
     type: bool
-    required: False
-    description: "Whether Double Encryption is enabled or disabled for the app."
+    required: false
   icmp_access_type:
+    description:
+      - icmp access type.
     type: str
-    required: False
-    default: "NONE"
-    choices: ["PING_TRACEROUTING", "PING", "NONE"]
-    description: "icmp access type."
+    required: false
+    choices:
+      - PING_TRACEROUTING
+      - PING
+      - NONE
+    default: NONE
   default_idle_timeout:
+    description:
+      - default idle timeout.
     type: str
-    required: False
-    default: ""
-    description: "default idle timeout."
+    required: false
   passive_health_enabled:
+    description:
+      - passive health enabled.
     type: bool
-    required: False
-    description: "passive health enabled."
+    required: false
   bypass_type:
+    description:
+      - Indicates whether users can bypass ZPA to access applications.
     type: str
-    required: False
-    description: "Indicates whether users can bypass ZPA to access applications."
-    choices: ["ALWAYS", "NEVER", "ON_NET"]
+    required: false
+    choices:
+      - ALWAYS
+      - NEVER
+      - ON_NET
+    default: NEVER
   is_cname_enabled:
+    description:
+      - Indicates if the Zscaler Client Connector (formerly Zscaler App or Z App) receives CNAME DNS records from the connectors.
     type: bool
-    required: False
-    description: "Indicates if the Zscaler Client Connector (formerly Zscaler App or Z App) receives CNAME DNS records from the connectors."
+    required: false 
   config_space:
+    description:
+      - config space.
     type: str
-    required: False
-    default: "DEFAULT"
-    choices: ["DEFAULT", "SIEM"]
-    description: "config space."
+    required: false
+    choices:
+      - DEFAULT
+      - SIEM
+    default: DEFAULT
   health_reporting:
+    description:
+      - Whether health reporting for the app is Continuous or On Access. Supported values are NONE, ON_ACCESS, CONTINUOUS
     type: str
-    required: False
-    description: "Whether health reporting for the app is Continuous or On Access. Supported values: NONE, ON_ACCESS, CONTINUOUS."
-    default: "NONE"
-    choices: ["NONE", "ON_ACCESS", "CONTINUOUS"]
+    required: false
+    choices:
+      - NONE
+      - ON_ACCESS
+      - CONTINUOUS
+    default: NONE
   log_features:
+    description:
+      - log features.
     type: str
-    required: False
-    choices: ["skip_discovery", "full_wildcard"]
-    description: "log features."
+    required: false
+    choices:
+      - skip_discovery
+      - full_wildcard
   server_groups:
+    description:
+      - ID of the server group.
     type: list
     elements: dict
-    required: True
-    description: "List of the server group ID objects of type {"id":"82828"}"
+    required: true
+    suboptions:
+      id:
+        type: str
+        required: true
+        description:
+          - ID of the server group.
   segment_group_id:
+    description:
+      - ID of the segment group.
     type: str
-    required: True
-    description: "segment group id"
-  description:
-    type: str
-    required: False
-    description: "Description of the application."
-  health_check_type:
-    type: str
-    description: "health check type."
+    required: true
   segment_group_name:
+    description:
+      - segment group name.
     type: str
-    required: False
-    description: "segment group name."
+    required: false
+  health_check_type:
+    description:
+      - health check type.
+    type: str
+    required: false
   enabled:
+    description:
+      - Whether this application is enabled or not.
     type: bool
-    required: False
-    description: "Whether this application is enabled or not."
+    required: false
   domain_names:
+    description:
+      - List of domains and IPs.
     type: list
     elements: str
-    required: True
-    description: "List of domains and IPs."
+    required: true
 """
 
 EXAMPLES = """
 - name: Create/Update/Delete an application segment.
-  willguibr.zpacloud_ansible.zpa_application_segment:
+  willguibr.zpacloud.zpa_application_segment:
     name: Example Application Segment
     description: Example Application Segment
     enabled: true

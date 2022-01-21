@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
     - name: Gather information about all policy rules
-      willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+      willguibr.zpacloud.zpa_policy_access_rule_info:
         #id: "216196257331292020"
         name: "All Other Services"
       register: policy
@@ -10,7 +10,7 @@
       debug:
         msg: "{{ policy }}"
     - name: Create/update/delete a policy rule
-      willguibr.zpacloud_ansible.zpa_policy_access_rule:
+      willguibr.zpacloud.zpa_policy_access_rule:
         name: "test policy access rule"
         description: "test policy access rule"
         action: "ALLOW"

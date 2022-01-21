@@ -1,39 +1,26 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_policy_rule import PolicyRuleService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_policy_access_rule import PolicyAccessRuleService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
 
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
-author: William Guilherme (@willguibr)
+module: zpa_policy_access_rule_info
+short_description: Retrieves policy access rule information.
 description:
-  - Provides details about a specific policy rule created in the Zscaler Private Access Mobile Portal
-module: zpa_policy_rule_info
-short_description: Provides details about a specific policy rule created in the Zscaler Private Access Mobile Portal
+  - This module will allow the retrieval of information about a policy access rule.
+author: William Guilherme (@willguibr)
 version_added: "1.0.0"
 requirements:
   - supported starting from zpa_api >= 1.0
@@ -51,108 +38,20 @@ options:
 """
 
 EXAMPLES = """
-- name: policy rule
-  hosts: localhost
-  tasks:
-    - name: Gather information about all policy rules
-      willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
-        #id: "216196257331292020"
-        name: "All Other Services"
-      register: policy
-    - name: policy rule
-      debug:
-        msg: "{{ policy }}"
-
+- name: Get Details of All Policy Access Rules
+    willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+    
+- name: Get Details of a Policy Access Rule by Name
+    willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+    name: "Policy Access Rule - Example"
+    
+- name: Get Details of a Policy Access Rule by ID
+    willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+    id: "216196257331291979"
 """
 
-RETURN = r"""
-data:
-    description: policy rule information
-    returned: success
-    elements: dict
-    type: list
-    sample:
-        [
-            {
-                "action": "ALLOW",
-                "action_id": null,
-                "app_connector_groups": [
-                    {
-                        "city_country": "Langley, CA",
-                        "country_code": "CA",
-                        "creation_time": "1639693615",
-                        "description": "Canada App Connector Group",
-                        "dns_query_type": "IPV4",
-                        "enabled": true,
-                        "id": "216196257331291924",
-                        "location": "Langley City, BC, Canada",
-                        "lss_app_connector_group": false,
-                        "modified_by": "216196257331282070",
-                        "name": "Canada App Connector Group",
-                        "override_version_profile": true,
-                        "version_profile_id": "2"
-                    }
-                ],
-                "app_server_groups": [
-                    {
-                        "config_space": "DEFAULT",
-                        "creation_time": "1639693619",
-                        "description": "All Other Services",
-                        "dynamic_discovery": true,
-                        "enabled": true,
-                        "id": "216196257331291967",
-                        "modified_by": "216196257331282070",
-                        "name": "All Other Services"
-                    }
-                ],
-                "bypass_default_rule": null,
-                "conditions": [
-                    {
-                        "creation_time": "1640027085",
-                        "id": "1004465",
-                        "modified_by": "216196257331282070",
-                        "modified_time": "1640027085",
-                        "negated": false,
-                        "operands": [
-                            {
-                                "creation_time": "1640027085",
-                                "id": "1004466",
-                                "lhs": "id",
-                                "modified_by": "216196257331282070",
-                                "name": "All Other Services",
-                                "object_type": "APP",
-                                "rhs": "216196257331291979"
-                            },
-                            {
-                                "creation_time": "1640027085",
-                                "id": "1004467",
-                                "lhs": "id",
-                                "modified_by": "216196257331282070",
-                                "name": "All Other Services",
-                                "object_type": "APP_GROUP",
-                                "rhs": "216196257331291913"
-                            }
-                        ],
-                        "operator": "OR"
-                    }
-                ],
-                "custom_msg": null,
-                "default_rule": false,
-                "description": "All Other Services",
-                "id": "216196257331292020",
-                "lss_default_rule": null,
-                "name": "All Other Services",
-                "operator": "AND",
-                "policy_set_id": null,
-                "policy_type": "1",
-                "priority": "1",
-                "reauth_default_rule": null,
-                "reauth_idle_timeout": null,
-                "reauth_timeout": null,
-                "rule_order": "12"
-            }
-        ]
-
+RETURN = """
+# Returns information on a specified Policy Access Rule.
 """
 
 
@@ -160,7 +59,7 @@ def core(module):
     policy_rule_name = module.params.get("name", None)
     policy_rule_id = module.params.get("id", None)
     customer_id = module.params.get("customer_id", None)
-    service = PolicyRuleService(module, customer_id)
+    service = PolicyAccessRuleService(module, customer_id)
     global_policy_set = service.getByPolicyType("ACCESS_POLICY")
     if global_policy_set is None or global_policy_set.get("id") is None:
         module.fail_json(msg="Unable to get global policy set")

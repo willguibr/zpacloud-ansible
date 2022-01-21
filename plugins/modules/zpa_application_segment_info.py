@@ -1,26 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_application_segment import ApplicationSegmentService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_application_segment import ApplicationSegmentService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
@@ -30,8 +17,9 @@ __metaclass__ = type
 DOCUMENTATION = """
 ---
 module: zpa_application_segment_info
-short_description: "Gather details of all or specific Application Segments"
-description: "This module can be used to gather information about all or specific application segment."
+short_description: Retrieve an application segment information.
+description: 
+    - This module will allow the retrieval of information about an application segment.
 author: "William Guilherme (@willguibr)"
 version_added: "1.0.0"
 options:
@@ -46,32 +34,20 @@ options:
 """
 
 EXAMPLES = """"
-- name: Gather Details of All Application Segments
+- name: Retrieve Details of All Application Segments
   willguibr.zpacloud.zpa_application_segment_info:
-  register: all_app_segments
 
-- debug:
-    msg: "{{ all_app_segments }}"
-
-- name: Gather Details of a Specific Application Segments by Name
+- name: Retrieve Details of a Specific Application Segments by Name
   willguibr.zpacloud.zpa_application_segment_info:
     name: "Example Application Segment"
-  register: app_segment_name
-  
-- debug:
-    msg: "{{ app_segment_name }}"
 
-- name: Gather Details of a Specific Application Segments by ID
+- name: Retrieve Details of a Specific Application Segments by ID
   willguibr.zpacloud.zpa_application_segment_info:
     id: "216196257331291981"
-  register: app_segment_id
-  
-- debug:
-    msg: "{{ app_segment_id }}"
 """
 
 RETURN = """
-# Default return values
+# Returns information on a specified Application Segment.
 """
 
 

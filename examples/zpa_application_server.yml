@@ -2,25 +2,47 @@
   hosts: localhost
 
   tasks:
+<<<<<<< HEAD
+    # - name: Gather information about all Application Servers
+    #   willguibr.zpacloud.zpa_application_server_info:
+    #     # name: "jenkins.securitygeek.io"
+    #   register: app_server
+    # - name: application server
+=======
     - name: Gather information about all Application Servers
-      willguibr.zpacloud_ansible.zpa_application_server_info:
+      willguibr.zpacloud.zpa_application_server_info:
         # name: "jenkins.securitygeek.io"
       register: app_server
     - name: application server
+<<<<<<< HEAD
+>>>>>>> master
 
+    #   debug:
+    #     msg: "{{ app_server }}"
+=======
       debug:
         msg: "{{ app_server }}"
+>>>>>>> master
 
     - name: Create a segment group
-      willguibr.zpacloud_ansible.zpa_application_server:
+      willguibr.zpacloud.zpa_application_server:
+<<<<<<< HEAD
+        # state: absent
+=======
         state: absent
+>>>>>>> master
         name: "Example Application Server"
         address: "test.securitygeek.io"
         enabled: true
         description: "Example Application Server"
         config_space: "DEFAULT"
-        # app_server_group_ids: []
+<<<<<<< HEAD
+        app_server_group_ids: 
+          - id: "216196257331291967"
+=======
+        app_server_group_ids: [216196257331292104, 216196257331291965]
+>>>>>>> master
       register: application_server
-    - name: created/updated application server
-      debug:
+
+    - debug:
         msg: "{{ application_server }}"

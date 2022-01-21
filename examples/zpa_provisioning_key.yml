@@ -1,8 +1,9 @@
 - name: provisioning key
   hosts: localhost
   tasks:
+<<<<<<< HEAD
     - name: Gather information about all provisioning keys
-      willguibr.zpacloud_ansible.zpa_provisioning_key_info:
+      willguibr.zpacloud.zpa_provisioning_key_info:
         # id: "8691"
         #name: "USA App Connector Group"
         association_type: "CONNECTOR_GRP"
@@ -11,14 +12,50 @@
       debug:
         msg: "{{ keys }}"
     # - name: Create/update/delete a Provisioning Key
-    #   willguibr.zpacloud_ansible.zpa_provisioning_key:
+    #   willguibr.zpacloud.zpa_provisioning_key:
     #     name: "New York Provisioning Key"
+=======
+    # - name: Gather information about all provisioning keys
+    #   willguibr.zpacloud.zpa_provisioning_key_info:
+    #     # id: "8691"
+    #     #name: "USA App Connector Group"
+>>>>>>> master
     #     association_type: "CONNECTOR_GRP"
-    #     max_usage: "10"
-    #     enrollment_cert_id: 6573
-    #     zcomponent_id: 216196257331291903
-    #     state: absent
-    #   register: created_key
-    # - name: created key
+    #   register: keys
+    # - name: provisioning key
     #   debug:
-    #     msg: "{{ created_key }}"
+    #     msg: "{{ keys }}"
+    # - name: Create/update/delete an app connector group
+    #   willguibr.zpacloud.zpa_app_connector_groups:
+    #     # state: "absent"
+    #     #id: "216196257331292046"
+    #     name: "Example"
+    #     description: "Example2"
+    #     enabled: true
+    #     city_country: "California, US"
+    #     country_code: "US"
+    #     latitude: "37.3382082"
+    #     longitude: "-121.8863286"
+    #     location: "San Jose, CA, USA"
+    #     upgrade_day: "SUNDAY"
+    #     upgrade_time_in_secs: "66600"
+    #     override_version_profile: true
+    #     version_profile_id: "0"
+    #     dns_query_type: "IPV4"
+    #   register: appconnectorg
+    # - name: created appconnector group
+    #   debug:
+    #     msg: "{{ appconnectorg }}"
+
+    - name: Create/update/delete a Provisioning Key
+      willguibr.zpacloud.zpa_provisioning_key:
+        name: "New York Provisioning Key"
+        association_type: "CONNECTOR_GRP"
+        max_usage: "10"
+        enrollment_cert_id: "6573"
+        zcomponent_id: "{{ appconnectorg.data.id }}"
+        # state: absent
+      register: created_key
+    - name: created key
+      debug:
+        msg: "{{ created_key }}"

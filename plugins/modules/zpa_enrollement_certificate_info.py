@@ -1,26 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_enrollement_certificate import EnrollementCertificateService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_enrollement_certificate import EnrollementCertificateService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
@@ -29,11 +16,11 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-author: William Guilherme (@willguibr)
+module: zpa_enrollement_certificate_info
+short_description: Retrieves enrollment certificate information.
 description:
-  - Provides details about a specific trusted network created in the Zscaler Private Access Mobile Portal
-module: zpa_trusted_network_info
-short_description: Provides details about a specific trusted network created in the Zscaler Private Access Mobile Portal
+  - This module will allow the retrieval of information about a Enrollment Certificate detail from the ZPA Cloud.
+author: William Guilherme (@willguibr)
 version_added: "1.0.0"
 requirements:
   - supported starting from zpa_api >= 1.0
@@ -53,80 +40,31 @@ options:
 EXAMPLES = """
 - name: Gather Information Details of All Enrollment Certificates
   willguibr.zpacloud.zpa_enrollment_cert_info:
-  register: all_enrollment_certs
-
-- debug:
-    msg: "{{ all_enrollment_certs }}"
 
 - name: Gather Information Details of the Root Enrollment Certificates by Name
   willguibr.zpacloud.zpa_enrollment_cert_info:
     name: "Root"
-  register: enrollment_cert_root
-
-- debug:
-    msg: "{{ enrollment_cert_root }}"
 
 - name: Gather Information Details of the Client Enrollment Certificates by Name
   willguibr.zpacloud.zpa_enrollment_cert_info:
     name: "Client"
-  register: enrollment_cert_client
-
-- debug:
-    msg: "{{ enrollment_cert_client }}"
 
 - name: Gather Information Details of the Connector Enrollment Certificates by Name
   willguibr.zpacloud.zpa_enrollment_cert_info:
     name: "Connector"
-  register: enrollment_cert_connector
-
-- debug:
-    msg: "{{ enrollment_cert_connector }}"
 
 - name: Gather Information Details of the Service Edge Enrollment Certificates by Name
   willguibr.zpacloud.zpa_enrollment_cert_info:
     name: "Service Edge"
-  register: enrollment_cert_service_edge
-
-- debug:
-    msg: "{{ enrollment_cert_service_edge }}"
 
 - name: Gather Information Details of the Isolation Client Enrollment Certificates by Name
   willguibr.zpacloud.zpa_enrollment_cert_info:
     name: "Isolation Client"
-  register: enrollment_cert_isolation_client
-
-- debug:
-    msg: "{{ enrollment_cert_isolation_client }}"
+    
 """
 
 RETURN = """
-data:
-    description: ZPA enrollment certificate
-    returned: success
-    elements: dict
-    type: list
-    data: [
-            {
-              "id": "12345",
-              "name": "Root",
-            },
-            {
-              "id": "12345",
-              "name": "Client",
-            },
-            {
-              "id": "1234567890",
-              "name": "Connector",
-            },
-            {
-              "id": "6574",
-              "name": "Service Edge",
-            },
-            {
-                "id": "10242",
-                "name": "Isolation Client",
-            }
-    ]
+# Returns information on a specified Enrollment Certificate.
 """
 
 def core(module):

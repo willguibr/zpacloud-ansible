@@ -1,38 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_browser_certificate import BrowserCertificateService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_browser_certificate import BrowserCertificateService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
 
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
 module: zpa_ba_certificate_info
-short_description: This module can be used to gather information about a browser access certificate.
-description:
-  - Returns information on a specified Browser Access certificate.
+short_description: Retrieves browser access certificate information.
+description: 
+    - This module will allow the retrieval of information about a browser access certificate.
 author: William Guilherme (@willguibr)
 version_added: "1.0.0"
 requirements:
@@ -53,26 +40,15 @@ options:
 EXAMPLES = """
 - name: Gather Details of All Browser Certificates
   willguibr.zpacloud.zpa_ba_certificate_info:
-  register: all_certificates
-
-- debug:
-  msg: "{{ all_certificates }}"
 
 - name: Gather Details of a Specific Browser Certificates by Name
   willguibr.zpacloud.zpa_ba_certificate_info:
     name: crm.acme.com
-  register: certificate_name
-
-- debug:
-  msg: "{{ certificate_name }}"
 
 - name: Gather Details of a Specific Browser Certificates by ID
   willguibr.zpacloud.zpa_ba_certificate_info:
     id: "216196257331282583"
-  register: certificate_id
-
-- debug:
-  msg: "{{ certificate_id }}"
+    
 """
 
 RETURN = """

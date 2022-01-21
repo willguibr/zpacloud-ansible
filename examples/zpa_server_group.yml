@@ -2,7 +2,7 @@
   hosts: localhost
   tasks:
     - name: Gather information about all server group
-      willguibr.zpacloud_ansible.zpa_server_group_info:
+      willguibr.zpacloud.zpa_server_group_info:
         name: Browser Access Apps
         #id: 216196257331291969
       register: servers
@@ -10,7 +10,7 @@
       debug:
         msg: "{{ servers }}"
     - name: Create an server group
-      willguibr.zpacloud_ansible.zpa_server_group:
+      willguibr.zpacloud.zpa_server_group:
         state: absent
         name: "Example Test"
         description: "Example  Test"

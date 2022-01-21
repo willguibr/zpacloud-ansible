@@ -1,39 +1,26 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_scim_group import ScimGroupService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_scim_group import ScimGroupService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
 
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
-author: William Guilherme (@willguibr)
+module: zpa_scim_group_info
+short_description: Retrieves scim group information from a given IDP
 description:
-  - Provides details about a specific scim attributes from a given IDP
-module: zpa_scim_attribute_header_info
-short_description: Provides details about a specific scim attributes from a given IDP
+  - This module will allow the retrieval of information about scim group(s) from a given IDP
+author: William Guilherme (@willguibr)
 version_added: "1.0.0"
 requirements:
   - supported starting from zpa_api >= 1.0
@@ -46,80 +33,33 @@ options:
   idp_name:
     description:
       - Name of the IDP.
-    required: false
+    required: true
     type: str
   id:
     description:
       - ID of the scim group.
     required: false
     type: str
-
 """
 
 EXAMPLES = """
-- name: scim attribute
-  hosts: localhost
-  tasks:
-    - name: Gather information about scim attribute by attribute Name
-      willguibr.zpacloud_ansible.zpa_scim_attribute_header_info:
-        name: DepartmentName_User-Okta
-        idp_name: "SGIO-User-Okta"
-      register: department_name
-    - name: department_name
-      debug:
-        msg: "{{ department_name }}"
-        
-    - name: Gather information about scim attribute by attribute ID
-      willguibr.zpacloud_ansible.zpa_scim_attribute_header_info:
-        id: 216196257331285827
-        idp_name: "SGIO-User-Okta"
-      register: attribute_id
-    - name: attribute_id
-      debug:
-        msg: "{{ attribute_id }}"
-        
-    - name: Gather information about all scim attribute by attributes
-      willguibr.zpacloud_ansible.zpa_scim_attribute_header_info:
-        idp_name: "SGIO-User-Okta"
-      register: scim_attribute_header
-    - name: scim_attribute_header
-      debug:
-        msg: "{{ scim_attribute_header }}"
-
+- name: Get Information About All SCIM Groups from an IdP
+  willguibr.zpacloud.zpa_scim_attribute_header_info:
+    idp_name: "IdP_Name"
+    
+- name: Get Information About a SCIM Group by ID
+  willguibr.zpacloud.zpa_scim_attribute_header_info:
+    id: 216196257331285827
+    idp_name: "IdP_Name"
+    
+- name: Get Information About a SCIM Group by Name 
+  willguibr.zpacloud.zpa_scim_attribute_header_info:
+    name: "Finance"
+    idp_name: "IdP_Name"
 """
 
-RETURN = r"""
-data:
-    description: scim group information
-    returned: success
-    elements: dict
-    type: list
-    data: [
-  {
-                "creation_time": 1631718444,
-                "id": 293479,
-                "idp_group_id": null,
-                "idp_id": 216196257331285825,
-                "modified_time": 1639601338,
-                "name": "Executives"
-            },
-            {
-                "creation_time": 1631718391,
-                "id": 293478,
-                "idp_group_id": null,
-                "idp_id": 216196257331285825,
-                "modified_time": 1639601336,
-                "name": "Finance"
-            },
-            {
-                "creation_time": 1631718383,
-                "id": 293477,
-                "idp_group_id": null,
-                "idp_id": 216196257331285825,
-                "modified_time": 1639601333,
-                "name": "Sales"
-            }
-    ]
+RETURN = """
+# Returns information on a specified posture profile.
 """
 
 

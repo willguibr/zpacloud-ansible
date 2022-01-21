@@ -1,5 +1,5 @@
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
+    ZPAClientHelper, delete_none
 )
 
 
@@ -40,6 +40,7 @@ class EnrollementCertificateService:
                 return certificate
         return None
 
+    @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
             return {}
@@ -48,10 +49,11 @@ class EnrollementCertificateService:
             "name": resp_json.get("name"),
         }
 
+    @delete_none
     def mapAppToJSON(self, certificate):
         if certificate is None:
             return {}
-        return {            
+        return {
             "id": certificate.get("id"),
             "name": certificate.get("name"),
         }

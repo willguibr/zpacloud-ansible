@@ -1,124 +1,62 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_segment_group import SegmentGroupService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_segment_group import SegmentGroupService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
+
 __metaclass__ = type
 
-DOCUMENTATION = '''
+DOCUMENTATION = """
 ---
 module: zpa_segment_group
-short_description: Create a segment group
+short_description: Create a Segment Group
 description:
-  - This module will create, retrieve, update or delete a specific segment group
+    - This module will create/update/delete a segment group resource.
 author:
-  - William Guilherme (@willguibr)
-version_added: "1.0.0"
+    - William Guilherme (@willguibr)
+version_added: '1.0.0'
 options:
-  applications:
-    type: list
-    elements: str
-    required: False
-    description: "This field is a json array of segment_group-connector-id objects only.
-  config_space:
-    type: str
-    required: False
-    description: ""
-    default: "DEFAULT"
-    choices: ["DEFAULT", "SIEM"]
-  description:
-    type: str
-    required: False
-    description: "This field is the description of the server group."
-  enabled:
-    type: bool
-    required: False
-    description: "This field defines if the server group is enabled or disabled."
   name:
+    description:
+        - Name of the server group.
+    required: false
     type: str
-    required: True
-    description: "This field defines the name of the server group."
-  policy_migrated:
-    type: bool
-    required: False
-  tcp_keep_alive_enabled:
-    type: str
-    required: False
   id:
+    description:
+        - ID of the server group.
+    required: false
     type: str
-    description: ""
-  state:
-    description: "Whether the server group should be present or absent."
-    default: present
-    choices: ["present", "absent"]
+  config_space:
+    description:
+        - ID of the server group.
     type: str
-
-'''
-
-EXAMPLES = r'''
-- name: segment group
-  hosts: localhost
-  tasks:
-    - name: Create an Segment group
-      willguibr.zpacloud_ansible.zpa_segment_group:
-        state: absent
-        name: "Example Test"
-        description: "Example Test"
-        enabled: false
-        applications:
-          - id: 827277282
-      register: segment_group
-    - name: segment group
-      debug:
-        msg: "{{ segment_group }}"
-
-'''
-
-RETURN = r"""
-data:
-    description: Segment Group
-    returned: success
-    type: dict
-    sample: {
-                "applications": [
-                    {
-                      "id": "216196257331291981",
-                      "name" : "88788"
-                    }
-                ],
-                "config_space": "DEFAULT",
-                "description": "Browser Access Apps",
-                "dynamic_discovery": false,
-                "enabled": true,
-                "id": "216196257331291969",
-                "ip_anchored": false,
-                "name": "Browser Access Apps",
-                "servers": [
-                    "216196257331291921"
-                ]
-            }
+    choices:
+        - SIEM
+        - DEFAULT
+    default: DEFAULT               
 """
 
+EXAMPLES = """
+- name: Create/Update/Delete a Segment Group
+    willguibr.zpacloud.zpa_segment_group:
+        name: Example Segment Group
+        config_space: "DEFAULT"
+        description: Example Segment Group
+        enabled: true
+        policy_migrated: true
+        tcp_keep_alive_enabled: "1"
+"""
+
+RETURN = """
+# The newly created segment group resource record.
+"""
 
 def core(module):
     state = module.params.get("state", None)

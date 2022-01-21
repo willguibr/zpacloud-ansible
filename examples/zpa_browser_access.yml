@@ -2,28 +2,36 @@
   hosts: localhost
   tasks:
     - name: Gather information about all App segment
-      willguibr.zpacloud_ansible.zpa_browser_access_info:
-        name: "Browser Access Apps"
+      willguibr.zpacloud.zpa_browser_access_info:
+        #name: "Browser Access Apps"
       register: app
     - name: app segment
       debug:
         msg: "{{ app }}"
     - name: Create an app segment
-      willguibr.zpacloud_ansible.zpa_browser_access:
-        # state: absent
+      willguibr.zpacloud.zpa_browser_access:
+        state: absent
         name: Example Application
         description: Example Application Test
         enabled: true
         health_reporting: ON_ACCESS
         bypass_type: NEVER
         is_cname_enabled: true
+        clientless_apps:
+          - name: "crm2.example.com"
+            application_protocol: "HTTP"
+            application_port: "8089"
+            certificate_id: "216196257331282583"
+            trust_untrusted_cert: true
+            enabled: true
+            domain: "crm2.example.com"
         tcp_port_range:
-          - from: "80"
-            to: "80"
+          - from: "8088"
+            to: "8090"
         domain_names:
           - crm1.example.com
           - crm2.example.com
-        segment_group_id: "216196257331291896"
+        segment_group_id: "216196257331292103"
         server_groups:
           #- "216196257331291969"
       register: app_segment

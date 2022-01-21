@@ -1,38 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from re import T
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_segment_group import SegmentGroupService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_segment_group import SegmentGroupService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
 
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
 module: zpa_segment_group_info
-short_description: Gather information about an server group
+short_description: Retrieves information about a segment group.
 description:
-    - This module can be used to gather information about an server group.
+    - This module will allow the retrieval of information about a segment group.
 author:
     - William Guilherme (@willguibr)
 version_added: '1.0.0'
@@ -49,46 +36,21 @@ options:
     type: str
 """
 
-EXAMPLES = '''
-- name: server group
-  hosts: localhost
-  tasks:
-    - name: Gather information about all server group
-      willguibr.zpacloud_ansible.zpa_segment_group_info:
-        name: Browser Access Apps
-        #id: 216196257331291969
-      register: servers
-    - name: servers
-      debug:
-        msg: "{{ servers }}"
-'''
+EXAMPLES = """
+- name: Get Detail Information of All Segment Groups
+    willguibr.zpacloud.zpa_segment_group_info:
 
-RETURN = r"""
-data:
-    description: server group information
-    returned: success
-    elements: dict
-    type: list
-    sample: [
-      {
-                "app_connector_groups": [
-                    "216196257331291924"
-                ],
-                "applications": [
-                    "216196257331291974"
-                ],
-                "config_space": "DEFAULT",
-                "description": "SGIO Domain Controllers",
-                "dynamic_discovery": true,
-                "enabled": true,
-                "id": "216196257331291964",
-                "ip_anchored": false,
-                "name": "SGIO Domain Controllers",
-                "servers": [
-                    "216196257331291974"
-                ]
-            }
-    ]
+- name: Get Details of a Segment Group by Name
+    willguibr.zpacloud.zpa_segment_group_info:
+    name: "Example"
+
+- name: Get Details of a Segment Group by ID
+    willguibr.zpacloud.zpa_segment_group_info:
+    id: "216196257331291969"
+"""
+
+RETURN = """
+# Returns information on a specified segment group.
 """
 
 

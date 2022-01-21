@@ -1,89 +1,72 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Ansible module to manage Zscaler Private Access (ZPA) 2022
-#
-# Ansible is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# Ansible is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Ansible.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright: (c) 2022, William Guilherme <wguilherme@securitygeek.io>
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import (absolute_import, division, print_function)
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule
 from traceback import format_exc
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_service_edge_groups import ServiceEdgeGroupService
-from ansible_collections.willguibr.zpacloud_ansible.plugins.module_utils.zpa_client import ZPAClientHelper
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_service_edge_groups import ServiceEdgeGroupService
+from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import ZPAClientHelper
 __metaclass__ = type
 
-DOCUMENTATION = r"""
+DOCUMENTATION = """
 ---
-module: zpa_app_connector_groups
-short_description: Create/ an app connector group
+module: zpa_service_edge_groups
+short_description: Create a Service Edge Group.
 description:
-  - This module will create, retrieve, update or delete a specific app connector group
+  - This module create/update/delete a Service Edge Group resource in the ZPA Cloud.
 author:
   - William Guilherme (@willguibr)
 version_added: "1.0.0"
 options:
   name:
-    description: "Name of the App Connector Group."
+    description: "Name of the Service Edge Group."
     required: True
     type: str
   id:
-    description: "ID of the App Connector Group."
+    description: "Description of the Service Edge Group."
     type: str
   city_country:
-    description: "City Country of the App Connector Group."
+    description: "City Country of the Service Edge Group."
     type: str
   country_code:
-    description: "Country code of the App Connector Group."
+    description: "Country code of the Service Edge Group."
     type: str
   description:
-    description: "Description of the App Connector Group."
+    description: "Description of the Service Edge Group."
     type: str
   dns_query_type:
-    description: "Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the App Connector Group."
+    description: "Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the Service Edge Group."
     default: IPV4_IPV6
     choices: ["IPV4_IPV6", "IPV4", "IPV6"]
     type: str
   enabled:
-    description: "Whether this App Connector Group is enabled or not."
+    description: "Whether this Service Edge Group is enabled or not."
     required: False
     default: True
     type: bool
   latitude:
-    description: "Latitude of the App Connector Group. Integer or decimal. With values in the range of -90 to 90."
+    description: "Latitude for the Service Edge Group. Integer or decimal. With values in the range of -90 to 90."
     type: str
   location:
-    description: "Location of the App Connector Group."
+    description: "Location of the Service Edge Group."
     type: str
   longitude:
-    description: "Longitude of the App Connector Group. Integer or decimal. With values in the range of -180 to 180."
+    description: "Longitude for the Service Edge Group. Integer or decimal. With values in the range of -180 to 180."
     type: str
-  lss_app_connector_group:
-    description: "LSS app connector group."
-    required: False
-    type: bool
   upgrade_day:
-    description: "App Connectors in this group will attempt to update to a newer version of the software during this specified day. List of valid days (i.e., Sunday, Monday)."
+    description: "Service Edges in this group will attempt to update to a newer version of the software during this specified day. List of valid days (i.e., Sunday, Monday)."
     default: SUNDAY
     type: str
   upgrade_time_in_secs:
-    description: "App Connectors in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals."
+    description: "Service Edges in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals."
     default: 66600
     type: str
   override_version_profile:
-    description: "Whether the default version profile of the App Connector Group is applied or overridden. Supported values: true, false."
+    description: "Whether the default version profile of the Service Edges Group is applied or overridden. Supported values: true, false."
     required: False
     default: False
     type: bool
@@ -96,63 +79,32 @@ options:
     description: "Name of the version profile."
     type: str
   state:
-    description: "Whether the app connector group should be present or absent."
+    description: "Whether the Service Edge group should be present or absent."
     default: present
     choices: ["present", "absent"]
     type: str
 """
 
-EXAMPLES = '''
-- name: App Connector Groups
-  hosts: localhost
-  tasks:
-    - name: Create/update/delete an app connector group
-      willguibr.zpacloud_ansible.zpa_app_connector_groups:
-        state: "absent"
-        #id: "216196257331292046"
-        name: "Example"
-        description: "Example2"
-        enabled: true
-        city_country: "California, US"
-        country_code: "US"
-        latitude: "37.3382082"
-        longitude: "-121.8863286"
-        location: "San Jose, CA, USA"
-        upgrade_day: "SUNDAY"
-        upgrade_time_in_secs: "66600"
-        override_version_profile: true
-        version_profile_id: "0"
-        dns_query_type: "IPV4"
-      register: appconnectorg
-    - name: created appconnector group
-      debug:
-        msg: "{{ appconnectorg }}"
+EXAMPLES = """
+- name: Create/Update/Delete a Service Edge Group
+  willguibr.zpacloud.zpa_service_edge_groups:
+    name: "Example"
+    description: "Example2"
+    enabled: true
+    city_country: "California, US"
+    country_code: "US"
+    latitude: "37.3382082"
+    longitude: "-121.8863286"
+    location: "San Jose, CA, USA"
+    upgrade_day: "SUNDAY"
+    upgrade_time_in_secs: "66600"
+    override_version_profile: true
+    version_profile_id: "0"
+    dns_query_type: "IPV4"
+"""
 
-'''
-
-RETURN = r"""
-data:
-    description: App Connector Group
-    returned: success
-    type: dict
-    sample: [
-        {
-          id                      = "82827282828",
-          name                    = "Example",
-          description             = "Example",
-          enabled                 = true,
-          city_country            = "California, US",
-          country_code            = "US",
-          latitude                = "37.3382082",
-          longitude               = "-121.8863286",
-          location                = "San Jose, CA, USA",
-          upgrade_day             = "SUNDAY",
-          upgrade_time_in_secs    = "66600",
-          override_version_profile= true,
-          version_profile_id      = 0,
-          dns_query_type          = "IPV4"
-        },
-    ]
+RETURN = """
+# The newly created service edge group resource record.
 """
 
 def core(module):
@@ -228,8 +180,6 @@ def main():
                                 'ALL', 'NONE', 'CUSTOM'], required=False),
         service_edges=id_name_spec,
         trusted_networks=id_name_spec,
-        # service_edges=dict(type='list', elements='str', required=False),
-        # trusted_networks=dict(type='list', elements='str', required=False),
         state=dict(type="str", choices=[
                    "present", "absent"], default="present"),
     )

@@ -1,0 +1,53 @@
+- name: policy timeout rule
+  hosts: localhost
+  tasks:
+    - name: Timeout Policy - Test
+      willguibr.zpacloud.zpa_policy_timeout_rule:
+        name: "Timeout Policy - Test"
+        description: "Timeout Policy - Test"
+        action: "RE_AUTH"
+        rule_order: 1
+        reauth_idle_timeout: 600
+        reauth_timeout: 172800
+        operator: "AND"
+        conditions:
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "app_segment"
+                object_type: "APP"
+                lhs: "id"
+                rhs: "216196257331292105"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "segment_group"
+                object_type: "APP_GROUP"
+                lhs: "id"
+                rhs: "216196257331292103"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "zpn_client_type_exporter"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_exporter"
+              - name: "zpn_client_type_browser_isolation"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_browser_isolation"
+              - name: "zpn_client_type_zapp"
+                object_type: "CLIENT_TYPE"
+                lhs: "id"
+                rhs: "zpn_client_type_zapp"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "CrowdStrike_ZPA_ZTA_40"
+                object_type: "POSTURE"
+                lhs: "13ba3d97-aefb-4acc-9e54-6cc230dee4a5"
+                rhs: "true"
+        # state: absent
+      register: created_rule
+    - debug:
+        msg: "{{ created_rule }}"
