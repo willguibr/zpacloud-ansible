@@ -39,14 +39,14 @@ options:
 
 EXAMPLES = """
 - name: Get Details of All Policy Access Rules
-    willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+    willguibr.zpacloud.zpa_policy_access_rule_info:
     
 - name: Get Details of a Policy Access Rule by Name
-    willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+    willguibr.zpacloud.zpa_policy_access_rule_info:
     name: "Policy Access Rule - Example"
     
 - name: Get Details of a Policy Access Rule by ID
-    willguibr.zpacloud_ansible.zpa_policy_access_rule_info:
+    willguibr.zpacloud.zpa_policy_access_rule_info:
     id: "216196257331291979"
 """
 

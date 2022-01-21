@@ -3,7 +3,7 @@
 
   tasks:
     - name: Gather LSS Client Types
-      willguibr.zpacloud_ansible.zpa_lss_client_types_info:
+      willguibr.zpacloud.zpa_lss_client_types_info:
       register: client_types
     - name: client_types
       debug:
@@ -11,7 +11,7 @@
 
 
     # - name: Create a LSS Controller
-    #   willguibr.zpacloud_ansible.zpa_lss_config_controller:
+    #   willguibr.zpacloud.zpa_lss_config_controller:
     #     state: absent
     #     config:
     #       name: Status

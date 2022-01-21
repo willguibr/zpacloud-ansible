@@ -86,7 +86,7 @@ options:
 
 EXAMPLES = """
 - name: Get ID Information of a Connector Enrollment Certificate
-  willguibr.zpacloud_ansible.zpa_enrollement_certificate_info:
+  willguibr.zpacloud.zpa_enrollement_certificate_info:
     name: "Connector"
   register: connector_cert_id
 
@@ -96,7 +96,7 @@ EXAMPLES = """
   register: app_connector_group
   
 - name: Create/Update/Delete App Connector Group Provisioning Key
-  willguibr.zpacloud_ansible.zpa_provisioning_key:
+  willguibr.zpacloud.zpa_provisioning_key:
     name: "App Connector Group Provisioning Key"
     association_type: "CONNECTOR_GRP"
     max_usage: "10"
@@ -107,7 +107,7 @@ EXAMPLES = """
 
 EXAMPLES = """
 - name: Get ID Information of a Service Edge Group Enrollment Certificate
-  willguibr.zpacloud_ansible.zpa_enrollement_certificate_info:
+  willguibr.zpacloud.zpa_enrollement_certificate_info:
     name: "Service Edge"
   register: enrollment_cert_service_edge
 
@@ -117,7 +117,7 @@ EXAMPLES = """
   register: service_edge_group
   
 - name: Create/Update/Delete App Connector Group Provisioning Key
-  willguibr.zpacloud_ansible.zpa_provisioning_key:
+  willguibr.zpacloud.zpa_provisioning_key:
     name: "App Connector Group Provisioning Key"
     association_type: "CONNECTOR_GRP"
     max_usage: "10"

@@ -196,7 +196,7 @@ Policy Access Rule
 .. code-block:: yaml
 
     - name: Create/update/delete a Policy Rule
-      willguibr.zpacloud_ansible.zpa_policy_access_rule:
+      willguibr.zpacloud.zpa_policy_access_rule:
         name: "Example Policy Access Rule"
         description: "Example Policy Access Rule"
         action: "ALLOW"
@@ -217,7 +217,7 @@ Policy Access Timeout Rule
 .. code-block:: yaml
 
     - name: Create/update/delete a Policy Timeout Rule
-      willguibr.zpacloud_ansible.zpa_policy_access_timeout_rule:
+      willguibr.zpacloud.zpa_policy_access_timeout_rule:
         name: "Example Policy Timeout Rule"
         description: "Example Policy Timeout Rule"
         action: "RE_AUTH"
@@ -238,7 +238,7 @@ Policy Access Forwarding Rule
 .. code-block:: yaml
 
     - name: Create/update/delete a Policy Forwarding Rule
-      willguibr.zpacloud_ansible.zpa_policy_access_forwarding_rule:
+      willguibr.zpacloud.zpa_policy_access_forwarding_rule:
         name: "Example Policy Forwarding Rule"
         description: "Example Policy Forwarding Rule"
         action: "BYPASS"
