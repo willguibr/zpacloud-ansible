@@ -1,8 +1,8 @@
 .. _zpa_policy_timeout_rule_module:
 
 
-zpa_policy_timeout_rule -- Create a Policy Timeout Rule.
-========================================================
+zpa_policy_timeout_rule -- Create a Policy Timeout Rule
+=======================================================
 
 .. contents::
    :local:
@@ -12,7 +12,7 @@ zpa_policy_timeout_rule -- Create a Policy Timeout Rule.
 Synopsis
 --------
 
-This module will create, update or delete a specific Policy Timeout Rule.
+This module create/update/delete a Policy Timeout Rule in the ZPA Cloud.
 
 
 
@@ -23,16 +23,12 @@ This module will create, update or delete a specific Policy Timeout Rule.
 Parameters
 ----------
 
-  bypass_default_rule (type: bool)
-    
-
-
-  policy_set_id (required, type: str)
+  policy_set_id (type: str)
     
 
 
   action (type: str)
-      This is for providing the rule action.
+    This is for providing the rule action.
 
 
   action_id (type: str)
@@ -60,43 +56,62 @@ Parameters
 
 
   operator (type: str)
-    
-
-
-  app_connector_groups (type: list)
-    List of app-connector IDs.
-
-
-  reauth_default_rule (type: bool)
-    
+    This denotes the operation type.
 
 
   description (type: str)
     This is the description of the access policy.
 
 
-  conditions (type: list)
-    This is for proviidng the set of conditions for the policy.
-
-
-  reauth_idle_timeout (type: str)
-    
-
-
-  app_server_groups (type: list)
-    List of the server group IDs.
-
-
-  reauth_timeout (type: str)
-    
-
-
   custom_msg (type: str)
     This is for providing a customer message for the user.
 
 
+  lss_default_rule (type: bool)
+    
+
+
   name (required, type: str)
-    This is the name of the policy.
+    This is the name of the timeout policy.
+
+
+  conditions (type: list)
+    This is for providing the set of conditions for the policy.
+
+
+    negated (type: bool)
+      
+
+
+    operator (type: str)
+      This denotes the operation type.
+
+
+      operands (type: list)
+        This signifies the various policy criterias.
+
+
+        idp_id (type: str)
+          
+
+
+        lhs (type: str)
+          This signifies the key for the object type.
+
+
+        name (type: str)
+          This signifies the key for the object type.
+
+
+        rhs (type: str)
+          This denotes the value for the given object type. Its value depends upon the key.
+
+
+        object_type (type: str)
+          This is for specifying the policy criteria.
+
+
+
 
 
 
@@ -158,14 +173,6 @@ Examples
                 object_type: "POSTURE"
                 lhs: "13ba3d97-aefb-4acc-9e54-6cc230dee4a5"
                 rhs: "true"
-
-
-
-Return Values
--------------
-
-data (success, dict, {})
-  Policy Timeout Rule
 
 
 

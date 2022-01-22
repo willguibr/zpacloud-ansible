@@ -27,8 +27,20 @@ Parameters
     Name of the Service Edge Group.
 
 
+  description (type: str)
+    Description of the Service Edge Group.
+
+
+  enabled (type: bool, default: True)
+    Whether this Service Edge Group is enabled or not.
+
+
   id (type: str)
     Description of the Service Edge Group.
+
+
+  is_public (type: str, default: DEFAULT)
+    Enable or disable public access for the Service Edge Group.
 
 
   city_country (type: str)
@@ -39,27 +51,15 @@ Parameters
     Country code of the Service Edge Group.
 
 
-  description (type: str)
-    Description of the Service Edge Group.
-
-
-  dns_query_type (type: str, default: IPV4_IPV6)
-    Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the Service Edge Group.
-
-
-  enabled (type: bool, default: True)
-    Whether this Service Edge Group is enabled or not.
-
-
-  latitude (type: str)
+  latitude (required, type: str)
     Latitude for the Service Edge Group. Integer or decimal. With values in the range of -90 to 90.
 
 
-  location (type: str)
+  location (required, type: str)
     Location of the Service Edge Group.
 
 
-  longitude (type: str)
+  longitude (required, type: str)
     Longitude for the Service Edge Group. Integer or decimal. With values in the range of -180 to 180.
 
 
@@ -71,8 +71,26 @@ Parameters
     Service Edges in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
 
 
-  override_version_profile (type: bool)
-    Whether the default version profile of the Service Edges Group is applied or overridden. Supported values: true, false.
+  service_edges (type: list)
+    List of ID of the service edge connectors.
+
+
+    id (type: str)
+      List of ID of the service edge connectors.
+
+
+
+  trusted_networks (type: list)
+    List of Trusted networks for this Service Edge Group.
+
+
+    id (type: str)
+      List of Trusted networks for this Service Edge Group.
+
+
+
+  override_version_profile (type: bool, default: True)
+    Whether the default version profile of the Service Edges Group is applied or overridden.
 
 
   version_profile_id (type: str)
@@ -80,7 +98,11 @@ Parameters
 
 
   version_profile_name (type: str)
-    Name of the version profile.
+    Only applicable for a GET request. Ignored in PUT/POST/DELETE requests.
+
+
+  version_profile_visibility_scope (type: str, default: NONE)
+    Only applicable for a GET request. Ignored in PUT/POST/DELETE requests.
 
 
   state (type: str, default: present)

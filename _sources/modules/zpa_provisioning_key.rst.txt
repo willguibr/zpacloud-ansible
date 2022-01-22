@@ -23,8 +23,8 @@ This module will create/update/delete a specific Provisioning Key by association
 Parameters
 ----------
 
-  enabled (type: bool, default: True)
-    Whether the provisioning key is enabled or not. Supported values: true, false
+  enabled (type: bool)
+    Whether the provisioning key is enabled or not.
 
 
   max_usage (required, type: str)

@@ -48,7 +48,7 @@ Parameters
 
 
   config_space (type: str, default: DEFAULT)
-    
+    config space.
 
 
   description (type: str)

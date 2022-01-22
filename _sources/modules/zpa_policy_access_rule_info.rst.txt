@@ -28,7 +28,7 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
-  name (type: str)
+  name (required, type: str)
     Name of the policy rule.
 
 

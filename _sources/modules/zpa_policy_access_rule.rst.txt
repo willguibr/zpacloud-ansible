@@ -23,16 +23,12 @@ This module create/update/delete a Policy Access Rule in the ZPA Cloud.
 Parameters
 ----------
 
-  bypass_default_rule (type: bool)
-    
-
-
-  policy_set_id (required, type: str)
+  policy_set_id (type: str)
     
 
 
   action (type: str)
-      This is for providing the rule action.
+    This is for providing the rule action.
 
 
   action_id (type: str)
@@ -60,35 +56,25 @@ Parameters
 
 
   operator (type: str)
-    
+    This denotes the operation type.
 
 
   app_connector_groups (type: list)
-    List of app-connector IDs.
+    List of the app connector group IDs.
 
 
-  reauth_default_rule (type: bool)
-    
+    id (type: str)
+      List of the app connector group IDs.
 
-
-  description (type: str)
-    This is the description of the access policy.
-
-
-  conditions (type: list)
-    This is for proviidng the set of conditions for the policy.
-
-
-  reauth_idle_timeout (type: str)
-    
 
 
   app_server_groups (type: list)
     List of the server group IDs.
 
 
-  reauth_timeout (type: str)
-    
+    id (type: str)
+      List of the server group IDs.
+
 
 
   custom_msg (type: str)
@@ -101,6 +87,45 @@ Parameters
 
   name (required, type: str)
     This is the name of the policy.
+
+
+  conditions (type: list)
+    This is for proviidng the set of conditions for the policy.
+
+
+    negated (type: bool)
+      
+
+
+    operator (type: str)
+      This denotes the operation type.
+
+
+      operands (type: list)
+        This signifies the various policy criterias.
+
+
+        idp_id (type: str)
+          
+
+
+        lhs (type: str)
+          This signifies the key for the object type.
+
+
+        name (type: str)
+          This signifies the key for the object type.
+
+
+        rhs (type: str)
+          This denotes the value for the given object type. Its value depends upon the key.
+
+
+        object_type (type: str)
+          This is for specifying the policy criteria.
+
+
+
 
 
 
@@ -116,34 +141,35 @@ Examples
 .. code-block:: yaml+jinja
 
     
-        - name: Create/Update/Delete a Policy Access Rule
-          willguibr.zpacloud.zpa_policy_access_rule:
-            name: "Policy Access Rule - Example"
-            description: "Policy Access Rule - Example"
-            action: "ALLOW"
-            rule_order: 2
-            operator: "AND"
-            conditions:
-              - negated: false
-                operator: "OR"
-                operands:
-                  - name: "app_segment"
-                    object_type: "APP"
-                    lhs: "id"
-                    rhs: "216196257331291979"
-            state: present
-          register: created_rule
-        - name: created policy access rule
-          debug:
-            msg: "{{ created_rule }}"
-
-
-
-Return Values
--------------
-
-data (success, dict, {})
-  Policy Rule
+    - name: Access Policy - Intranet Web Apps
+      willguibr.zpacloud.zpa_policy_access_rule:
+        name: "Intranet Web Apps"
+        description: "Intranet Web Apps"
+        action: "ALLOW"
+        rule_order: 1
+        operator: "AND"
+        conditions:
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "app_seg_intranet"
+                object_type: "APP"
+                lhs: "id"
+                rhs: "{{ app_seg_intranet.data.id }}"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "sg_seg_intranet"
+                object_type: "APP_GROUP"
+                lhs: "id"
+                rhs: "{{ seg_intranet.data.id }}"
+          - negated: false
+            operator: "OR"
+            operands:
+              - name: "engineering_group"
+                object_type: "SCIM_GROUP"
+                lhs: "{{ user_okta.data[0].id }}"
+                rhs: "{{ engineering_group.data[0].id }}"
 
 
 

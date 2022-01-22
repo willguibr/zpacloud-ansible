@@ -62,7 +62,7 @@
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_access_rule_info.html">zpa_policy_access_rule_info – Retrieves policy access rule information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_forwarding_rule.html">zpa_policy_forwarding_rule – Create a Policy Forwarding Rule.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_forwarding_rule_info.html">zpa_policy_forwarding_rule_info – Retrieves policy forwarding rule information.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zpa_policy_timeout_rule.html">zpa_policy_timeout_rule – Create a Policy Timeout Rule.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_policy_timeout_rule.html">zpa_policy_timeout_rule – Create a Policy Timeout Rule</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_timeout_rule_info.html">zpa_policy_timeout_rule_info – Retrieves policy timeout rule information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_posture_profile_info.html">zpa_posture_profile_info – Retrieves details of a posture profile resource.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_provisioning_key.html">zpa_provisioning_key – Create a Provisioning Key.</a></li>
@@ -135,36 +135,50 @@
 <section id="parameters">
 <h2><a class="toc-backref" href="#id2">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
 <blockquote>
-<div><dl class="simple">
+<div><dl>
 <dt>name (required, type: str)</dt><dd><p>Name of the Service Edge Group.</p>
 </dd>
+<dt>description (type: str)</dt><dd><p>Description of the Service Edge Group.</p>
+</dd>
+<dt>enabled (type: bool, default: True)</dt><dd><p>Whether this Service Edge Group is enabled or not.</p>
+</dd>
 <dt>id (type: str)</dt><dd><p>Description of the Service Edge Group.</p>
+</dd>
+<dt>is_public (type: str, default: DEFAULT)</dt><dd><p>Enable or disable public access for the Service Edge Group.</p>
 </dd>
 <dt>city_country (type: str)</dt><dd><p>City Country of the Service Edge Group.</p>
 </dd>
 <dt>country_code (type: str)</dt><dd><p>Country code of the Service Edge Group.</p>
 </dd>
-<dt>description (type: str)</dt><dd><p>Description of the Service Edge Group.</p>
+<dt>latitude (required, type: str)</dt><dd><p>Latitude for the Service Edge Group. Integer or decimal. With values in the range of -90 to 90.</p>
 </dd>
-<dt>dns_query_type (type: str, default: IPV4_IPV6)</dt><dd><p>Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the Service Edge Group.</p>
+<dt>location (required, type: str)</dt><dd><p>Location of the Service Edge Group.</p>
 </dd>
-<dt>enabled (type: bool, default: True)</dt><dd><p>Whether this Service Edge Group is enabled or not.</p>
-</dd>
-<dt>latitude (type: str)</dt><dd><p>Latitude for the Service Edge Group. Integer or decimal. With values in the range of -90 to 90.</p>
-</dd>
-<dt>location (type: str)</dt><dd><p>Location of the Service Edge Group.</p>
-</dd>
-<dt>longitude (type: str)</dt><dd><p>Longitude for the Service Edge Group. Integer or decimal. With values in the range of -180 to 180.</p>
+<dt>longitude (required, type: str)</dt><dd><p>Longitude for the Service Edge Group. Integer or decimal. With values in the range of -180 to 180.</p>
 </dd>
 <dt>upgrade_day (type: str, default: SUNDAY)</dt><dd><p>Service Edges in this group will attempt to update to a newer version of the software during this specified day. List of valid days (i.e., Sunday, Monday).</p>
 </dd>
 <dt>upgrade_time_in_secs (type: str, default: 66600)</dt><dd><p>Service Edges in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.</p>
 </dd>
-<dt>override_version_profile (type: bool)</dt><dd><p>Whether the default version profile of the Service Edges Group is applied or overridden. Supported values: true, false.</p>
+<dt>service_edges (type: list)</dt><dd><p>List of ID of the service edge connectors.</p>
+<dl class="simple">
+<dt>id (type: str)</dt><dd><p>List of ID of the service edge connectors.</p>
+</dd>
+</dl>
+</dd>
+<dt>trusted_networks (type: list)</dt><dd><p>List of Trusted networks for this Service Edge Group.</p>
+<dl class="simple">
+<dt>id (type: str)</dt><dd><p>List of Trusted networks for this Service Edge Group.</p>
+</dd>
+</dl>
+</dd>
+<dt>override_version_profile (type: bool, default: True)</dt><dd><p>Whether the default version profile of the Service Edges Group is applied or overridden.</p>
 </dd>
 <dt>version_profile_id (type: str)</dt><dd><p>ID of the version profile. To learn more, see Version Profile Use Cases. This value is required, if the value for overrideVersionProfile is set to true.</p>
 </dd>
-<dt>version_profile_name (type: str)</dt><dd><p>Name of the version profile.</p>
+<dt>version_profile_name (type: str)</dt><dd><p>Only applicable for a GET request. Ignored in PUT/POST/DELETE requests.</p>
+</dd>
+<dt>version_profile_visibility_scope (type: str, default: NONE)</dt><dd><p>Only applicable for a GET request. Ignored in PUT/POST/DELETE requests.</p>
 </dd>
 <dt>state (type: str, default: present)</dt><dd><p>Whether the Service Edge group should be present or absent.</p>
 </dd>

@@ -64,7 +64,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#return-values">Return Values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#status">Status</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#authors">Authors</a></li>
 </ul>
@@ -72,7 +71,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_forwarding_rule_info.html">zpa_policy_forwarding_rule_info – Retrieves policy forwarding rule information.</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zpa_policy_timeout_rule.html">zpa_policy_timeout_rule – Create a Policy Timeout Rule.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_policy_timeout_rule.html">zpa_policy_timeout_rule – Create a Policy Timeout Rule</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_timeout_rule_info.html">zpa_policy_timeout_rule_info – Retrieves policy timeout rule information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_posture_profile_info.html">zpa_posture_profile_info – Retrieves details of a posture profile resource.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_provisioning_key.html">zpa_provisioning_key – Create a Provisioning Key.</a></li>
@@ -126,8 +125,7 @@
 <li><p><a class="reference internal" href="#synopsis" id="id1">Synopsis</a></p></li>
 <li><p><a class="reference internal" href="#parameters" id="id2">Parameters</a></p></li>
 <li><p><a class="reference internal" href="#examples" id="id3">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id4">Return Values</a></p></li>
-<li><p><a class="reference internal" href="#status" id="id5">Status</a></p></li>
+<li><p><a class="reference internal" href="#status" id="id4">Status</a></p></li>
 </ul>
 </div>
 <section id="synopsis">
@@ -150,7 +148,9 @@
 <p>policy_type (type: str)</p>
 <p>rule_order (type: str)</p>
 <dl>
-<dt>default_rule (type: bool)</dt><dd><p>This is for providing a customer message for the user.</p>
+<dt>default_rule (type: bool)</dt><dd><p>This enables the default client forwarding policy rule.</p>
+</dd>
+<dt>default_rule_name (type: str)</dt><dd><p>This is the name of the default client forwarding policy rule.</p>
 </dd>
 <dt>operator (type: str)</dt><dd><p>This denotes the operation type.</p>
 </dd>
@@ -160,7 +160,7 @@
 </dd>
 <dt>description (type: str)</dt><dd><p>This is the description of the access policy.</p>
 </dd>
-<dt>conditions (type: list)</dt><dd><p>This is for proviidng the set of conditions for the policy.</p>
+<dt>conditions (type: list)</dt><dd><p>This is for providing the set of conditions for the policy.</p>
 <p>negated (type: bool)</p>
 <dl>
 <dt>operator (type: str)</dt><dd><p>This denotes the operation type.</p>
@@ -202,6 +202,9 @@
             <span class="nt">object_type</span><span class="p">:</span> <span class="s">&quot;APP&quot;</span>
             <span class="nt">lhs</span><span class="p">:</span> <span class="s">&quot;id&quot;</span>
             <span class="nt">rhs</span><span class="p">:</span> <span class="s">&quot;216196257331292105&quot;</span>
+      <span class="p p-Indicator">-</span> <span class="nt">negated</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="nt">operator</span><span class="p">:</span> <span class="s">&quot;OR&quot;</span>
+        <span class="nt">operands</span><span class="p">:</span>
           <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;segment_group&quot;</span>
             <span class="nt">object_type</span><span class="p">:</span> <span class="s">&quot;APP_GROUP&quot;</span>
             <span class="nt">lhs</span><span class="p">:</span> <span class="s">&quot;id&quot;</span>
@@ -231,15 +234,8 @@
 </pre></div>
 </div>
 </section>
-<section id="return-values">
-<h2><a class="toc-backref" href="#id4">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this headline"></a></h2>
-<dl class="simple">
-<dt>data (success, dict, {})</dt><dd><p>Policy Forwarding Rule</p>
-</dd>
-</dl>
-</section>
 <section id="status">
-<h2><a class="toc-backref" href="#id5">Status</a><a class="headerlink" href="#status" title="Permalink to this headline"></a></h2>
+<h2><a class="toc-backref" href="#id4">Status</a><a class="headerlink" href="#status" title="Permalink to this headline"></a></h2>
 <section id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Permalink to this headline"></a></h3>
 <ul class="simple">

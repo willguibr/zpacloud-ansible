@@ -56,7 +56,11 @@ Parameters
 
 
   default_rule (type: bool)
-    This is for providing a customer message for the user.
+    This enables the default client forwarding policy rule.
+
+
+  default_rule_name (type: str)
+    This is the name of the default client forwarding policy rule.
 
 
   operator (type: str)
@@ -76,7 +80,7 @@ Parameters
 
 
   conditions (type: list)
-    This is for proviidng the set of conditions for the policy.
+    This is for providing the set of conditions for the policy.
 
 
     negated (type: bool)
@@ -142,6 +146,9 @@ Examples
                 object_type: "APP"
                 lhs: "id"
                 rhs: "216196257331292105"
+          - negated: false
+            operator: "OR"
+            operands:
               - name: "segment_group"
                 object_type: "APP_GROUP"
                 lhs: "id"
@@ -168,14 +175,6 @@ Examples
                 object_type: "POSTURE"
                 lhs: "{{ postures.data[0].posture_udid }}"
                 rhs: "false"
-
-
-
-Return Values
--------------
-
-data (success, dict, {})
-  Policy Forwarding Rule
 
 
 
