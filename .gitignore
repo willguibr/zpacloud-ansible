@@ -1,3 +1,5 @@
 docs
 docs/
 .DS_Store
+collection_tests
+collection_tests/
