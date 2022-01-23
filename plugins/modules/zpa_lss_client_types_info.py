@@ -56,38 +56,13 @@ data:
 
 
 def core(module):
-    lss_client_type_name = module.params.get("name", None)
-    lss_client_type_id = module.params.get("id", None)
-    customer_id = module.params.get("customer_id", None)
-    service = LSSClientTypesService(module, customer_id)
-    lss_client_types = []
-    if lss_client_type_id is not None:
-        lss_client_type = service.getByID(lss_client_type_id)
-        if lss_client_type is None:
-            module.fail_json(
-                msg="Failed to retrieve LSS Client Types ID: '%s'" % (id))
-        lss_client_types = [lss_client_type]
-    elif lss_client_type_name is not None:
-        lss_client_type = service.getByName(lss_client_type_name)
-        if lss_client_type is None:
-            module.fail_json(
-                msg="Failed to retrieve LSS Client Type Name: '%s'" % (lss_client_type_name))
-        lss_client_types = [lss_client_types]
-    else:
-        lss_client_types = service.getAll()
+    service = LSSClientTypesService(module)
+    lss_client_types = service.getAll()
     module.exit_json(changed=False, data=lss_client_types)
 
 
 def main():
     argument_spec = ZPAClientHelper.zpa_argument_spec()
-    argument_spec.update(
-        zpn_client_type_exporter=dict(type="str", required=False),
-        zpn_client_type_machine_tunnel=dict(type="str", required=False),
-        zpn_client_type_ip_anchoring=dict(type="str", required=False),
-        zpn_client_type_edge_connector=dict(type="str", required=False),
-        zpn_client_type_zapp=dict(type="str", required=False),
-        zpn_client_type_slogger=dict(type="str", required=False),
-    )
     module = AnsibleModule(argument_spec=argument_spec,
                            supports_check_mode=True)
     try:
