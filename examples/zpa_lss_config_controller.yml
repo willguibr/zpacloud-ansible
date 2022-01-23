@@ -7,7 +7,12 @@
     - name: client_types
       debug:
         msg: "{{ client_types }}"
-
+    - name: Gather LSS Status Codes
+      willguibr.zpacloud.zpa_lss_config_status_codes_info:
+      register: status_codes
+    - name: status_codes
+      debug:
+        msg: "{{ status_codes }}"
     # - name: Create a LSS Controller
     #   willguibr.zpacloud.zpa_lss_config_controller:
     #     state: absent
