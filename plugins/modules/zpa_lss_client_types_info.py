@@ -25,18 +25,12 @@ version_added: "1.0.0"
 requirements:
   - supported starting from zpa_api >= 2.0
 options:
-  name:
-    description:
-      - Name of the LSS client type.
-    required: false
-    type: str
 """
 
 EXAMPLES = """
 - name: Get Details About All LSS Client Types
   willguibr.zpacloud.zpa_lss_client_types_info:
   register: lss_client_typeps
-
 - debug:
     msg: "{{ lss_client_typeps }}"
 
@@ -50,6 +44,12 @@ data:
     type: list
     sample: [
       {
+            "zpn_client_type_edge_connector": "Cloud Connector",
+            "zpn_client_type_exporter": "Web Browser",
+            "zpn_client_type_ip_anchoring": "ZIA Service Edge",
+            "zpn_client_type_machine_tunnel": "Machine Tunnel",
+            "zpn_client_type_slogger": "ZPA LSS",
+            "zpn_client_type_zapp": "Client Connector"
       }
     ]
 """
