@@ -13,6 +13,13 @@
     - name: status_codes
       debug:
         msg: "{{ status_codes }}"
+    - name: Gather LSS Log types formats
+      willguibr.zpacloud.zpa_lss_config_log_types_formats_info:
+        log_type: zpn_trans_log
+      register: log_types_formats
+    - name: log_types_formats
+      debug:
+        msg: "{{ log_types_formats }}"
     # - name: Create a LSS Controller
     #   willguibr.zpacloud.zpa_lss_config_controller:
     #     state: absent

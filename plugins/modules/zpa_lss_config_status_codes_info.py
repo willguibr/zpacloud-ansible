@@ -29,7 +29,7 @@ options:
 
 EXAMPLES = """
 - name: Get Details About All LSS Status Codes
-  willguibr.zpacloud.zpa_lss_status_codes_info:
+  willguibr.zpacloud.zpa_lss_config_status_codes_info:
   register: lss_status_codes
 - debug:
     msg: "{{ lss_status_codes }}"
