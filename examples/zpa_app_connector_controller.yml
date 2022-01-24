@@ -1,0 +1,10 @@
+- name: App Connector Controller
+  hosts: localhost
+  tasks:
+    - name: Gather information about all App Connector Controllers
+      willguibr.zpacloud.zpa_app_connector_controller_info:
+        #name: "USA App Connector Group"
+      register: app_connector
+      
+    - debug:
+        msg: "{{ app_connector }}"

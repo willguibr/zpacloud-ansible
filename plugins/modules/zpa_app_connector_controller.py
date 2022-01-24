@@ -16,92 +16,187 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 ---
-module: zpa_app_connector_groups
-short_description: Create an App Connector Group in the ZPA Cloud.
+module: zpa_app_connector_controller
+short_description: Manages an app connector controller
 description:
-  - This module creates/update/delete an App Connector Group in the ZPA Cloud.
+  - This module update/delete/bulk delete App Connector Controllers in the ZPA Cloud.
 author:
   - William Guilherme (@willguibr)
 version_added: "1.0.0"
 options:
-  name:
+  application_start_time:
     description:
-      - Name of the App Connector Group.
-    required: true
+      - "".
+    required: false
+    type: str
+  app_connector_group_id:
+    description:
+      - "".
+    required: false
+    type: str
+  app_connector_group_name:
+    description:
+        - "".
+    type: str
+  control_channel_status:
+    description:
+      - Read only.Ignored in PUT/POST calls. Expected values: UNKNOWN/ZPN_STATUS_AUTHENTICATED(1)/ZPN_STATUS_DISCONNECTED.
+    type: str
+    choices:
+      - UNKNOWN
+      - ZPN_STATUS_AUTHENTICATED
+      - FAILED
+      - ZPN_STATUS_DISCONNECTED
+  creation_time:
+    description:
+      - "".
+    type: str
+  ctrl_broker_name:
+    description:
+      - Read only. Ignored in PUT/POST calls.
+    type: str 
+  current_version:
+    description:
+      - Read only. Ignored in PUT/POST calls.
+    type: str
+  description:
+    description:
+      - Description of the App Connector.
+    type: str
+  enabled:
+    description:
+      - Whether the App Connector is enabled or not.
+    type: bool
+  expected_upgrade_time:
+    description:
+      - Read only. Ignored in PUT/POST calls.
+    type: str
+  expected_version:
+    description:
+      - Read only. Ignored in PUT/POST calls.
+    type: str
+  fingerprint:
+    description:
+      - "".
     type: str
   id:
     description:
-      - ID of the App Connector Group.
-    required: false
+      - "".
     type: str
-  city_country:
+  ip_acl:
     description:
-        - City Country of the App Connector Group.
+      - "".
     type: str
-  country_code:
+  issued_cert_id:
     description:
-      - Country code of the App Connector Group.
+      - "".
     type: str
-  dns_query_type:
+  last_broker_connect_time:
     description:
-      - Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the App Connector Group.
+      - Read only. Ignored in PUT/POST calls.
     type: str
-    choices:
-        - IPV4_IPV6
-        - IPV4
-        - IPV6
-    default: IPV4_IPV6
-  enabled:
+  last_broker_connect_time_duration:
     description:
-      - Whether this App Connector Group is enabled or not.
-    type: bool
+      - Read only. Ignored in PUT/POST calls.
+    type: str      
+  last_broker_disconnect_time:
+    description:
+      - Read only. Ignored in PUT/POST calls.
+    type: str
+  last_broker_disconnect_time_duration:
+    description:
+      - Read only. Ignored in PUT/POST calls.
+    type: str
+  last_upgrade_time:
+    description:
+      - Read only. Ignored in PUT/POST calls.
+    type: str
   latitude:
     description:
-      - Latitude of the App Connector Group. Integer or decimal. With values in the range of -90 to 90.
+      - Latitude of the App Connector Controller. Integer or decimal. With values in the range of -90 to 90.
     required: true
     type: str
   location:
     description:
-      - Location of the App Connector Group.
+      - Location of the App Connector Controller.
     required: true
     type: str
   longitude:
     description:
-      - Longitude of the App Connector Group. Integer or decimal. With values in the range of -180 to 180.
+      - Longitude of the App Connector Controller. Integer or decimal. With values in the range of -180 to 180.
     required: true
     type: str
-  lss_app_connector_group:
+  modified_by:
     description:
-      - LSS app connector group
+      - "".
     required: false
-    type: bool
-  upgrade_day:
-    description:
-      - App Connectors in this group will attempt to update to a newer version of the software during this specified day. List of valid days (i.e., Sunday, Monday).
-    default: SUNDAY
     type: str
-  upgrade_time_in_secs:
+  modified_time:
     description:
-      - App Connectors in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
-    default: 66600
+      - "".
+    required: false
     type: str
-  override_version_profile:
+  name:
     description:
-      - App Connectors in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
-    type: bool
-  version_profile_id:
+      - "".
+    required: false
+    type: str
+  provisioning_key_id:
     description:
-      - ID of the version profile. To learn more, see Version Profile Use Cases. This value is required, if the value for overrideVersionProfile is set to true.
+      - "".
+    required: false
+    type: str
+  provisioning_key_name:
+    description:
+      - "".
+    required: false
+    type: str
+  platform:
+    description:
+      - "".
+    required: false
+    type: str
+  previous_version:
+    description:
+      - "".
+    required: false
+    type: str
+  private_ip:
+    description:
+      - "".
+    required: false
+    type: str
+  public_ip:
+    description:
+      - "".
+    required: false
+    type: str
+  sarge_version:
+    description:
+      - "".
+    required: false
+    type: str
+  enrollment_cert:
+    description:
+      - "".
+    required: false
+    type: str
+  upgrade_attempt:
+    description:
+      - "".
+    required: false
+    type: str
+  upgrade_status:
+    description:
+      - Read only. Ignored in PUT/POST calls..
+    required: false
     type: str
     choices:
-        - 0
-        - 1
-        - 2
-    default: 0
-  version_profile_name:
-    description:
-      - Name of the version profile.
-    type: str
+      - COMPLETE
+      - IN_PROGRESS
+      - FAILED
+      - UNKNOWN
+      - RESTARTING
   state:
     description:
       - Whether the app connector group should be present or absent.
@@ -146,7 +241,6 @@ def core(module):
         "app_connector_group_name",
         "control_channel_status",
         "creation_time",
-        "country_code",
         "ctrl_broker_name",
         "current_version",
         "description",
@@ -208,7 +302,7 @@ def main():
     #     type='str', required=False), name=dict(type='str', required=False)), required=False)
     argument_spec.update(
         # connectors=id_name_spec,
-        application_start_time=dict(type="str", required=True),
+        application_start_time=dict(type="str", required=False),
         app_connector_group_id=dict(type="str", required=False),
         app_connector_group_name=dict(type="str", required=False),
         control_channel_status=dict(type="str", required=False),
@@ -218,12 +312,11 @@ def main():
         description=dict(type="str", required=False),          
         enabled=dict(type="bool", default=True, required=False),
         expected_upgrade_time=dict(type="str", required=False),   
-        
         expected_version=dict(type="str", required=False),
         fingerprint=dict(type="str", required=False),
         id=dict(type="str", required=False),
         ip_acl=dict(type="str", required=False),
-        issued_cert_id=dict(type="str", default="SUNDAY", required=False),
+        issued_cert_id=dict(type="str", required=False),
         last_broker_connect_time=dict(type="str", required=False),
         last_broker_connect_time_duration=dict(type="str", required=False),
         last_broker_disconnect_time=dict(type="str", required=False),
