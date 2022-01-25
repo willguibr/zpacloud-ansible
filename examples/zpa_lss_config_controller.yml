@@ -1,6 +1,10 @@
 - name: LSS Controller
   hosts: localhost
   tasks:
+    - name: Gather information about App Connector Groups
+      willguibr.zpacloud.zpa_app_connector_groups_info:
+        name: "USA App Connector Group"
+      register: app_connector_group
     - name: Gather LSS Client Types
       willguibr.zpacloud.zpa_lss_client_types_info:
       register: client_types
@@ -15,22 +19,26 @@
         msg: "{{ status_codes }}"
     - name: Gather LSS Log types formats
       willguibr.zpacloud.zpa_lss_config_log_types_formats_info:
-        log_type: zpn_trans_log
+        log_type: zpn_ast_auth_log
       register: log_types_formats
     - name: log_types_formats
       debug:
         msg: "{{ log_types_formats }}"
-    # - name: Create a LSS Controller
-    #   willguibr.zpacloud.zpa_lss_config_controller:
-    #     state: absent
-    #     config:
-    #       name: Status
-    #       description: status
-    #       enabled: true
-    #       lss_host: 10.1.1.1
-    #       lss_port: 20000
-    #       source_log_type: "zpn_ast_auth_log"
-    #   register: lss_controller
-    # - name: lss_controller
-    #   debug:
-    #     msg: "{{ lss_controller }}"
+    - name: Create a LSS Controller
+      willguibr.zpacloud.zpa_lss_config_controller:
+        state: absent
+        config:
+          name: Status
+          description: status
+          enabled: true
+          lss_host: 10.1.1.1
+          lss_port: 20000
+          format: "{{log_types_formats.data.json}}"
+          source_log_type: "zpn_ast_auth_log"
+        connector_groups:
+          - id: "{{app_connector_group.data[0].id}}"
+            name: "{{app_connector_group.data[0].name}}"
+      register: lss_controller
+    - name: lss_controller
+      debug:
+        msg: "{{ lss_controller }}"

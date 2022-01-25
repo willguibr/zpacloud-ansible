@@ -1,0 +1,9 @@
+- name: LSS Controller
+  hosts: localhost
+  tasks:
+    - name: Get all LSS Controller
+      willguibr.zpacloud.zpa_lss_config_controller_info:
+      register: lss_controller
+    - name: lss_controller
+      debug:
+        msg: "{{ lss_controller }}"
