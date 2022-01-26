@@ -70,6 +70,7 @@ class LSSConfigControllerService:
                 "lhs": op.get("lhs"),
                 "rhs": op.get("rhs"),
                 "name": op.get("name"),
+                "values": op.get("values"),
             })
         return ops
 
@@ -83,6 +84,7 @@ class LSSConfigControllerService:
                 "lhs": op.get("lhs"),
                 "rhs": op.get("rhs"),
                 "name": op.get("name"),
+                "values": op.get("values")
             })
         return ops
 
@@ -116,6 +118,48 @@ class LSSConfigControllerService:
             })
         return conds
 
+    def mapJSONPolicyRule(self, policy):
+        if policy is None:
+            return None
+        return {
+            "default_rule": policy.get("defaultRule"),
+            "default_rule_name": policy.get("defaultRuleName"),
+            "description": policy.get("description"),
+            "policy_type": policy.get("policyType"),
+            "custom_msg": policy.get("customMsg"),
+            "policy_set_id": policy.get("policySetId"),
+            "id": policy.get("id"),
+            "lss_default_rule": policy.get("lssDefaultRule"),
+            "action_id": policy.get("actionId"),
+            "name": policy.get("name"),
+            "action": policy.get("action"),
+            "priority": policy.get("priority"),
+            "operator": policy.get("operator"),
+            "rule_order": policy.get("ruleOrder"),
+            "conditions": self.mapConditionsToList(policy.get("conditions"))
+        }
+
+    def mapToJSONPolicyRule(self, policy):
+        if policy is None:
+            return None
+        return {
+            "defaultRule": policy.get("default_rule"),
+            "defaultRuleName": policy.get("default_rule_name"),
+            "description": policy.get("description"),
+            "policyType": policy.get("policy_type"),
+            "customMsg": policy.get("custom_msg"),
+            "policySetId": policy.get("policy_set_id"),
+            "id": policy.get("id"),
+            "lssDefaultRule": policy.get("lss_default_rule"),
+            "actionId": policy.get("action_id"),
+            "name": policy.get("name"),
+            "action": policy.get("action"),
+            "priority": policy.get("priority"),
+            "operator": policy.get("operator"),
+            "ruleOrder": policy.get("rule_order"),
+            "conditions": self.mapConditionsToJSONList(policy.get("conditions"))
+        }
+
     @delete_none
     def mapRespJSONToApp(self, resp_json):
         if resp_json is None:
@@ -124,7 +168,7 @@ class LSSConfigControllerService:
             "id": resp_json.get("id"),
             "config": camelcaseToSnakeCase(resp_json.get("config")),
             "connector_groups": self.mapListJSONToList(resp_json.get("connectorGroups")),
-            "conditions": self.mapConditionsToList(resp_json.get("conditions")),
+            "policy_rule": self.mapJSONPolicyRule(resp_json.get("policyRule")),
         }
 
     @delete_none
@@ -135,7 +179,7 @@ class LSSConfigControllerService:
             "id": policy_rule.get("id"),
             "config": snakecaseToCamelcase(policy_rule.get("config")),
             "connectorGroups": self.mapListToJSONList(policy_rule.get("connector_groups")),
-            "conditions": self.mapConditionsToJSONList(policy_rule.get("conditions")),
+            "policyRuleResource": self.mapToJSONPolicyRule(policy_rule.get("policy_rule_resource")),
         }
 
     def create(self, lss_config):
