@@ -190,7 +190,7 @@ class LSSConfigControllerService:
         status_code = response.status_code
         if status_code > 299:
             return None
-        return self.mapRespJSONToApp(response.json)
+        return self.getByID(response.get("id"))
 
     def update(self, lss_config):
         """update the LSSConfig"""
@@ -200,7 +200,7 @@ class LSSConfigControllerService:
         status_code = response.status_code
         if status_code > 299:
             return None
-        return lss_config
+        return self.getByID(appJSON.get("id"))
 
     def delete(self, id):
         """delete the LSSConfig"""

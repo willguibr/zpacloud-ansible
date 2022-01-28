@@ -125,11 +125,15 @@ def core(module):
         lss_config[param_name] = module.params.get(param_name, None)
     existing_lss_config = service.getByIDOrName(
         lss_config.get("id"), lss_config.get("config", {}).get("name"))
+    if existing_lss_config is not None:
+        id = existing_lss_config.get("id")
+        existing_lss_config.update(lss_config)
+        existing_lss_config["id"] = id
     if state == "present":
         if existing_lss_config is not None:
             """Update"""
-            existing_lss_config = service.update(existing_lss_config)
-            module.exit_json(changed=True, data=existing_lss_config)
+            lss_config = service.update(existing_lss_config)
+            module.exit_json(changed=True, data=lss_config)
         else:
             """Create"""
             lss_config = service.create(lss_config)
