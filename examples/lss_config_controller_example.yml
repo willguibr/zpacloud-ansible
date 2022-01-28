@@ -1,0 +1,54 @@
+
+---
+- name: SGIO ZPA LSS Configuration
+  # collections:
+  #   - willguibr.zpacloud
+  hosts: localhost
+  connection: local
+  tasks:
+
+# Create App Connector Groups
+    - name: LSS App Connector Group 🚀
+      willguibr.zpacloud.zpa_app_connector_groups_info:
+        name: "LSS App Connector Group"
+      register: canada01_app_connector
+
+# LSS Log Type Format Configuration
+    - name: Get LSS Log Type zpn_trans_log 🚀
+      willguibr.zpacloud.zpa_lss_config_log_types_formats_info:
+        log_type: zpn_trans_log
+      register: zpn_trans_log
+
+    - name: LSS User Activity 🚀
+      willguibr.zpacloud.zpa_lss_config_controller:
+        #state: absent
+        config:
+          name: "LSS User Activity"
+          description: "LSS User Activity"
+          enabled: true
+          lss_host: "splunk.securitygeek.io"
+          lss_port: "11001"
+          format: "{{ zpn_trans_log.data.json }}"
+          source_log_type: "zpn_trans_log"
+        connector_groups:
+          - id: "{{ canada01_app_connector.data.id }}"
+        policy_rule_resource:
+          name: "policy_rule_resource-lss_user_activity"
+          action: "LOG"
+          operator: "AND"
+          conditions:
+            - negated: false
+              operator: "OR"
+              operands:
+                - object_type: "CLIENT_TYPE"
+                  values:
+                    ["zpn_client_type_exporter",
+                    "zpn_client_type_ip_anchoring"]
+
+                # - object_type: "CLIENT_TYPE"
+                #   values: 
+                #     - "zpn_client_type_edge_connector"
+                #     - "zpn_client_type_ip_anchoring"
+                #     - "zpn_client_type_machine_tunnel"
+                #     - "zpn_client_type_slogger"
+                #     - "zpn_client_type_zapp"
