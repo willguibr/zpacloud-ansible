@@ -1,18 +1,1 @@
-plugins/modules/zpa_app_connector_controller_info.py validate-modules:missing-gplv3-license
-plugins/modules/zpa_app_connector_controller_info.py validate-modules:deprecation-mismatch
-plugins/modules/zpa_app_connector_controller_info.py validate-modules:invalid-documentation
-plugins/modules/zpa_app_connector_controller.py validate-modules:missing-gplv3-license
-plugins/modules/zpa_app_connector_controller.py validate-modules:deprecation-mismatch
-plugins/modules/zpa_app_connector_controller.py validate-modules:invalid-documentation
-plugins/modules/zpa_app_connector_groups_info.py validate-modules:missing-gplv3-license
-plugins/modules/zpa_app_connector_groups_info.py validate-modules:deprecation-mismatch
-plugins/modules/zpa_app_connector_groups_info.py validate-modules:invalid-documentation
-plugins/modules/zpa_app_connector_groups.py validate-modules:missing-gplv3-license
-plugins/modules/zpa_app_connector_groups.py validate-modules:deprecation-mismatch
-plugins/modules/zpa_app_connector_groups.py validate-modules:invalid-documentation
-plugins/modules/zpa_application_segment_info.py validate-modules:missing-gplv3-license
-plugins/modules/zpa_application_segment_info.py validate-modules:deprecation-mismatch
-plugins/modules/zpa_application_segment_info.py validate-modules:invalid-documentation
-plugins/modules/zpa_application_segment.py validate-modules:missing-gplv3-license
-plugins/modules/zpa_application_segment.py validate-modules:deprecation-mismatch
-plugins/modules/zpa_application_segment.py validate-modules:invalid-documentation
+
