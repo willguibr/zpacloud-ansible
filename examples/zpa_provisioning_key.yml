@@ -1,7 +1,6 @@
 - name: provisioning key
   hosts: localhost
   tasks:
-<<<<<<< HEAD
     - name: Gather information about all provisioning keys
       willguibr.zpacloud.zpa_provisioning_key_info:
         # id: "8691"
@@ -14,12 +13,10 @@
     # - name: Create/update/delete a Provisioning Key
     #   willguibr.zpacloud.zpa_provisioning_key:
     #     name: "New York Provisioning Key"
-=======
     # - name: Gather information about all provisioning keys
     #   willguibr.zpacloud.zpa_provisioning_key_info:
     #     # id: "8691"
     #     #name: "USA App Connector Group"
->>>>>>> master
     #     association_type: "CONNECTOR_GRP"
     #   register: keys
     # - name: provisioning key

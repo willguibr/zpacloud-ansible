@@ -78,17 +78,17 @@ options:
 EXAMPLES = r"""
 - name: Create Second Application Server
   willguibr.zpacloud.zpa_application_server:
-      name: Example1
-      description: Example1
-      address: example.acme.com
-      enabled: true
-      app_server_group_ids: []
-
+    name: Example1
+    description: Example1
+    address: example.acme.com
+    enabled: true
+    app_server_group_ids: []
 """
 
 RETURN = r"""
 # The newly created application server resource record.
 """
+
 
 from ansible.module_utils._text import to_native
 from ansible.module_utils.basic import AnsibleModule

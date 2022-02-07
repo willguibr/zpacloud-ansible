@@ -1,4 +1,3 @@
-
 ---
 - name: SGIO ZPA LSS Configuration
   # collections:
@@ -6,14 +5,13 @@
   hosts: localhost
   connection: local
   tasks:
-
-# Create App Connector Groups
+    # Create App Connector Groups
     - name: LSS App Connector Group 🚀
       willguibr.zpacloud.zpa_app_connector_groups_info:
         name: "LSS App Connector Group"
       register: canada01_app_connector
 
-# LSS Log Type Format Configuration
+    # LSS Log Type Format Configuration
     - name: Get LSS Log Type zpn_trans_log 🚀
       willguibr.zpacloud.zpa_lss_config_log_types_formats_info:
         log_type: zpn_trans_log
@@ -42,11 +40,10 @@
               operands:
                 - object_type: "CLIENT_TYPE"
                   values:
-                    ["zpn_client_type_exporter",
-                    "zpn_client_type_ip_anchoring"]
+                    ["zpn_client_type_exporter", "zpn_client_type_ip_anchoring"]
 
                 # - object_type: "CLIENT_TYPE"
-                #   values: 
+                #   values:
                 #     - "zpn_client_type_edge_connector"
                 #     - "zpn_client_type_ip_anchoring"
                 #     - "zpn_client_type_machine_tunnel"
