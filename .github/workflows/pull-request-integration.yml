@@ -2,18 +2,22 @@ name: pull-request-integration
 
 on:
   pull_request:
-    types: [ opened, synchronize, reopened ]
+    types: [opened, synchronize, reopened]
   push:
-    branches: [ develop, master ]
+    branches: [develop, master]
   schedule:
-    - cron: '0 6 * * *'
+    - cron: "0 6 * * *"
 
 concurrency:
   group: cloud-integration-tests
   cancel-in-progress: false
 
-jobs:
+env:
+  ZPA_CLIENT_ID: ${{ secrets.ZPA_CLIENT_ID }}
+  ZPA_CLIENT_SECRET: ${{ secrets.ZPA_CLIENT_SECRET }}
+  ZPA_CUSTOMER_ID: ${{ secrets.ZPA_CUSTOMER_ID }}
 
+jobs:
   integration:
     # Require reviewers for this environment
     # https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
@@ -27,11 +31,6 @@ jobs:
         with:
           # ansible-core-version:
           git-checkout-ref: ${{ github.event.pull_request.head.sha }} # Check out the pull request
-          pre-test-cmd: >-  # Configure integration test run
-            ZPA_CLIENT_ID=${{ secrets.ZPA_CLIENT_ID }} ZPA_CLIENT_SECRET=${{ secrets.ZPA_CLIENT_SECRET }} ZPA_CUSTOMER_ID=${{ secrets.ZPA_CUSTOMER_ID }}
-            ./tests/utils/render.sh
-            ./tests/integration/integration_config.yml.template
-            > ./tests/integration/integration_config.yml
           python-version: 3.9
           target-python-version: 3.9
           testing-type: integration
