@@ -210,7 +210,7 @@ def core(module):
     elif state == "absent":
         if existing_app is not None:
             service.delete(existing_app.get("id"))
-            module.exit_json(changed=False, data=existing_app)
+            module.exit_json(changed=True, data=existing_app)
     module.exit_json(changed=False, data={})
 
 

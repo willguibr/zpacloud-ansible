@@ -1,0 +1,160 @@
+---
+- block:
+    - name: Ensure ZPA API Credential is Set
+      ansible.builtin.fail:
+        msg: client_id, client_secret and customer_id should be defined in tests/integration/integration_config.yml
+      when:
+        - client_id is not defined
+        - client_secret is not defined
+        - customer_id  is not defined
+        - client_id | length == 0
+        - client_secret | length == 0
+        - customer_id | length == 0
+
+    - name: Ensure App Connector Group is (Absent)
+      willguibr.zpacloud.zpa_app_connector_groups:
+        client_id: "{{ client_id }}"
+        client_secret: "{{ client_secret }}"
+        customer_id: "{{ customer_id }}"
+        state: absent
+        name: "{{ name }}"
+        description: "{{ description }}"
+        enabled: "{{ enabled }}"
+        city_country: "{{ city_country }}"
+        country_code: "{{ country_code }}"
+        latitude: "{{ latitude }}"
+        longitude: "{{ longitude }}"
+        location: "{{ location }}"
+        upgrade_day: "{{ upgrade_day }}"
+        upgrade_time_in_secs: "{{ upgrade_time_in_secs }}"
+        override_version_profile: "{{ override_version_profile }}"
+        version_profile_id: "{{ version_profile_id }}"
+        dns_query_type: "{{ dns_query_type }}"
+
+    - name: Verify App Connector Group is absent
+      ansible.builtin.assert:
+        that:
+          - not result.changed
+
+    - name: Ensure App Connector Group is (Present)
+      willguibr.zpacloud.zpa_app_connector_groups:
+        client_id: "{{ client_id }}"
+        client_secret: "{{ client_secret }}"
+        customer_id: "{{ customer_id }}"
+        state: present
+        name: "{{ name }}"
+        description: "{{ description }}"
+        enabled: "{{ enabled }}"
+        city_country: "{{ city_country }}"
+        country_code: "{{ country_code }}"
+        latitude: "{{ latitude }}"
+        longitude: "{{ longitude }}"
+        location: "{{ location }}"
+        upgrade_day: "{{ upgrade_day }}"
+        upgrade_time_in_secs: "{{ upgrade_time_in_secs }}"
+        override_version_profile: "{{ override_version_profile }}"
+        version_profile_id: "{{ version_profile_id }}"
+        dns_query_type: "{{ dns_query_type }}"
+      register: result
+
+    - name: Give the cloud a minute to settle
+      ansible.builtin.pause:
+        minutes: 1
+
+    - name: Verify App Connector Group is present (from present)
+      ansible.builtin.assert:
+        that:
+          - result.changed
+          - result.data is defined
+          - result.data.name is defined
+          - result.data.name == name
+          - result.data.status in ["true", "false"]
+
+    - name: Destroy App Connector Group is (Absent)
+      willguibr.zpacloud.zpa_app_connector_groups:
+        client_id: "{{ client_id }}"
+        client_secret: "{{ client_secret }}"
+        customer_id: "{{ customer_id }}"
+        state: present
+        name: "{{ name }}"
+        description: "{{ description }}"
+        enabled: "{{ enabled }}"
+        city_country: "{{ city_country }}"
+        country_code: "{{ country_code }}"
+        latitude: "{{ latitude }}"
+        longitude: "{{ longitude }}"
+        location: "{{ location }}"
+        upgrade_day: "{{ upgrade_day }}"
+        upgrade_time_in_secs: "{{ upgrade_time_in_secs }}"
+        override_version_profile: "{{ override_version_profile }}"
+        version_profile_id: "{{ version_profile_id }}"
+        dns_query_type: "{{ dns_query_type }}"
+      register: result
+
+    - name: Verify App Connector Group is absent (from absent)
+      ansible.builtin.assert:
+        that:
+          - result.changed
+
+    - name: Give the cloud a minute to settle
+      ansible.builtin.pause:
+        minutes: 1
+
+    - name: Create the App Connector Group (Inactive)
+      willguibr.zpacloud.zpa_app_connector_groups:
+        client_id: "{{ client_id }}"
+        client_secret: "{{ client_secret }}"
+        customer_id: "{{ customer_id }}"
+        state: inactive
+        name: "{{ name }}"
+        description: "{{ description }}"
+        enabled: "{{ enabled }}"
+        city_country: "{{ city_country }}"
+        country_code: "{{ country_code }}"
+        latitude: "{{ latitude }}"
+        longitude: "{{ longitude }}"
+        location: "{{ location }}"
+        upgrade_day: "{{ upgrade_day }}"
+        upgrade_time_in_secs: "{{ upgrade_time_in_secs }}"
+        override_version_profile: "{{ override_version_profile }}"
+        version_profile_id: "{{ version_profile_id }}"
+        dns_query_type: "{{ dns_query_type }}"
+      register: result
+
+    - name: Give the cloud a minute to settle
+      ansible.builtin.pause:
+        minutes: 1
+
+    - name: Verify App Connector Group is present (from present)
+      ansible.builtin.assert:
+        that:
+          - result.changed
+          - result.data is defined
+          - result.data.name is defined
+          - result.data.name == name
+          - result.data.status == "false"
+
+    - name: Give the cloud a minute to settle
+      ansible.builtin.pause:
+        minutes: 1
+
+    - name: Create the App Connector Group (always)
+      willguibr.zpacloud.zpa_app_connector_groups:
+        client_id: "{{ client_id }}"
+        client_secret: "{{ client_secret }}"
+        customer_id: "{{ customer_id }}"
+        state: absent
+        name: "{{ name }}"
+        description: "{{ description }}"
+        enabled: "{{ enabled }}"
+        city_country: "{{ city_country }}"
+        country_code: "{{ country_code }}"
+        latitude: "{{ latitude }}"
+        longitude: "{{ longitude }}"
+        location: "{{ location }}"
+        upgrade_day: "{{ upgrade_day }}"
+        upgrade_time_in_secs: "{{ upgrade_time_in_secs }}"
+        override_version_profile: "{{ override_version_profile }}"
+        version_profile_id: "{{ version_profile_id }}"
+        dns_query_type: "{{ dns_query_type }}"
+      ignore_errors: true # Should this fail, we'll clean it up next run
