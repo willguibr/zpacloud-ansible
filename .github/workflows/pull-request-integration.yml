@@ -1,21 +1,21 @@
-name: integration
+name: pull-request-integration
+
 on:
-  # ! Don't enable pwn requests !
-  # pull_request:
-  push:
-    branches:
-      - ci*
-      - master
-      - develop
-  schedule:
-    - cron: "10 6 * * *"
+  pull_request_target:
+    branches: [ master, develop ]
+    types: [ opened, synchronize, reopened ]
 
 concurrency:
   group: cloud-integration-tests
   cancel-in-progress: false
 
 jobs:
+
   integration:
+    # Require reviewers for this environment
+    # https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
+    environment: integration
+
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,8 @@ jobs:
         uses: ansible-community/ansible-test-gh-action@release/v1
         with:
           # ansible-core-version:
-          pre-test-cmd: >- # Configure integration test run
+          git-checkout-ref: ${{ github.event.pull_request.head.sha }} # Check out the pull request
+          pre-test-cmd: >-  # Configure integration test run
             ZPA_CLIENT_ID=${{ secrets.ZPA_CLIENT_ID }}
             ZPA_CLIENT_SECRET=${{ secrets.ZPA_CLIENT_SECRET }}
             ZPA_CUSTOMER_ID=${{ secrets.ZPA_CUSTOMER_ID }}
