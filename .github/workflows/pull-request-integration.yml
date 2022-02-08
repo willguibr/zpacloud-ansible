@@ -1,9 +1,12 @@
 name: pull-request-integration
 
 on:
-  pull_request_target:
-    branches: [ master, develop ]
+  pull_request:
     types: [ opened, synchronize, reopened ]
+  push:
+    branches: [ develop, master ]
+  schedule:
+    - cron: '0 6 * * *'
 
 concurrency:
   group: cloud-integration-tests
