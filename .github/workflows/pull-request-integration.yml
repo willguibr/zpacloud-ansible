@@ -28,12 +28,10 @@ jobs:
           # ansible-core-version:
           git-checkout-ref: ${{ github.event.pull_request.head.sha }} # Check out the pull request
           pre-test-cmd: >-  # Configure integration test run
-            ZPA_CLIENT_ID=${{ secrets.ZPA_CLIENT_ID }}
-            ZPA_CLIENT_SECRET=${{ secrets.ZPA_CLIENT_SECRET }}
-            ZPA_CUSTOMER_ID=${{ secrets.ZPA_CUSTOMER_ID }}
+            ZPA_CLIENT_ID=${{ secrets.ZPA_CLIENT_ID }} ZPA_CLIENT_SECRET=${{ secrets.ZPA_CLIENT_SECRET }} ZPA_CUSTOMER_ID=${{ secrets.ZPA_CUSTOMER_ID }}
             ./tests/utils/render.sh
-            tests/integration/integration_config.yml.template
-            > tests/integration/integration_config.yml
+            ./tests/integration/integration_config.yml.template
+            > ./tests/integration/integration_config.yml
           python-version: 3.9
           target-python-version: 3.9
           testing-type: integration
