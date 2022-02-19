@@ -20,7 +20,7 @@ class TestAppConnectorGroupService(unittest.TestCase):
             "someField": "value"
         }]}
         k = AppConnectorGroupService(module, "", rest)
-        self.assertEqual(k.getByID("test"),  {"name": "bar", "id": "test", "connectors": [{
+        self.assertEqual(k.getByID("test"), {"name": "bar", "id": "test", "connectors": [{
             "some_field": "value"
         }]})
 
@@ -57,7 +57,7 @@ class TestAppConnectorGroupService(unittest.TestCase):
             }
         ]
         k = AppConnectorGroupService(module, "", rest)
-        self.assertEqual(k.getByName("bar2"),  {
+        self.assertEqual(k.getByName("bar2"), {
             "name": "bar2",
             "id": "test2",
             "connectors": [
