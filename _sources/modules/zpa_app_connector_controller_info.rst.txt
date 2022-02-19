@@ -1,0 +1,85 @@
+.. _zpa_app_connector_controller_info_module:
+
+
+zpa_app_connector_controller_info -- Retrieves an app connector controller information
+======================================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of information about an app connector controller.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  name (type: str)
+    Name of the App Connector Group.
+
+
+  id (type: str)
+    ID of the App Connector Group.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Retrieve Details of all App Connector Groups
+      willguibr.zpacloud.zpa_app_connector_controller_info:
+
+    - name: Retrieve Details of a Specific App Connector Groups by Name
+      willguibr.zpacloud.zpa_app_connector_controller_info:
+        name: "Example App Connector Group"
+
+    - name: Retrieve Details of a Specific App Connector Groups by ID
+      willguibr.zpacloud.zpa_app_connector_controller_info:
+        id: "216196257331292046"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

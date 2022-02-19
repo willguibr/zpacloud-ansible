@@ -23,52 +23,16 @@ This module will create/update/delete a specific Provisioning Key by association
 Parameters
 ----------
 
-  enabled (type: bool)
-    Whether the provisioning key is enabled or not.
-
-
-  max_usage (required, type: str)
-    The maximum number of instances where this provisioning key can be used for enrolling an App Connector or Service Edge.
-
-
-  enrollment_cert_id (required, type: str)
-    ID of the enrollment certificate that can be used for this provisioning key.
-
-
-  ui_config (type: str)
+  client_id (type: str)
     
 
 
-  provisioning_key (type: str)
-    read only field. Ignored in PUT/POST calls.
-
-
-  association_type (required, type: str)
-    Specifies the provisioning key type for App Connectors or ZPA Private Service Edges. The supported values are CONNECTOR_GRP and SERVICE_EDGE_GRP.
-
-
-  id (type: str)
+  client_secret (type: str)
     
 
 
-  name (required, type: str)
-    Name of the provisioning key.
-
-
-  usage_count (type: str)
-    The provisioning key utilization count.
-
-
-  zcomponent_id (required, type: str)
-    ID of the existing App Connector or Service Edge Group.
-
-
-  zcomponent_name (type: str)
-    Read only property. Applicable only for GET calls, ignored in PUT/POST calls.
-
-
-  enrollment_cert_name (type: str)
-    Read only property. Applicable only for GET calls, ignored in PUT/POST calls.
+  customer_id (type: str)
+    
 
 
   app_connector_group_id (type: str)
@@ -76,10 +40,78 @@ Parameters
 
 
   app_connector_group_name (type: str)
-    Read only property. Applicable only for GET calls, ignored in PUT/POST calls.
+    
 
 
-  ip_acl (type: list)
+  creation_time (type: str)
+    
+
+
+  enabled (type: bool, default: True)
+    
+
+
+  expiration_in_epoch_sec (type: str)
+    
+
+
+  id (type: str)
+    
+
+
+  ip_acl (type: str)
+    
+
+
+  max_usage (required, type: str)
+    
+
+
+  modified_by (type: str)
+    
+
+
+  modified_time (type: str)
+    
+
+
+  name (required, type: str)
+    
+
+
+  provisioning_key (type: str)
+    
+
+
+  enrollment_cert_id (required, type: str)
+    
+
+
+  enrollment_cert_name (type: str)
+    
+
+
+  ui_config (type: str)
+    
+
+
+  usage_count (type: str)
+    
+
+
+  zcomponent_id (required, type: str)
+    
+
+
+  zcomponent_name (type: str)
+    
+
+
+  association_type (required, type: str)
+    
+
+
+  state (type: str, default: present)
     
 
 
@@ -97,7 +129,7 @@ Examples
 
     
     - name: Get ID Information of a Service Edge Group Enrollment Certificate
-      willguibr.zpacloud_ansible.zpa_enrollement_certificate_info:
+      willguibr.zpacloud.zpa_enrollement_certificate_info:
         name: "Service Edge"
       register: enrollment_cert_service_edge
 
@@ -105,9 +137,8 @@ Examples
       willguibr.zpacloud.zpa_service_edge_groups_info:
         name: "Example"
       register: service_edge_group
-      
-    - name: Create/Update/Delete App Connector Group Provisioning Key
-      willguibr.zpacloud_ansible.zpa_provisioning_key:
+    - name: "Create/Update/Delete App Connector Group Provisioning Key"
+      willguibr.zpacloud.zpa_provisioning_key:
         name: "App Connector Group Provisioning Key"
         association_type: "CONNECTOR_GRP"
         max_usage: "10"

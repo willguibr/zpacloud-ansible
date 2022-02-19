@@ -31,7 +31,7 @@ Then in your playbooks you can specify that you want to use the
         - willguibr.zpacloud
 
 * Ansible Galaxy: https://galaxy.ansible.com/willguibr/zpacloud
-* GitHub repo:  https://github.com/willguibr/zpa-ansible
+* GitHub repo:  https://github.com/willguibr/zpacloud-ansible
 
 
 .. toctree::

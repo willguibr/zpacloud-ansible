@@ -23,6 +23,18 @@ This module will allow the retrieval of information about an application server.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the server group.
 
@@ -45,15 +57,16 @@ Examples
 
     
     - name: Gather Information Details of All Application Servers
-        willguibr.zpacloud.zpa_application_server_info:
+      willguibr.zpacloud.zpa_application_server_info:
 
     - name: Gather Information Details of an Application Server by Name
-        willguibr.zpacloud.zpa_application_server_info:
-        name: server1.acme.com
+      willguibr.zpacloud.zpa_application_server_info:
+          name: server1.acme.com
 
     - name: Gather Information Details of an Application Server by ID
-        willguibr.zpacloud.zpa_application_server_info:
-        id: "216196257331291921"
+      willguibr.zpacloud.zpa_application_server_info:
+          id: "216196257331291921"
+
 
 
 

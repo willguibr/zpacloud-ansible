@@ -1,0 +1,91 @@
+.. _zpa_lss_config_log_types_formats_info_module:
+
+
+zpa_lss_config_log_types_formats_info -- Retrieves LSS Log formats Information.
+===============================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of LSS (Log Streaming Services) Log formats information from the ZPA Cloud.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 2.0
+
+
+
+Parameters
+----------
+
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  log_type (required, type: str)
+    Log type
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+        - name: Gather LSS Log types formats
+          willguibr.zpacloud.zpa_lss_config_log_types_formats_info:
+            log_type: zpn_trans_log
+          register: log_types_formats
+        - name: log_types_formats
+          debug:
+            msg: "{{ log_types_formats }}"
+
+
+
+Return Values
+-------------
+
+data (success, list, [{'csv': '...', 'json': '...', 'tsv': '...'}])
+  LSS Log formats
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

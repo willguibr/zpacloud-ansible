@@ -23,6 +23,18 @@ This module will allow the retrieval of information about an app connector group
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the App Connector Group.
 

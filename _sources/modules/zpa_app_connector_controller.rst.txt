@@ -1,0 +1,230 @@
+.. _zpa_app_connector_controller_module:
+
+
+zpa_app_connector_controller -- Manages an app connector controller
+===================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module update/delete/bulk delete App Connector Controllers in the ZPA Cloud.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  application_start_time (type: str)
+    
+
+
+  app_connector_group_id (type: str)
+    
+
+
+  app_connector_group_name (type: str)
+    
+
+
+  control_channel_status (type: str)
+    Read only.Ignored in PUT/POST calls. Expected values: UNKNOWN/ZPN_STATUS_AUTHENTICATED(1)/ZPN_STATUS_DISCONNECTED.
+
+
+  creation_time (type: str)
+    
+
+
+  ctrl_broker_name (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  current_version (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  description (type: str)
+    Description of the App Connector.
+
+
+  enabled (type: bool, default: True)
+    Whether the App Connector is enabled or not.
+
+
+  expected_upgrade_time (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  expected_version (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  fingerprint (type: str)
+    
+
+
+  id (type: str)
+    
+
+
+  ip_acl (type: str)
+    
+
+
+  issued_cert_id (type: str)
+    
+
+
+  last_broker_connect_time (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  last_broker_connect_time_duration (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  last_broker_disconnect_time (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  last_broker_disconnect_time_duration (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  last_upgrade_time (type: str)
+    Read only. Ignored in PUT/POST calls.
+
+
+  latitude (type: str)
+    Latitude of the App Connector Controller. Integer or decimal. With values in the range of -90 to 90.
+
+
+  location (type: str)
+    Location of the App Connector Controller.
+
+
+  longitude (type: str)
+    Longitude of the App Connector Controller. Integer or decimal. With values in the range of -180 to 180.
+
+
+  modified_by (type: str)
+    
+
+
+  modified_time (type: str)
+    
+
+
+  name (type: str)
+    
+
+
+  provisioning_key_id (type: str)
+    
+
+
+  provisioning_key_name (type: str)
+    
+
+
+  platform (type: str)
+    
+
+
+  previous_version (type: str)
+    
+
+
+  private_ip (type: str)
+    
+
+
+  public_ip (type: str)
+    
+
+
+  sarge_version (type: str)
+    
+
+
+  enrollment_cert (type: str)
+    
+
+
+  upgrade_attempt (type: str)
+    
+
+
+  upgrade_status (type: str)
+    Read only. Ignored in PUT/POST calls..
+
+
+  state (type: str, default: present)
+    Whether the app connector group should be present or absent.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Create/Update/Delete an App Connector Group
+      willguibr.zpacloud.zpa_app_connector_groups:
+        name: "Example"
+        description: "Example2"
+        enabled: true
+        city_country: "California, US"
+        country_code: "US"
+        latitude: "37.3382082"
+        longitude: "-121.8863286"
+        location: "San Jose, CA, USA"
+        upgrade_day: "SUNDAY"
+        upgrade_time_in_secs: "66600"
+        override_version_profile: true
+        version_profile_id: "0"
+        dns_query_type: "IPV4"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

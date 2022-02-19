@@ -23,11 +23,31 @@ This module creates/update/delete an application server in the ZPA Cloud.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (required, type: str)
     This field defines the name of the server to create.
 
 
-  app_application_server_ids (type: list)
+  id (type: str)
+    
+
+
+  address (required, type: str)
+    
+
+
+  app_server_group_ids (type: list)
     This field defines the list of server groups IDs.
 
 
@@ -39,8 +59,12 @@ Parameters
     This field defines the description of the server to create.
 
 
-  config_space (type: str)
+  config_space (type: str, default: DEFAULT)
     This field defines the type of the server, DEFAULT or SIEM.
+
+
+  state (type: str, default: present)
+    Whether the app should be present or absent.
 
 
 
@@ -57,7 +81,7 @@ Examples
 
     
     - name: Create Second Application Server
-        willguibr.zpacloud.zpa_application_server:
+      willguibr.zpacloud.zpa_application_server:
         name: Example1
         description: Example1
         address: example.acme.com

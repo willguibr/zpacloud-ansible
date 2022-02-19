@@ -23,7 +23,19 @@ This module will allow the retrieval of information about an application segment
 Parameters
 ----------
 
-  name (required, type: str)
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  name (type: str)
     Name of the application segment.
 
 
@@ -43,7 +55,7 @@ Examples
 
 .. code-block:: yaml+jinja
 
-    "
+    
     - name: Retrieve Details of All Application Segments
       willguibr.zpacloud.zpa_application_segment_info:
 

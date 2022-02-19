@@ -23,6 +23,18 @@ This module will allow the retrieval of information about a browser access appli
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the App Connector Group.
 
@@ -54,7 +66,6 @@ Examples
     - name: Browser Access Application Segment by Name
       willguibr.zpacloud.zpa_browser_access_info:
         name: "Example"
-        
     - name: Browser Access Application Segment by ID
       willguibr.zpacloud.zpa_browser_access_info:
         id: "198288282"

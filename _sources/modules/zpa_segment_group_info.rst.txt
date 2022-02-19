@@ -23,6 +23,18 @@ This module will allow the retrieval of information about a segment group.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the server group.
 
@@ -45,14 +57,14 @@ Examples
 
     
     - name: Get Detail Information of All Segment Groups
-        willguibr.zpacloud.zpa_segment_group_info:
+      willguibr.zpacloud.zpa_segment_group_info:
 
     - name: Get Details of a Segment Group by Name
-        willguibr.zpacloud.zpa_segment_group_info:
+      willguibr.zpacloud.zpa_segment_group_info:
         name: "Example"
 
     - name: Get Details of a Segment Group by ID
-        willguibr.zpacloud.zpa_segment_group_info:
+      willguibr.zpacloud.zpa_segment_group_info:
         id: "216196257331291969"
 
 

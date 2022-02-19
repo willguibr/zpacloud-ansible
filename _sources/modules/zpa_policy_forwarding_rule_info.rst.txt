@@ -28,7 +28,19 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
-  name (required, type: str)
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  name (type: str)
     Name of the policy forwarding rule.
 
 
@@ -50,15 +62,13 @@ Examples
 
     
     - name: Get Information About All Policy Forwarding Rules
-        willguibr.zpacloud.zpa_policy_forwarding_rule_info:
-      
+      willguibr.zpacloud.zpa_policy_forwarding_rule_info:
     - name: Get information About Forwarding Rules by Name
-        willguibr.zpacloud.zpa_policy_forwarding_rule_info:
-          name: "All Other Services"
-        
+      willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+        name: "All Other Services"
     - name: Get information About Forwarding Rules by ID
-        willguibr.zpacloud.zpa_policy_forwarding_rule_info:
-          id: "216196257331292020"
+      willguibr.zpacloud.zpa_policy_forwarding_rule_info:
+        id: "216196257331292020"
 
 
 

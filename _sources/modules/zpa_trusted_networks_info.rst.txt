@@ -28,6 +28,18 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the trusted network.
 
@@ -51,11 +63,9 @@ Examples
     
     - name: Get Information About All Trusted Networks
       willguibr.zpacloud.zpa_trusted_network_info:
-        
     - name: Get information about Trusted Networks by Name
       willguibr.zpacloud.zpa_trusted_network_info:
         name: Corp-Trusted-Networks
-
     - name: Get information about Trusted Networks by ID
       willguibr.zpacloud.zpa_trusted_network_info:
         id: 216196257331282234

@@ -28,6 +28,18 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the saml attribute.
 
@@ -51,11 +63,9 @@ Examples
     
     - name: Get Information About All SAML Attributes
       willguibr.zpacloud.zpa_saml_attribute_info:
-      
     - name: Get Information About Saml Attribute by Attribute Name
       willguibr.zpacloud.zpa_saml_attribute_info:
         name: DepartmentName_User
-        
     - name: Get Information About Saml Attribute by Attribute ID
       willguibr.zpacloud.zpa_saml_attribute_info:
         id: 216196257331285827

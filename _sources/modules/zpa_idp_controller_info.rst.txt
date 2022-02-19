@@ -23,7 +23,19 @@ This module will allow the retrieval of information about an Identity Provider (
 Parameters
 ----------
 
-  name (required, type: str)
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  name (type: str)
     Name of the Identity Provider.
 
 
@@ -53,7 +65,7 @@ Examples
 
     - name: Get Details of a Specific IdP Controller by ID
       willguibr.zpacloud.zpa_idp_controller_info:
-        id: "216196257331282583"  
+        id: "216196257331282583"
 
 
 

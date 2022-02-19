@@ -23,90 +23,114 @@ This module create/update/delete a Service Edge Group resource in the ZPA Cloud.
 Parameters
 ----------
 
-  name (required, type: str)
-    Name of the Service Edge Group.
+  client_id (type: str)
+    
 
 
-  description (type: str)
-    Description of the Service Edge Group.
+  client_secret (type: str)
+    
 
 
-  enabled (type: bool, default: True)
-    Whether this Service Edge Group is enabled or not.
-
-
-  id (type: str)
-    Description of the Service Edge Group.
-
-
-  is_public (type: str, default: DEFAULT)
-    Enable or disable public access for the Service Edge Group.
+  customer_id (type: str)
+    
 
 
   city_country (type: str)
-    City Country of the Service Edge Group.
+    
 
 
   country_code (type: str)
-    Country code of the Service Edge Group.
+    
 
 
-  latitude (required, type: str)
-    Latitude for the Service Edge Group. Integer or decimal. With values in the range of -90 to 90.
+  description (type: str)
+    
 
 
-  location (required, type: str)
-    Location of the Service Edge Group.
+  enabled (type: bool, default: True)
+    
 
 
-  longitude (required, type: str)
-    Longitude for the Service Edge Group. Integer or decimal. With values in the range of -180 to 180.
+  geolocation_id (type: str)
+    
+
+
+  id (type: str)
+    
+
+
+  is_public (type: str)
+    
+
+
+  latitude (type: str)
+    
+
+
+  location (type: str)
+    
+
+
+  longitude (type: str)
+    
+
+
+  name (required, type: str)
+    
+
+
+  override_version_profile (type: bool)
+    
 
 
   upgrade_day (type: str, default: SUNDAY)
-    Service Edges in this group will attempt to update to a newer version of the software during this specified day. List of valid days (i.e., Sunday, Monday).
+    
 
 
   upgrade_time_in_secs (type: str, default: 66600)
-    Service Edges in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
+    
+
+
+  version_profile_id (type: str)
+    
+
+
+  version_profile_name (type: str)
+    
+
+
+  version_profile_visibility_scope (type: str, default: NONE)
+    
 
 
   service_edges (type: list)
-    List of ID of the service edge connectors.
+    
 
 
     id (type: str)
-      List of ID of the service edge connectors.
+      
+
+
+    name (type: str)
+      
 
 
 
   trusted_networks (type: list)
-    List of Trusted networks for this Service Edge Group.
+    
 
 
     id (type: str)
-      List of Trusted networks for this Service Edge Group.
+      
 
 
+    name (type: str)
+      
 
-  override_version_profile (type: bool, default: True)
-    Whether the default version profile of the Service Edges Group is applied or overridden.
-
-
-  version_profile_id (type: str)
-    ID of the version profile. To learn more, see Version Profile Use Cases. This value is required, if the value for overrideVersionProfile is set to true.
-
-
-  version_profile_name (type: str)
-    Only applicable for a GET request. Ignored in PUT/POST/DELETE requests.
-
-
-  version_profile_visibility_scope (type: str, default: NONE)
-    Only applicable for a GET request. Ignored in PUT/POST/DELETE requests.
 
 
   state (type: str, default: present)
-    Whether the Service Edge group should be present or absent.
+    
 
 
 

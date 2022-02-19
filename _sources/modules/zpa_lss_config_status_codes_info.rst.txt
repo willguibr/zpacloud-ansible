@@ -1,0 +1,85 @@
+.. _zpa_lss_config_status_codes_info_module:
+
+
+zpa_lss_config_status_codes_info -- Retrieves LSS Status Codes Information.
+===========================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of LSS (Log Streaming Services) Status Codes information from the ZPA Cloud.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 2.0
+
+
+
+Parameters
+----------
+
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Details About All LSS Status Codes
+      willguibr.zpacloud.zpa_lss_config_status_codes_info:
+      register: lss_status_codes
+    - debug:
+        msg: "{{ lss_status_codes }}"
+
+
+
+Return Values
+-------------
+
+data (success, list, [{'zpn_ast_auth_log': {'ZPN_STATUS_AUTHENTICATED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Authenticated', 'status': 'Success'}, 'ZPN_STATUS_AUTH_FAILED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Authentication failed', 'status': 'Error'}, 'ZPN_STATUS_DISCONNECTED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Disconnected', 'status': 'Success'}}, 'zpn_auth_log': {'ZPN_STATUS_AUTHENTICATED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Authenticated', 'status': 'Success'}, 'ZPN_STATUS_AUTH_FAILED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Authentication failed', 'status': 'Error'}, 'ZPN_STATUS_DISCONNECTED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Disconnected', 'status': 'Success'}}, 'zpn_sys_auth_log': {'ZPN_STATUS_AUTHENTICATED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Authenticated', 'status': 'Success'}, 'ZPN_STATUS_AUTH_FAILED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Authentication failed', 'status': 'Error'}, 'ZPN_STATUS_DISCONNECTED': {'adminAction': 'NA', 'errorType': 'NA', 'name': 'Disconnected', 'status': 'Success'}}, 'zpn_trans_log': {'APP_NOT_AVAILABLE': {'adminAction': 'NA', 'errorType': 'InternalError', 'name': 'CA: Application is not available', 'status': 'Error'}, 'AST_MT_SETUP_TIMEOUT_CANNOT_CONN_TO_SERVER': {'adminAction': 'Check connectivity to server', 'errorType': 'ActionableError', 'name': 'AC: Connection request to server timed out', 'status': 'Error'}, 'BRK_MT_AUTH_SAML_CANNOT_ADD_ATTR_TO_HEAP': {'adminAction': 'NA', 'errorType': 'InternalError', 'name': 'SE: Authentication failed due to insufficient memory', 'status': 'Error'}, 'BRK_MT_AUTH_SAML_DECODE_FAIL': {'adminAction': 'NA', 'errorType': 'InternalError', 'status': 'Error'}, 'BRK_MT_AUTH_SAML_FAILURE': {'adminAction': 'NA', 'errorType': 'ActionableError', 'name': 'SE: Authentication unsuccessful', 'status': 'Error'}}}])
+  LSS Status Codes
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

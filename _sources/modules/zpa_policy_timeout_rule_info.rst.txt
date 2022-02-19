@@ -28,6 +28,18 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the policy timeout rule.
 
@@ -50,15 +62,13 @@ Examples
 
     
     - name: Gather information about all policy rules
-        willguibr.zpacloud.zpa_policy_timeout_rule_info:
-        
+      willguibr.zpacloud.zpa_policy_timeout_rule_info:
     - name: Get Information About a Specific Timeout Rule by Name
-        willguibr.zpacloud.zpa_policy_timeout_rule_info:
-            name: "Example"
-        
+      willguibr.zpacloud.zpa_policy_timeout_rule_info:
+        name: "Example"
     - name: Get Information About a Specific Timeout Rule by ID
-        willguibr.zpacloud.zpa_policy_timeout_rule_info:
-            id: "216196257331292020"
+      willguibr.zpacloud.zpa_policy_timeout_rule_info:
+        id: "216196257331292020"
 
 
 

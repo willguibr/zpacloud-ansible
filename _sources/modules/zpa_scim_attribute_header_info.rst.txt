@@ -28,11 +28,23 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the scim attribute.
 
 
-  idp_name (type: str)
+  idp_name (required, type: str)
     Name of the IDP, required when ID is not sepcified.
 
 
@@ -56,12 +68,10 @@ Examples
     - name: Get Information About All SCIM Attribute of an IDP
       willguibr.zpacloud.zpa_scim_attribute_header_info:
         idp_name: IdP_Name
-        
     - name: Get Information About the SCIM Attribute by Name
       willguibr.zpacloud.zpa_scim_attribute_header_info:
         name: costCenter
         idp_name: IdP_Name
-        
     - name: Get Information About the SCIM Attribute by ID
       willguibr.zpacloud.zpa_scim_attribute_header_info:
         id: 216196257331285842

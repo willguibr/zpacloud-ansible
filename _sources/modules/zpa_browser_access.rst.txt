@@ -23,6 +23,18 @@ This module create/update/delete a Browser Access Application Segment in the ZPA
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   default_max_age (type: str)
     default_max_age
 
@@ -33,6 +45,15 @@ Parameters
 
   udp_port_range (type: list)
     udp port range
+
+
+    to (type: str)
+      
+
+
+    from (type: str)
+      
+
 
 
   id (type: str)
@@ -49,10 +70,6 @@ Parameters
 
   default_idle_timeout (type: str)
     default idle timeout.
-
-
-  modifiedby (type: str)
-    modified by.
 
 
   passive_health_enabled (type: bool)
@@ -79,12 +96,17 @@ Parameters
     Whether health reporting for the app is Continuous or On Access. Supported values: NONE, ON_ACCESS, CONTINUOUS.
 
 
-  log_features (type: str)
-    log features.
-
-
   server_groups (required, type: list)
     List of the server group IDs.
+
+
+    name (type: str)
+      
+
+
+    id (required, type: str)
+      
+
 
 
   segment_group_id (required, type: str)
@@ -107,12 +129,13 @@ Parameters
     tcp port range
 
 
-  udp_port_ranges (type: list)
-    UDP port ranges used to access the app.
+    to (type: str)
+      
 
 
-  tcp_port_ranges (type: list)
-    TCP port ranges used to access the app.
+    from (type: str)
+      
+
 
 
   enabled (type: bool)
@@ -125,6 +148,75 @@ Parameters
 
   clientless_apps (type: list)
     
+
+
+    path (type: str)
+      
+
+
+    trust_untrusted_cert (type: bool)
+      
+
+
+    allow_options (type: bool)
+      
+
+
+    description (type: str)
+      
+
+
+    id (type: str)
+      
+
+
+    cname (type: str)
+      
+
+
+    hidden (type: bool)
+      
+
+
+    app_id (type: str)
+      
+
+
+    application_port (type: str)
+      
+
+
+    application_protocol (required, type: str)
+      
+
+
+    name (required, type: str)
+      
+
+
+    certificate_id (required, type: str)
+      
+
+
+    certificate_name (type: str)
+      
+
+
+    domain (type: str)
+      
+
+
+    enabled (type: bool)
+      
+
+
+    local_domain (type: str)
+      
+
+
+
+  state (type: str, default: present)
+    Whether the app should be present or absent.
 
 
 

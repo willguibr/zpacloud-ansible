@@ -28,6 +28,18 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the browser certificate.
 
@@ -71,7 +83,6 @@ Examples
     - name: Gather Information Details of the Isolation Client Enrollment Certificates by Name
       willguibr.zpacloud.zpa_enrollment_cert_info:
         name: "Isolation Client"
-        
 
 
 

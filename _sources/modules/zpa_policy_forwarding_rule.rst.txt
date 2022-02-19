@@ -23,23 +23,15 @@ This module will create, update or delete a specific Policy Forwarding Rule
 Parameters
 ----------
 
-  bypass_default_rule (type: bool)
+  client_id (type: str)
     
 
 
-  policy_set_id (required, type: str)
+  client_secret (type: str)
     
 
 
-  action (type: str)
-    This is for providing the rule action.
-
-
-  action_id (type: str)
-    This field defines the description of the server.
-
-
-  priority (type: str)
+  customer_id (type: str)
     
 
 
@@ -47,7 +39,47 @@ Parameters
     
 
 
+  name (required, type: str)
+    
+
+
+  description (type: str)
+    
+
+
+  action (type: str, default: INTERCEPT)
+    
+
+
+  action_id (type: str)
+    
+
+
+  default_rule (type: bool)
+    
+
+
+  default_rule_name (type: str)
+    
+
+
+  custom_msg (type: str)
+    
+
+
+  bypass_default_rule (type: bool)
+    
+
+
+  operator (type: str)
+    
+
+
   policy_type (type: str)
+    
+
+
+  priority (type: str)
     
 
 
@@ -55,67 +87,58 @@ Parameters
     
 
 
-  default_rule (type: bool)
-    This enables the default client forwarding policy rule.
-
-
-  default_rule_name (type: str)
-    This is the name of the default client forwarding policy rule.
-
-
-  operator (type: str)
-    This denotes the operation type.
-
-
-  custom_msg (type: str)
-    This is for providing a customer message for the user.
-
-
-  name (required, type: str)
-    This is the name of the policy.
-
-
-  description (type: str)
-    This is the description of the access policy.
-
-
   conditions (type: list)
-    This is for providing the set of conditions for the policy.
+    
+
+
+    id (type: str)
+      
 
 
     negated (type: bool)
       
 
 
-    operator (type: str)
-      This denotes the operation type.
+    operator (required, type: str)
+      
 
 
-      operands (type: list)
-        This signifies the various policy criterias.
+    operands (type: list)
+      
 
 
-        idp_id (type: str)
-          
+      id (type: str)
+        
 
 
-        lhs (type: str)
-          This signifies the key for the object type.
+      idp_id (type: str)
+        
 
 
-        name (type: str)
-          This signifies the key for the object type.
+      name (type: str)
+        
 
 
-        rhs (type: str)
-          This denotes the value for the given object type. Its value depends upon the key.
+      lhs (required, type: str)
+        
 
 
-        object_type (type: str)
-          This is for specifying the policy criteria.
+      rhs (type: str)
+        
+
+
+      rhs_list (type: list)
+        
+
+
+      object_type (required, type: str)
+        
 
 
 
+
+  state (type: str, default: present)
+    
 
 
 

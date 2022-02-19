@@ -28,7 +28,19 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
-  name (required, type: str)
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  name (type: str)
     Name of the browser certificate.
 
 
@@ -59,7 +71,6 @@ Examples
     - name: Gather Details of a Specific Browser Certificates by ID
       willguibr.zpacloud.zpa_ba_certificate_info:
         id: "216196257331282583"
-        
 
 
 

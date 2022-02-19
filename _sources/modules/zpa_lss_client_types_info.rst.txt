@@ -1,0 +1,88 @@
+.. _zpa_lss_client_types_info_module:
+
+
+zpa_lss_client_types_info -- Retrieves LSS Client Types Information.
+====================================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module will allow the retrieval of LSS (Log Streaming Services) Client Types information from the ZPA Cloud.
+
+This can then be associated with the source_log_type parameter when creating an LSS Resource.
+
+
+
+
+Requirements
+------------
+The below requirements are needed on the host that executes this module.
+
+- supported starting from zpa_api >= 2.0
+
+
+
+Parameters
+----------
+
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: Get Details About All LSS Client Types
+      willguibr.zpacloud.zpa_lss_client_types_info:
+      register: lss_client_typeps
+    - debug:
+        msg: "{{ lss_client_typeps }}"
+
+
+
+
+Return Values
+-------------
+
+data (success, list, [{'zpn_client_type_edge_connector': 'Cloud Connector', 'zpn_client_type_exporter': 'Web Browser', 'zpn_client_type_ip_anchoring': 'ZIA Service Edge', 'zpn_client_type_machine_tunnel': 'Machine Tunnel', 'zpn_client_type_slogger': 'ZPA LSS', 'zpn_client_type_zapp': 'Client Connector'}])
+  Trusted Network information
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

@@ -23,7 +23,15 @@ This module create/update/delete a Policy Access Rule in the ZPA Cloud.
 Parameters
 ----------
 
-  policy_set_id (type: str)
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
     
 
 
@@ -40,6 +48,14 @@ Parameters
 
 
   id (type: str)
+    
+
+
+  default_rule_name (type: str)
+    
+
+
+  description (type: str)
     
 
 
@@ -63,8 +79,12 @@ Parameters
     List of the app connector group IDs.
 
 
-    id (type: str)
-      List of the app connector group IDs.
+    name (type: str)
+      
+
+
+    id (required, type: str)
+      
 
 
 
@@ -72,8 +92,12 @@ Parameters
     List of the server group IDs.
 
 
-    id (type: str)
-      List of the server group IDs.
+    name (type: str)
+      
+
+
+    id (required, type: str)
+      
 
 
 
@@ -90,42 +114,57 @@ Parameters
 
 
   conditions (type: list)
-    This is for proviidng the set of conditions for the policy.
+    
+
+
+    id (type: str)
+      
 
 
     negated (type: bool)
       
 
 
-    operator (type: str)
-      This denotes the operation type.
+    operator (required, type: str)
+      
 
 
-      operands (type: list)
-        This signifies the various policy criterias.
+    operands (type: list)
+      
 
 
-        idp_id (type: str)
-          
+      id (type: str)
+        
 
 
-        lhs (type: str)
-          This signifies the key for the object type.
+      idp_id (type: str)
+        
 
 
-        name (type: str)
-          This signifies the key for the object type.
+      name (type: str)
+        
 
 
-        rhs (type: str)
-          This denotes the value for the given object type. Its value depends upon the key.
+      lhs (required, type: str)
+        
 
 
-        object_type (type: str)
-          This is for specifying the policy criteria.
+      rhs (type: str)
+        
+
+
+      rhs_list (type: list)
+        
+
+
+      object_type (required, type: str)
+        
 
 
 
+
+  state (type: str, default: present)
+    Whether the app should be present or absent.
 
 
 

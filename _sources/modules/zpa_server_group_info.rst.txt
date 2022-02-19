@@ -23,6 +23,18 @@ This module will allow the retrieval of information about a server group resourc
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the server group.
 
@@ -45,14 +57,14 @@ Examples
 
     
     - name: Get Details of All Server Groups
-        willguibr.zpacloud.zpa_server_group_info:
+      willguibr.zpacloud.zpa_server_group_info:
 
     - name: Get Details of a Specific Server Group by Name
-        willguibr.zpacloud.zpa_server_group_info:
+      willguibr.zpacloud.zpa_server_group_info:
         name: Example
 
     - name: Get Details of a Specific Server Group by ID
-        willguibr.zpacloud.zpa_server_group_info:
+      willguibr.zpacloud.zpa_server_group_info:
         id: "216196257331291969"
 
 

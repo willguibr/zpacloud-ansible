@@ -28,6 +28,18 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the provisioning key.
 
@@ -37,7 +49,9 @@ Parameters
 
 
   association_type (required, type: str)
-    Specifies the provisioning key type for App Connectors or ZPA Private Service Edges. The supported values are CONNECTOR_GRP and SERVICE_EDGE_GRP.
+    Specifies the provisioning key type for App Connectors or ZPA Private Service Edges.
+
+    The supported values are CONNECTOR_GRP and SERVICE_EDGE_GRP.
 
 
 

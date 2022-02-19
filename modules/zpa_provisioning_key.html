@@ -44,6 +44,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Module reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="zpa_app_connector_controller.html">zpa_app_connector_controller – Manages an app connector controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_app_connector_controller_info.html">zpa_app_connector_controller_info – Retrieves an app connector controller information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_app_connector_groups.html">zpa_app_connector_groups – Create an App Connector Group in the ZPA Cloud.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_app_connector_groups_info.html">zpa_app_connector_groups_info – Retrieves an app connector group information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_application_segment.html">zpa_application_segment – Create an application segment in the ZPA Cloud.</a></li>
@@ -57,6 +59,11 @@
 <li class="toctree-l2"><a class="reference internal" href="zpa_customer_version_profile_info.html">zpa_customer_version_profile_info – Retrieves customer version profile information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_enrollement_certificate_info.html">zpa_enrollement_certificate_info – Retrieves enrollment certificate information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_idp_controller_info.html">zpa_idp_controller_info – Retrieves Identity Provider information.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_client_types_info.html">zpa_lss_client_types_info – Retrieves LSS Client Types Information.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_config_controller.html">zpa_lss_config_controller – Create a LSS CONFIG.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_config_controller_info.html">zpa_lss_config_controller_info – Retrieves LSS Config controller information.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_config_log_types_formats_info.html">zpa_lss_config_log_types_formats_info – Retrieves LSS Log formats Information.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_config_status_codes_info.html">zpa_lss_config_status_codes_info – Retrieves LSS Status Codes Information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_machine_group_info.html">zpa_machine_group_info – Retrieves machine group information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_access_rule.html">zpa_policy_access_rule – Create a Policy Access Rule</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_access_rule_info.html">zpa_policy_access_rule_info – Retrieves policy access rule information.</a></li>
@@ -135,61 +142,49 @@
 <section id="parameters">
 <h2><a class="toc-backref" href="#id2">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
 <blockquote>
-<div><dl class="simple">
-<dt>enabled (type: bool)</dt><dd><p>Whether the provisioning key is enabled or not.</p>
-</dd>
-<dt>max_usage (required, type: str)</dt><dd><p>The maximum number of instances where this provisioning key can be used for enrolling an App Connector or Service Edge.</p>
-</dd>
-<dt>enrollment_cert_id (required, type: str)</dt><dd><p>ID of the enrollment certificate that can be used for this provisioning key.</p>
-</dd>
-</dl>
-<p>ui_config (type: str)</p>
-<dl class="simple">
-<dt>provisioning_key (type: str)</dt><dd><p>read only field. Ignored in PUT/POST calls.</p>
-</dd>
-<dt>association_type (required, type: str)</dt><dd><p>Specifies the provisioning key type for App Connectors or ZPA Private Service Edges. The supported values are CONNECTOR_GRP and SERVICE_EDGE_GRP.</p>
-</dd>
-</dl>
-<p>id (type: str)</p>
-<dl class="simple">
-<dt>name (required, type: str)</dt><dd><p>Name of the provisioning key.</p>
-</dd>
-<dt>usage_count (type: str)</dt><dd><p>The provisioning key utilization count.</p>
-</dd>
-<dt>zcomponent_id (required, type: str)</dt><dd><p>ID of the existing App Connector or Service Edge Group.</p>
-</dd>
-<dt>zcomponent_name (type: str)</dt><dd><p>Read only property. Applicable only for GET calls, ignored in PUT/POST calls.</p>
-</dd>
-<dt>enrollment_cert_name (type: str)</dt><dd><p>Read only property. Applicable only for GET calls, ignored in PUT/POST calls.</p>
-</dd>
-</dl>
+<div><p>client_id (type: str)</p>
+<p>client_secret (type: str)</p>
+<p>customer_id (type: str)</p>
 <p>app_connector_group_id (type: str)</p>
-<dl class="simple">
-<dt>app_connector_group_name (type: str)</dt><dd><p>Read only property. Applicable only for GET calls, ignored in PUT/POST calls.</p>
-</dd>
-</dl>
-<p>ip_acl (type: list)</p>
+<p>app_connector_group_name (type: str)</p>
+<p>creation_time (type: str)</p>
+<p>enabled (type: bool, default: True)</p>
+<p>expiration_in_epoch_sec (type: str)</p>
+<p>id (type: str)</p>
+<p>ip_acl (type: str)</p>
+<p>max_usage (required, type: str)</p>
+<p>modified_by (type: str)</p>
+<p>modified_time (type: str)</p>
+<p>name (required, type: str)</p>
+<p>provisioning_key (type: str)</p>
+<p>enrollment_cert_id (required, type: str)</p>
+<p>enrollment_cert_name (type: str)</p>
+<p>ui_config (type: str)</p>
+<p>usage_count (type: str)</p>
+<p>zcomponent_id (required, type: str)</p>
+<p>zcomponent_name (type: str)</p>
+<p>association_type (required, type: str)</p>
+<p>state (type: str, default: present)</p>
 </div></blockquote>
 </section>
 <section id="examples">
 <h2><a class="toc-backref" href="#id3">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get ID Information of a Service Edge Group Enrollment Certificate</span>
-  <span class="nt">willguibr.zpacloud_ansible.zpa_enrollement_certificate_info</span><span class="p">:</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Service</span><span class="nv"> </span><span class="s">Edge&quot;</span>
-  <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">enrollment_cert_service_edge</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get ID Information of a Service Edge Group Enrollment Certificate</span><span class="w"></span>
+<span class="w">  </span><span class="nt">willguibr.zpacloud.zpa_enrollement_certificate_info</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Service</span><span class="nv"> </span><span class="s">Edge&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrollment_cert_service_edge</span><span class="w"></span>
 
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get ID Information of an Service Edge Group</span>
-  <span class="nt">willguibr.zpacloud.zpa_service_edge_groups_info</span><span class="p">:</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;Example&quot;</span>
-  <span class="nt">register</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">service_edge_group</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Create/Update/Delete App Connector Group Provisioning Key</span>
-  <span class="nt">willguibr.zpacloud_ansible.zpa_provisioning_key</span><span class="p">:</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="s">&quot;App</span><span class="nv"> </span><span class="s">Connector</span><span class="nv"> </span><span class="s">Group</span><span class="nv"> </span><span class="s">Provisioning</span><span class="nv"> </span><span class="s">Key&quot;</span>
-    <span class="nt">association_type</span><span class="p">:</span> <span class="s">&quot;CONNECTOR_GRP&quot;</span>
-    <span class="nt">max_usage</span><span class="p">:</span> <span class="s">&quot;10&quot;</span>
-    <span class="nt">enrollment_cert_id</span><span class="p">:</span> <span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">enrollment_cert_service_edge.data</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.id</span> <span class="cp">}}</span><span class="s">&quot;</span>
-    <span class="nt">zcomponent_id</span><span class="p">:</span> <span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">service_edge_group.data</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.id</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get ID Information of an Service Edge Group</span><span class="w"></span>
+<span class="w">  </span><span class="nt">willguibr.zpacloud.zpa_service_edge_groups_info</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Example&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_edge_group</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Create/Update/Delete</span><span class="nv"> </span><span class="s">App</span><span class="nv"> </span><span class="s">Connector</span><span class="nv"> </span><span class="s">Group</span><span class="nv"> </span><span class="s">Provisioning</span><span class="nv"> </span><span class="s">Key&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">willguibr.zpacloud.zpa_provisioning_key</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;App</span><span class="nv"> </span><span class="s">Connector</span><span class="nv"> </span><span class="s">Group</span><span class="nv"> </span><span class="s">Provisioning</span><span class="nv"> </span><span class="s">Key&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">association_type</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CONNECTOR_GRP&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">max_usage</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;10&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">enrollment_cert_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">enrollment_cert_service_edge.data</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.id</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">zcomponent_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">service_edge_group.data</span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="nv">.id</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

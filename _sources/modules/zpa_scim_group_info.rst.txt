@@ -28,6 +28,18 @@ The below requirements are needed on the host that executes this module.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (type: str)
     Name of the scim group.
 
@@ -56,13 +68,11 @@ Examples
     - name: Get Information About All SCIM Groups from an IdP
       willguibr.zpacloud.zpa_scim_attribute_header_info:
         idp_name: "IdP_Name"
-        
     - name: Get Information About a SCIM Group by ID
       willguibr.zpacloud.zpa_scim_attribute_header_info:
         id: 216196257331285827
         idp_name: "IdP_Name"
-        
-    - name: Get Information About a SCIM Group by Name 
+    - name: Get Information About a SCIM Group by Name
       willguibr.zpacloud.zpa_scim_attribute_header_info:
         name: "Finance"
         idp_name: "IdP_Name"

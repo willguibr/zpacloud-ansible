@@ -23,16 +23,61 @@ This module will create/update/delete a segment group resource.
 Parameters
 ----------
 
-  name (type: str)
-    Name of the server group.
+  client_id (type: str)
+    
 
 
-  id (type: str)
-    ID of the server group.
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  applications (type: list)
+    
+
+
+    id (required, type: str)
+      
+
+
+    name (type: str)
+      
+
 
 
   config_space (type: str, default: DEFAULT)
-    ID of the server group.
+    
+
+
+  description (type: str)
+    
+
+
+  enabled (type: bool)
+    
+
+
+  id (type: str)
+    
+
+
+  name (required, type: str)
+    
+
+
+  policy_migrated (type: bool)
+    
+
+
+  tcp_keep_alive_enabled (type: str)
+    
+
+
+  state (type: str, default: present)
+    
 
 
 
@@ -49,13 +94,13 @@ Examples
 
     
     - name: Create/Update/Delete a Segment Group
-        willguibr.zpacloud.zpa_segment_group:
-            name: Example Segment Group
-            config_space: "DEFAULT"
-            description: Example Segment Group
-            enabled: true
-            policy_migrated: true
-            tcp_keep_alive_enabled: "1"
+      willguibr.zpacloud.zpa_segment_group:
+        name: Example Segment Group
+        config_space: "DEFAULT"
+        description: Example Segment Group
+        enabled: true
+        policy_migrated: true
+        tcp_keep_alive_enabled: "1"
 
 
 

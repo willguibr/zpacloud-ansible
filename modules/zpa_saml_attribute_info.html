@@ -44,6 +44,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Module reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="zpa_app_connector_controller.html">zpa_app_connector_controller – Manages an app connector controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_app_connector_controller_info.html">zpa_app_connector_controller_info – Retrieves an app connector controller information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_app_connector_groups.html">zpa_app_connector_groups – Create an App Connector Group in the ZPA Cloud.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_app_connector_groups_info.html">zpa_app_connector_groups_info – Retrieves an app connector group information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_application_segment.html">zpa_application_segment – Create an application segment in the ZPA Cloud.</a></li>
@@ -57,6 +59,11 @@
 <li class="toctree-l2"><a class="reference internal" href="zpa_customer_version_profile_info.html">zpa_customer_version_profile_info – Retrieves customer version profile information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_enrollement_certificate_info.html">zpa_enrollement_certificate_info – Retrieves enrollment certificate information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_idp_controller_info.html">zpa_idp_controller_info – Retrieves Identity Provider information.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_client_types_info.html">zpa_lss_client_types_info – Retrieves LSS Client Types Information.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_config_controller.html">zpa_lss_config_controller – Create a LSS CONFIG.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_config_controller_info.html">zpa_lss_config_controller_info – Retrieves LSS Config controller information.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_config_log_types_formats_info.html">zpa_lss_config_log_types_formats_info – Retrieves LSS Log formats Information.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zpa_lss_config_status_codes_info.html">zpa_lss_config_status_codes_info – Retrieves LSS Status Codes Information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_machine_group_info.html">zpa_machine_group_info – Retrieves machine group information.</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_access_rule.html">zpa_policy_access_rule – Create a Policy Access Rule</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zpa_policy_access_rule_info.html">zpa_policy_access_rule_info – Retrieves policy access rule information.</a></li>
@@ -144,7 +151,10 @@
 <section id="parameters">
 <h2><a class="toc-backref" href="#id3">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
 <blockquote>
-<div><dl class="simple">
+<div><p>client_id (type: str)</p>
+<p>client_secret (type: str)</p>
+<p>customer_id (type: str)</p>
+<dl class="simple">
 <dt>name (type: str)</dt><dd><p>Name of the saml attribute.</p>
 </dd>
 <dt>id (type: str)</dt><dd><p>ID of the saml attribute.</p>
@@ -154,16 +164,14 @@
 </section>
 <section id="examples">
 <h2><a class="toc-backref" href="#id4">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get Information About All SAML Attributes</span>
-  <span class="nt">willguibr.zpacloud.zpa_saml_attribute_info</span><span class="p">:</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get Information About Saml Attribute by Attribute Name</span>
-  <span class="nt">willguibr.zpacloud.zpa_saml_attribute_info</span><span class="p">:</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DepartmentName_User</span>
-
-<span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get Information About Saml Attribute by Attribute ID</span>
-  <span class="nt">willguibr.zpacloud.zpa_saml_attribute_info</span><span class="p">:</span>
-    <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">216196257331285827</span>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get Information About All SAML Attributes</span><span class="w"></span>
+<span class="w">  </span><span class="nt">willguibr.zpacloud.zpa_saml_attribute_info</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get Information About Saml Attribute by Attribute Name</span><span class="w"></span>
+<span class="w">  </span><span class="nt">willguibr.zpacloud.zpa_saml_attribute_info</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DepartmentName_User</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get Information About Saml Attribute by Attribute ID</span><span class="w"></span>
+<span class="w">  </span><span class="nt">willguibr.zpacloud.zpa_saml_attribute_info</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">216196257331285827</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

@@ -23,8 +23,29 @@ This module create/update/delete a Server Group resource in the ZPA Cloud.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   applications (type: list)
     This field is a json array of server_group-connector-id objects only.
+
+
+    name (type: str)
+      
+
+
+    id (required, type: str)
+      
+
 
 
   enabled (type: bool)
@@ -40,11 +61,31 @@ Parameters
 
 
   servers (type: list)
-    This field is a list of servers objects that are applicable only when dynamic discovery is disabled. Server name is required only in cases where the new servers need to be created in this API. For existing servers, pass only the serverId.
+    This field is a list of servers objects that are applicable only when dynamic discovery is disabled.
+
+    Server name is required only in cases where the new servers need to be created in this API. For existing servers, pass only the serverId.
+
+
+    name (type: str)
+      
+
+
+    id (required, type: str)
+      
+
 
 
   app_connector_groups (type: list)
     List of server_group-connector ID objects.
+
+
+    name (type: str)
+      
+
+
+    id (required, type: str)
+      
+
 
 
   config_space (type: str, default: DEFAULT)

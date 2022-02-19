@@ -1,0 +1,257 @@
+.. _zpa_lss_config_controller_module:
+
+
+zpa_lss_config_controller -- Create a LSS CONFIG.
+=================================================
+
+.. contents::
+   :local:
+   :depth: 1
+
+
+Synopsis
+--------
+
+This module create/update/delete a LSS CONFIG in the ZPA Cloud.
+
+
+
+
+
+
+
+Parameters
+----------
+
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
+  config (type: dict)
+    Name of the LSS configuration
+
+
+    audit_message (type: str)
+      
+
+
+    description (type: str)
+      Name of the LSS configuration
+
+
+    enabled (type: bool, default: True)
+      Whether this LSS configuration is enabled or not
+
+
+    filter (type: list)
+      Filter for the LSS configuration
+
+
+    format (required, type: str)
+      Format of the log type
+
+
+    id (type: str)
+      
+
+
+    name (required, type: str)
+      Name of the LSS configuration
+
+
+    lss_host (required, type: str)
+      Host of the LSS configuration
+
+
+    lss_port (required, type: str)
+      Port of the LSS configuration
+
+
+    source_log_type (required, type: str)
+      Log type of the LSS configuration
+
+
+    use_tls (type: bool)
+      Whether TLS is enabled or not
+
+
+
+  connector_groups (type: list)
+    App Connector Group(s) to be added to the LSS configuration
+
+
+    name (type: str)
+      
+
+
+    id (required, type: str)
+      
+
+
+
+  id (type: str)
+    
+
+
+  policy_rule_resource (type: dict)
+    Object Type
+
+
+    action (type: str)
+      
+
+
+    action_id (type: str)
+      
+
+
+    description (type: str)
+      Object Type
+
+
+    priority (type: str)
+      
+
+
+    reauth_idle_timeout (type: str)
+      
+
+
+    policy_type (type: str)
+      
+
+
+    reauth_default_rule (type: bool)
+      
+
+
+    custom_msg (type: str)
+      
+
+
+    operator (type: str)
+      
+
+
+    bypass_default_rule (type: bool)
+      
+
+
+    policy_set_id (type: str)
+      
+
+
+    default_rule (type: bool)
+      
+
+
+    name (required, type: str)
+      
+
+
+    reauth_timeout (type: str)
+      
+
+
+    rule_order (type: str)
+      
+
+
+    id (type: str)
+      
+
+
+    lss_default_rule (type: bool)
+      
+
+
+    conditions (type: list)
+      
+
+
+      negated (type: bool)
+        
+
+
+      operator (required, type: str)
+        
+
+
+      operands (type: list)
+        
+
+
+        values (type: list)
+          
+
+
+        object_type (required, type: str)
+          
+
+
+
+
+
+  state (type: str, default: present)
+    Whether the config should be present or absent.
+
+
+
+
+
+
+
+
+
+Examples
+--------
+
+.. code-block:: yaml+jinja
+
+    
+    - name: LSS Controller
+      hosts: localhost
+      tasks:
+        - name: Create a LSS Controller
+          willguibr.zpacloud.zpa_lss_config_controller:
+            state: present
+            config:
+              name: Status
+              description: status
+              enabled: true
+              lss_host: 10.1.1.1
+              lss_port: 20000
+              format: "..."
+              source_log_type: "zpn_ast_auth_log"
+            connector_groups:
+              - id: "11111"
+                name: "Test"
+          register: lss_controller
+        - name: lss_controller
+          debug:
+            msg: "{{ lss_controller }}"
+
+
+
+
+
+Status
+------
+
+
+
+
+
+Authors
+~~~~~~~
+
+- William Guilherme (@willguibr)
+

@@ -23,8 +23,37 @@ This module creates/update/delete an App Connector Group in the ZPA Cloud.
 Parameters
 ----------
 
+  client_id (type: str)
+    
+
+
+  client_secret (type: str)
+    
+
+
+  customer_id (type: str)
+    
+
+
   name (required, type: str)
     Name of the App Connector Group.
+
+
+  description (type: str)
+    
+
+
+  connectors (type: list)
+    Connectors
+
+
+    name (type: str)
+      Name of the App Connector Group.
+
+
+    id (type: str)
+      id of the App Connector Group.
+
 
 
   id (type: str)
@@ -43,40 +72,48 @@ Parameters
     Whether to enable IPv4 or IPv6, or both, for DNS resolution of all applications in the App Connector Group.
 
 
-  enabled (type: bool)
+  enabled (type: bool, default: True)
     Whether this App Connector Group is enabled or not.
 
 
-  latitude (required, type: str)
+  latitude (type: str)
     Latitude of the App Connector Group. Integer or decimal. With values in the range of -90 to 90.
 
 
-  location (required, type: str)
+  location (type: str)
     Location of the App Connector Group.
 
 
-  longitude (required, type: str)
+  longitude (type: str)
     Longitude of the App Connector Group. Integer or decimal. With values in the range of -180 to 180.
 
 
-  lss_app_connector_group (type: bool)
+  lss_app_connector_group (type: str)
     LSS app connector group
 
 
   upgrade_day (type: str, default: SUNDAY)
-    App Connectors in this group will attempt to update to a newer version of the software during this specified day. List of valid days (i.e., Sunday, Monday).
+    App Connectors in this group will attempt to update to a newer version of the software during this specified day.
+
+    List of valid days (i.e., Sunday, Monday).
 
 
   upgrade_time_in_secs (type: str, default: 66600)
-    App Connectors in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
+    App Connectors in this group will attempt to update to a newer version of the software during this specified time.
+
+    Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
 
 
   override_version_profile (type: bool)
-    App Connectors in this group will attempt to update to a newer version of the software during this specified time. Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
+    App Connectors in this group will attempt to update to a newer version of the software during this specified time.
+
+    Integer in seconds (i.e., -66600). The integer should be greater than or equal to 0 and less than 86400, in 15 minute intervals.
 
 
-  version_profile_id (type: str)
-    ID of the version profile. To learn more, see Version Profile Use Cases. This value is required, if the value for overrideVersionProfile is set to true.
+  version_profile_id (type: str, default: 0)
+    ID of the version profile. To learn more, see Version Profile Use Cases.
+
+    This value is required, if the value for overrideVersionProfile is set to true.
 
 
   version_profile_name (type: str)
