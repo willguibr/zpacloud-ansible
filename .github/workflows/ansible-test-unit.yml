@@ -47,4 +47,3 @@ jobs:
           python-version: 3.9
           target-python-version: 3.9
           testing-type: units
-
