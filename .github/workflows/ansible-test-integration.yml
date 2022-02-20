@@ -5,8 +5,6 @@ on:
       # - ci*
       - master
       - develop
-  schedule:
-    - cron: "10 6 * * *"
 
 concurrency:
   group: cloud-integration-tests

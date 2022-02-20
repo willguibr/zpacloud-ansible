@@ -4,8 +4,6 @@ on:
     types: [ opened, synchronize, reopened ]
   push:
     branches: [ master, develop ]
-  schedule:
-    - cron: '10 6 * * *'
 
 jobs:
 
