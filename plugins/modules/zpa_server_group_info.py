@@ -76,7 +76,7 @@ def core(module):
     server_group_name = module.params.get("name", None)
     server_group_id = module.params.get("id", None)
     customer_id = module.params.get("customer_id", None)
-    service = ServerGroupService(module, customer_id)
+    service = ServerGroupService(module, customer_id, ZPAClientHelper(module))
     server_groups = []
     if server_group_id is not None:
         server_group = service.getByID(server_group_id)

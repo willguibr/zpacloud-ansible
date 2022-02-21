@@ -157,7 +157,7 @@ from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_server_grou
 def core(module):
     state = module.params.get("state", None)
     customer_id = module.params.get("customer_id", None)
-    service = ServerGroupService(module, customer_id)
+    service = ServerGroupService(module, customer_id, ZPAClientHelper(module))
     server_group = dict()
     params = [
         "id",
