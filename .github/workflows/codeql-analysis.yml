@@ -1,8 +1,13 @@
-name: "Code scanning - action"
+name: "CodeQL"
 
 on:
+  push:
+    branches: [ master ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ master ]
   schedule:
-    - cron: '26 19 * * 1'
+    - cron: '23 11 * * 3'
 
 jobs:
   CodeQL-Build:
