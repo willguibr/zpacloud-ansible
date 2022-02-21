@@ -73,7 +73,7 @@ def core(module):
     app_name = module.params.get("name", None)
     app_id = module.params.get("id", None)
     customer_id = module.params.get("customer_id", None)
-    service = ApplicationSegmentService(module, customer_id)
+    service = ApplicationSegmentService(module, customer_id, ZPAClientHelper(module))
     apps = []
     if app_id is not None:
         app = service.getByID(app_id)
