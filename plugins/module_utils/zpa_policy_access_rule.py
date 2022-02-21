@@ -12,10 +12,10 @@ from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client impo
 
 
 class PolicyAccessRuleService:
-    def __init__(self, module, customer_id):
+    def __init__(self, module, customer_id, rest):
         self.module = module
         self.customer_id = customer_id
-        self.rest = ZPAClientHelper(module)
+        self.rest = rest
 
     def getByIDOrName(self, id, name, policy_set_id, policy_type):
         policy_rule = None

@@ -245,7 +245,7 @@ from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_policy_acce
 def core(module):
     state = module.params.get("state", None)
     customer_id = module.params.get("customer_id", None)
-    service = PolicyAccessRuleService(module, customer_id)
+    service = PolicyAccessRuleService(module, customer_id, ZPAClientHelper(module))
     global_policy_set = service.getByPolicyType("ACCESS_POLICY")
     if global_policy_set is None or global_policy_set.get("id") is None:
         module.fail_json(msg="Unable to get global policy set")

@@ -75,7 +75,7 @@ def core(module):
     policy_rule_name = module.params.get("name", None)
     policy_rule_id = module.params.get("id", None)
     customer_id = module.params.get("customer_id", None)
-    service = PolicyAccessRuleService(module, customer_id)
+    service = PolicyAccessRuleService(module, customer_id, ZPAClientHelper(module))
     global_policy_set = service.getByPolicyType("ACCESS_POLICY")
     if global_policy_set is None or global_policy_set.get("id") is None:
         module.fail_json(msg="Unable to get global policy set")
