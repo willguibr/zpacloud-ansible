@@ -76,7 +76,7 @@ def core(module):
     segment_group_name = module.params.get("name", None)
     segment_group_id = module.params.get("id", None)
     customer_id = module.params.get("customer_id", None)
-    service = SegmentGroupService(module, customer_id)
+    service = SegmentGroupService(module, customer_id, ZPAClientHelper(module))
     segment_groups = []
     if segment_group_id is not None:
         segment_group = service.getByID(segment_group_id)

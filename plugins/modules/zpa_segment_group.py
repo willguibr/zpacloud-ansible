@@ -110,7 +110,7 @@ from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_segment_gro
 def core(module):
     state = module.params.get("state", None)
     customer_id = module.params.get("customer_id", None)
-    service = SegmentGroupService(module, customer_id)
+    service = SegmentGroupService(module, customer_id, ZPAClientHelper(module))
     segment_group = dict()
     params = [
         "applications",

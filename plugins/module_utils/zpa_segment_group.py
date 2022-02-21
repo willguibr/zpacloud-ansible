@@ -5,17 +5,16 @@ __metaclass__ = type
 import re
 
 from ansible_collections.willguibr.zpacloud.plugins.module_utils.zpa_client import (
-    ZPAClientHelper,
     camelcaseToSnakeCase,
     delete_none,
 )
 
 
 class SegmentGroupService:
-    def __init__(self, module, customer_id):
+    def __init__(self, module, customer_id, rest):
         self.module = module
         self.customer_id = customer_id
-        self.rest = ZPAClientHelper(module)
+        self.rest = rest
 
     def getByIDOrName(self, id, name):
         segment_group = None
