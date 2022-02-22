@@ -1,76 +1,48 @@
 {
-    "branch": "master",
-    "plugins": [
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "eslint",
-          "releaseRules": [
-            { "tag": "Breaking", "release": "major" },
-            { "tag": "Build", "release": "minor" },
-            { "tag": "Chore", "release": "minor" },
-            { "tag": "Fix", "release": "patch" },
-            { "tag": "New", "release": "minor" },
-            { "tag": "Update", "release": "minor" },
-            { "tag": "Upgrade", "release": "minor" }
-          ]
-        }
-      ],
-      [
-        "@semantic-release/release-notes-generator",
-        {
-          "preset": "eslint",
-          "releaseRules": [
-            { "tag": "Breaking", "release": "major" },
-            { "tag": "Build", "release": "minor" },
-            { "tag": "Chore", "release": "minor" },
-            { "tag": "Fix", "release": "patch" },
-            { "tag": "New", "release": "minor" },
-            { "tag": "Update", "release": "minor" },
-            { "tag": "Upgrade", "release": "minor" }
-          ]
-        }
-      ],
-      [
-        "@semantic-release/exec",
-        {
-            "prepareCmd": ".github/set-version.sh ${nextRelease.version}",
-            "publishCmd": ".github/do-release.sh"
-        }
+  "branch": "develop",
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "eslint",
+        "releaseRules": [
+          { "tag": "Breaking", "release": "major" },
+          { "tag": "Build", "release": "minor" },
+          { "tag": "Chore", "release": "minor" },
+          { "tag": "Fix", "release": "patch" },
+          { "tag": "New", "release": "minor" },
+          { "tag": "Update", "release": "minor" },
+          { "tag": "Upgrade", "release": "minor" }
+        ]
+      }
     ],
     [
-        "@semantic-release/git",
-        {
-            "assets": [
-                "galaxy.yml",
-                "docs/source/index.rst"
-            ],
-            "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
-        }
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "eslint",
+        "releaseRules": [
+          { "tag": "Breaking", "release": "major" },
+          { "tag": "Build", "release": "minor" },
+          { "tag": "Chore", "release": "minor" },
+          { "tag": "Fix", "release": "patch" },
+          { "tag": "New", "release": "minor" },
+          { "tag": "Update", "release": "minor" },
+          { "tag": "Upgrade", "release": "minor" }
+        ]
+      }
     ],
     [
-        "@semantic-release/github",
-        {
-            "assets": [
-                {
-                    "path": "*.tar.gz"
-                }
-            ],
-            "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on [Ansible Galaxy](https://galaxy.ansible.com/willguibr/zpacloud) and [GitHub release](https://github.com/willguibr/zpa-ansible/releases)\n\n> Posted by [semantic-release](https://github.com/semantic-release/semantic-release) bot"
-        }
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
     ],
-      [
-        "@semantic-release/changelog",
-        {
-          "changelogFile": "CHANGELOG.md"
-        }
-      ],
-      "@semantic-release/github",
-      [
-        "@semantic-release/git", {
-          "assets": ["package.json", "CHANGELOG.md"],
-          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-        }
-      ]
+    "@semantic-release/github",
+    [
+      "@semantic-release/git", {
+        "assets": ["package.json", "CHANGELOG.md"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
     ]
-  }
+  ]
+}
