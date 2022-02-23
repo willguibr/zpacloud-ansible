@@ -217,7 +217,7 @@ class LSSConfigControllerService:
         status_code = response.status_code
         if status_code > 299:
             return None
-        return self.getByID(response.get("id"))
+        return self.getByID(response.json.get("id"))
 
     def update(self, lss_config):
         """update the LSSConfig"""
