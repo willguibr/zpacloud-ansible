@@ -2,7 +2,7 @@
 Zscaler Private Access Ansible Collection
 =========================================
 
-Version: 1.1.0
+Version: 1.1.1
 
 The Zscaler Private Access Ansible collection is a collection of modules that
 automate configuration and operational tasks on Zscaler Private Access Cloud. The
