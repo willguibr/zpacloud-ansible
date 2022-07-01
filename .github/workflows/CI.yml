@@ -172,7 +172,7 @@ jobs:
           mv the_repo/ansible_collections/willguibr/zpacloud zpacloud-ansible
           mkdir -p zpacloud-ansible/ansible_collections/willguibr/zpacloud
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4.3.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
